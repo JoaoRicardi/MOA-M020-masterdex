@@ -5,11 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradiente"
-    android:padding="16dp"
-    tools:context=".CadastroActivity">
+    android:padding="16dp">
 
     <ImageView
-        android:id="@+id/logo_cadastrar"
+        android:id="@+id/logo_login"
         android:layout_width="229dp"
         android:layout_height="244dp"
         android:layout_marginStart="8dp"
@@ -33,13 +32,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Cadastre-se"
+        android:text="Login"
         android:textColor="@android:color/white"
         android:textSize="28dp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/logo_cadastrar"
+        app:layout_constraintTop_toTopOf="@+id/logo_login"
         app:layout_constraintVertical_bias="1.0" />
 
     <android.support.design.widget.TextInputLayout
@@ -48,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="160dp"
+        android:layout_marginBottom="276dp"
         android:textColorHint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,15 +57,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColorHint="@android:color/white">
-
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/white"
-
-                android:hint="Email"
-
-                android:textColor="@android:color/white" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -79,25 +69,11 @@
                     android:backgroundTint="@android:color/white"
 
                     android:hint="Senha"
+                    android:inputType="textPassword"
+                    android:id="@+id/login_senha"
 
                     android:textColor="@android:color/white" />
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColorHint="@android:color/white">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@android:color/white"
-
-                        android:hint="Confirmar Senha"
-
-                        android:textColor="@android:color/white" />
-
-
-                </android.support.design.widget.TextInputLayout>
             </android.support.design.widget.TextInputLayout>
 
         </android.support.design.widget.TextInputLayout>
@@ -106,45 +82,87 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
-            android:hint="Nick"
-            android:textColor="@android:color/white" />
+            android:hint="Email"
+            android:textColor="@android:color/white"
+            android:id="@+id/login_email"/>
     </android.support.design.widget.TextInputLayout>
 
 
     <Button
-        android:id="@+id/cadastrar_button"
-        android:layout_width="150dp"
+        android:id="@+id/entrar_button"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_enviar"
-        android:text="Cadastrar"
+        android:text="Entrar"
         android:textAllCaps="false"
         android:textColor="@color/branco"
-        android:textSize="20sp"
+        android:textSize="18sp"
 
 
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.052" />
 
-    <ImageView
-        android:id="@+id/botao_voltar_esqueci_senha"
-        android:layout_width="17dp"
-        android:layout_height="27dp"
+    <TextView
+        android:id="@+id/login_esqueci_senha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="64dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/logo_cadastrar"
-        app:layout_constraintHorizontal_bias="0.416"
+        android:layout_marginBottom="8dp"
+        android:text="Esqueceu sua senha?"
+        android:textColor="@color/branco"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/entrar_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <Button
+        android:id="@+id/entrar_com_fb_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Entrar com Facebook"
+        android:textAllCaps="false"
+        android:textSize="20dp"
+        android:textColor="@color/branco"
+        android:background="@drawable/button_facebook"
+        android:drawableStart="@drawable/ic_facebook"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/button_voltar" />
+        app:layout_constraintTop_toBottomOf="@+id/entrar_button" />
+
+    <Button
+        android:id="@+id/botao_ir_para_cadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Cadastre-se"
+        android:textSize="20dp"
+        android:textAllCaps="false"
+        android:textColor="@color/branco"
+        android:background="@drawable/button_ir_para_cadastro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entrar_com_fb_button" />
 
 </android.support.constraint.ConstraintLayout>

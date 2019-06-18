@@ -11,9 +11,9 @@
             <gradient
                 android:angle="270"
                 android:centerX="35%"
-                android:centerColor="#240CB6"
-                android:startColor="#2906EE"
-                android:endColor="#2A32B8"
+                android:centerColor="@color/azulFace"
+                android:startColor="@color/azulFace"
+                android:endColor="@color/azulFace"
                 android:type="linear"
                 />
             <padding
