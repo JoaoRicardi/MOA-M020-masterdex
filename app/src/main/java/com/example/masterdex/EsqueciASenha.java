@@ -11,17 +11,21 @@ import android.widget.ImageView;
 
 public class EsqueciASenha extends AppCompatActivity {
 
-    TextInputEditText emailDigitado;
-    ImageView buttonVoltar;
+    private TextInputEditText emailDigitado;
+    private ImageView buttonVoltar;
+    private Button buttonEnviar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esqueci_asenha);
 
-        emailDigitado = findViewById(R.id.email_textinput);
 
-        Button buttonEnviar = findViewById(R.id.enviar_button);
+        initComponents();
+
+
+
+
         buttonEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,18 +33,25 @@ public class EsqueciASenha extends AppCompatActivity {
             }
         });
 
-        buttonVoltar = findViewById(R.id.botao_voltar_esqueci_senha);
         buttonVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 voltarParaLogin();
             }
         });
+
+
     }
 
 
 
+    private void initComponents() {
 
+        emailDigitado = findViewById(R.id.email_textinput);
+        buttonVoltar = findViewById(R.id.botao_voltar_esqueci_senha);
+        buttonEnviar = findViewById(R.id.enviar_button);
+
+    }
 
 
     public void enviarClicado (View view){
@@ -56,7 +67,7 @@ public class EsqueciASenha extends AppCompatActivity {
         if (emailDigitado.getText().toString().equals("")){
             //Se não houver texto no campo do email, ele irá exibir o erro abaixo
 
-            emailDigitado.setError("Digite um email");
+            emailDigitado.setError("Digite seu email");
 
         } else {
             //Caso o campo de email tenha algo, aparecerá um snackbar dizendo que o usuário foi cadastrado
