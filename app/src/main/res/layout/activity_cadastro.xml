@@ -134,7 +134,7 @@
         app:layout_constraintVertical_bias="0.27" />
 
     <ImageView
-        android:id="@+id/botao_voltar_esqueci_senha"
+        android:id="@+id/button_voltar_para_login"
         android:layout_width="17dp"
         android:layout_height="27dp"
         android:layout_marginStart="8dp"
