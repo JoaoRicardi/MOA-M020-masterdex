@@ -18,7 +18,7 @@ public class CadastroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        cadastrarUsuario();
+
         initComponents();
 
         botaoVoltarParaLogin.setOnClickListener(new View.OnClickListener() {

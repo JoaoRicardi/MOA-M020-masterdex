@@ -1,10 +1,13 @@
 package com.example.masterdex;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +33,8 @@ public class PokemonsActivity extends AppCompatActivity {
     private RecyclerView recyclerPokemons;
     private AdapterPokemon pokemonAdapter;
 
+    private Button buttonMapas, buttonDex, buttonPerfil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +45,21 @@ public class PokemonsActivity extends AppCompatActivity {
         myToolbar.setTitle("MASTERDEX");
         myToolbar.setTitleTextColor(getResources().getColor(R.color.branco));
         myToolbar.setBackgroundColor(getResources().getColor(R.color.azulFace));
+
+
+
+        buttonDex = findViewById(R.id.buttonDex);
+        buttonPerfil = findViewById(R.id.buttonPerfil);
+        buttonMapas = findViewById(R.id.buttonMapas);
+
+        buttonPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               irParaLogin();
+            }
+        });
+
+
 
 
 
@@ -68,6 +88,12 @@ public class PokemonsActivity extends AppCompatActivity {
 
 
 }
+
+    private void irParaLogin() {
+
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
+    }
 
     // metodo que faz a chamada de dados
     private void receberDados() {

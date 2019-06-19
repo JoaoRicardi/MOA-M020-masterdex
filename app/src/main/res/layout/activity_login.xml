@@ -9,49 +9,42 @@
 
     <ImageView
         android:id="@+id/logo_login"
-        android:layout_width="229dp"
-        android:layout_height="244dp"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.123"
         app:srcCompat="@mipmap/ic_launcher_foreground"
         tools:ignore="VectorDrawableCompat" />
 
     <TextView
 
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:text="Login"
         android:textColor="@android:color/white"
         android:textSize="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/logo_login"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/logo_login" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="276dp"
         android:textColorHint="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -64,13 +57,13 @@
                 android:textColorHint="@android:color/white">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/login_senha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/white"
 
+                    android:backgroundTint="@android:color/white"
                     android:hint="Senha"
                     android:inputType="textPassword"
-                    android:id="@+id/login_senha"
 
                     android:textColor="@android:color/white" />
 
@@ -79,12 +72,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
             android:hint="Email"
-            android:textColor="@android:color/white"
-            android:id="@+id/login_email"/>
+            android:textColor="@android:color/white" />
     </android.support.design.widget.TextInputLayout>
 
 
@@ -95,54 +88,43 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/button_enviar"
         android:text="Entrar"
+
+
         android:textAllCaps="false"
         android:textColor="@color/branco"
         android:textSize="18sp"
-
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/login_esqueci_senha"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <TextView
         android:id="@+id/login_esqueci_senha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:text="Esqueceu sua senha?"
         android:textColor="@color/branco"
         android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/entrar_button"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        app:layout_constraintVertical_bias="0.126" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <Button
         android:id="@+id/entrar_com_fb_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="Entrar com Facebook"
-        android:textAllCaps="false"
-        android:textSize="20dp"
-        android:textColor="@color/branco"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/button_facebook"
         android:drawableStart="@drawable/ic_facebook"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Entrar com Facebook"
+        android:textAllCaps="false"
+        android:textColor="@color/branco"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entrar_button" />
@@ -151,16 +133,14 @@
         android:id="@+id/botao_ir_para_cadastro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_ir_para_cadastro"
         android:text="Cadastre-se"
-        android:textSize="20dp"
         android:textAllCaps="false"
         android:textColor="@color/branco"
-        android:background="@drawable/button_ir_para_cadastro"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entrar_com_fb_button" />
