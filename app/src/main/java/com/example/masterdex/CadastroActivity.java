@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toolbar;
 
 public class CadastroActivity extends AppCompatActivity {
 
     private TextInputEditText textEditNick,textEditEmail,textEditSenha,textEditConfirmarSenha;
+    private ImageView botaoVoltarParaLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +20,13 @@ public class CadastroActivity extends AppCompatActivity {
 
         cadastrarUsuario();
         initComponents();
+
+        botaoVoltarParaLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voltarParaLogin();
+            }
+        });
 
 
 
@@ -28,8 +38,16 @@ public class CadastroActivity extends AppCompatActivity {
         textEditEmail =findViewById(R.id.email_textinput);
         textEditSenha =findViewById(R.id.textEditSenha);
         textEditConfirmarSenha = findViewById(R.id.textEditConfirmarSenha);
+        botaoVoltarParaLogin = findViewById(R.id.button_voltar_para_login);
 
     }
+
+    public void voltarParaLogin(){
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
 
 
     public void cadastrarUsuario(){
@@ -60,11 +78,13 @@ public class CadastroActivity extends AppCompatActivity {
             //Se nãp huver nada no campo de senha aparecerá essa mensagem
             textEditConfirmarSenha.setError("Digite uma Senha");
         } else {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
 
     }
+
+
 
 
 }
