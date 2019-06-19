@@ -39,6 +39,7 @@ public class PokemonsActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         myToolbar.setTitle("MASTERDEX");
         myToolbar.setTitleTextColor(getResources().getColor(R.color.branco));
+        myToolbar.setBackgroundColor(getResources().getColor(R.color.azulFace));
 
 
 
