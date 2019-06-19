@@ -65,7 +65,7 @@
                 android:backgroundTint="@android:color/white"
 
                 android:hint="Email"
-
+                android:id="@+id/textEditEmail"
                 android:textColor="@android:color/white" />
 
             <android.support.design.widget.TextInputLayout
@@ -79,7 +79,7 @@
                     android:backgroundTint="@android:color/white"
 
                     android:hint="Senha"
-
+                    android:id="@+id/textEditSenha"
                     android:textColor="@android:color/white" />
 
                 <android.support.design.widget.TextInputLayout
@@ -93,7 +93,7 @@
                         android:backgroundTint="@android:color/white"
 
                         android:hint="Confirmar Senha"
-
+                        android:id="@+id/textEditConfirmarSenha"
                         android:textColor="@android:color/white" />
 
 
@@ -107,6 +107,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
             android:hint="Nick"
+            android:id="@+id/textEditNick"
             android:textColor="@android:color/white" />
     </android.support.design.widget.TextInputLayout>
 
