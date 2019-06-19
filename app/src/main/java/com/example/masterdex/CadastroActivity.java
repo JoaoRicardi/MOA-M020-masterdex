@@ -1,10 +1,12 @@
 package com.example.masterdex;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toolbar;
 
@@ -12,11 +14,21 @@ public class CadastroActivity extends AppCompatActivity {
 
     private TextInputEditText textEditNick,textEditEmail,textEditSenha,textEditConfirmarSenha;
     private ImageView botaoVoltarParaLogin;
+    private Button cadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+
+        cadastrar = findViewById(R.id.cadastrar_button);
+
+        cadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cadastroRealizado(view);
+            }
+        });
 
 
         initComponents();
@@ -50,7 +62,7 @@ public class CadastroActivity extends AppCompatActivity {
 
 
 
-    public void cadastrarUsuario(){
+    public void cadastroRealizado(){
 
         android.view.inputmethod.InputMethodManager teclado = (android.view.inputmethod.InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
@@ -82,6 +94,18 @@ public class CadastroActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+    }
+    public void cadastroRealizado(View view){
+
+        Snackbar.make(view, "Cadastro realizado com sucesso", Snackbar.LENGTH_INDEFINITE)
+                .setAction("OK", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        voltarParaLogin();
+
+                    }
+                }).setActionTextColor(getResources().getColor(R.color.branco)).show();
     }
 
 
