@@ -1,28 +1,25 @@
 package com.example.masterdex;
 
-import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.masterdex.adapter.AdapterPokemon;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.models.PokemonResposta;
 import com.example.masterdex.pokeApi.PokeApi;
-
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+
 
 public class PokemonsActivity extends AppCompatActivity {
 
@@ -33,67 +30,34 @@ public class PokemonsActivity extends AppCompatActivity {
     private RecyclerView recyclerPokemons;
     private AdapterPokemon pokemonAdapter;
 
-    private Button buttonMapas, buttonDex, buttonPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemons);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-        myToolbar.setTitle("MASTERDEX");
-        myToolbar.setTitleTextColor(getResources().getColor(R.color.branco));
-        myToolbar.setBackgroundColor(getResources().getColor(R.color.azulFace));
+        // ligando as coisas
+        textNomePokemon = findViewById(R.id.textNomePokemon);
+        imageFotoPokemon = findViewById(R.id.imageFotoPokemon);
 
 
-
-        buttonDex = findViewById(R.id.buttonDex);
-        buttonPerfil = findViewById(R.id.buttonPerfil);
-        buttonMapas = findViewById(R.id.buttonMapas);
-
-        buttonPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               irParaLogin();
-            }
-        });
-
-
-
-
-
-
-    // ligando as coisas
-    textNomePokemon = findViewById(R.id.textNomePokemon);
-    imageFotoPokemon = findViewById(R.id.imageFotoPokemon);
-
-
-    // configuração do recyclerview
-    recyclerPokemons = findViewById(R.id.recyclerView);
-    pokemonAdapter = new AdapterPokemon();
-    GridLayoutManager LayoutManager= new GridLayoutManager(getApplicationContext(),3);
+        // configuração do recyclerview
+        recyclerPokemons = findViewById(R.id.recyclerView);
+        pokemonAdapter = new AdapterPokemon();
+        GridLayoutManager LayoutManager = new GridLayoutManager(getApplicationContext(), 3);
         recyclerPokemons.setLayoutManager(LayoutManager);
         recyclerPokemons.setAdapter(pokemonAdapter);
 
 
-
-    //retrofit em ação kkk
-    retrofit = new Retrofit.Builder()
-            .baseUrl("https://pokeapi.co/api/v2/")// url que ira ser passada para ser consumida
+        //retrofit em ação kkk
+        retrofit = new Retrofit.Builder()
+                .baseUrl("https://pokeapi.co/api/v2/")// url que ira ser passada para ser consumida
                 .addConverterFactory(GsonConverterFactory.create())// conversor que ira converter um json em objeto
-            .build();
+                .build();
 
-    receberDados();
-
-
-}
-
-    private void irParaLogin() {
-
-        Intent intent = new Intent(this,LoginActivity.class);
-        startActivity(intent);
+        receberDados();
     }
+
 
     // metodo que faz a chamada de dados
     private void receberDados() {
