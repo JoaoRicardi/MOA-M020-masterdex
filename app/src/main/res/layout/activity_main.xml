@@ -11,7 +11,7 @@
         android:id="@+id/viewpager_id"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="35"
+        android:layout_weight="100"
         android:background="@color/azulBackground">
 
 
@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabTextColor="@color/branco"
-        app:tabIndicatorColor="@color/branco"
-        android:background="@color/azulBackground"
+        app:tabTextColor="@color/azulBackground"
+        app:tabIndicatorColor="@color/azulBackground"
+        android:background="@color/branco"
 
         ></android.support.design.widget.TabLayout>
 
@@ -34,9 +34,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/azulBackground">
+        android:background="@color/branco">
 
     </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="@color/azulBackground">
+
+    </LinearLayout>
 
 
 
