@@ -6,5 +6,6 @@
 
     <color name="branco">#FFFFFF</color>
     <color name="roxo">#481052</color>
-    <color name="azulFace" >#3b5998</color>
+    <color name="azulFace" >#2175F3</color>
+    <color name="azulBackground">#100B5A</color>
 </resources>
