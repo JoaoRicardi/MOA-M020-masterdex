@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private int[] tabIcons = {
-            R.drawable.dex_icon,
             R.drawable.perfil_icon,
+            R.drawable.dex_icon,
             R.drawable.regioes_icon,
     };
 
@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.viewpager_id);
         setupViewPager(viewPager);
+
+        viewPager.setCurrentItem(1,true);
 
 
         tabLayout = findViewById(R.id.tabs);
@@ -47,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         private void setupViewPager(ViewPager viewPager) {
             ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-            adapter.AddFragment(new PokemonsFragment(), "Dex");
+
             adapter.AddFragment(new PerfilFragment(), "Perfil");
+
+            adapter.AddFragment(new PokemonsFragment(), "Dex");
+
             adapter.AddFragment(new RegionsFragment(), "Regiões");
             viewPager.setAdapter(adapter);
         }
