@@ -27,8 +27,9 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="39dp"
         android:layout_weight="5"
+        android:background="@color/azulFace"
 
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
