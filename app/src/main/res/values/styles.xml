@@ -9,4 +9,11 @@
         <item name="android:statusBarColor">#100B5A</item>
     </style>
 
+    153
+
+    <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">11sp</item>
+
+    </style>
+
 </resources>

@@ -27,8 +27,8 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="39dp"
-        android:layout_weight="5"
+        android:layout_height="55dp"
+        android:layout_weight="1"
         android:background="@color/azulFace"
 
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -37,13 +37,17 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"
-            app:tabGravity="fill"
-            app:tabTextColor="@color/azulFace"
-            app:tabRippleColor="@color/azulFace"
-            app:tabIndicatorColor="@color/azulFace"
             android:background="@color/branco"
-            app:tabIconTint="@color/azulFace"/>
+            app:tabGravity="fill"
+            app:tabIconTint="@color/azulFace"
+            app:tabIndicatorColor="@color/azulFace"
+            app:tabMode="fixed"
+            app:tabRippleColor="@color/azulFace"
+            app:tabSelectedTextColor="@color/azulBackground"
+            app:tabTextAppearance="@style/MineCustomTabText"
+            app:tabTextColor="@color/azulFace"
+
+            />
     </android.support.design.widget.AppBarLayout>
 
 
