@@ -33,7 +33,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return FragmentListTitles.get(position);
+        return null;
     }
 
     public  void AddFragment (Fragment fragment, String Tittle){

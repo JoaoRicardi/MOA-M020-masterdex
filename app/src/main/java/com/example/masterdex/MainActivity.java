@@ -15,7 +15,10 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private int[] tabIcons = {
-            R.drawable.ic_facebook};
+            R.drawable.dex_icon,
+            R.drawable.perfil_icon,
+            R.drawable.regioes_icon,
+    };
 
 
 
@@ -28,10 +31,19 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager_id);
         setupViewPager(viewPager);
 
+
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+
+        setupIcons();
+
     }
+        private void setupIcons() {
+            tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+            tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+            tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+        }
 
         private void setupViewPager(ViewPager viewPager) {
             ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
