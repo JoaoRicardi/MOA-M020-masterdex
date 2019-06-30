@@ -1,15 +1,22 @@
 package com.example.masterdex;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
 import com.example.masterdex.adapter.ViewPagerAdapter;
+import com.example.masterdex.interfaces.FragmentActionListener;
+import com.example.masterdex.models.Regiao;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
 
     private TabLayout tabLayout;
