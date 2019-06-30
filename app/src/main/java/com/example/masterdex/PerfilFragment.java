@@ -1,18 +1,20 @@
 package com.example.masterdex;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
 
 
-public class PerfilFragment extends Fragment {
+public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
 
     Button buttonOpcoesPerfil;
 
@@ -37,6 +39,8 @@ public class PerfilFragment extends Fragment {
                 menuInflater.inflate(R.menu.popup_menu, popupMenu.getMenu());
                 popupMenu.show();
 
+                popupMenu.setOnMenuItemClickListener(PerfilFragment.this);
+
 
             }
         });
@@ -44,4 +48,15 @@ public class PerfilFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.item_sair:
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return false;
+        }
+    }
 }
