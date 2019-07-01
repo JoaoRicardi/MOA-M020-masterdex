@@ -19,9 +19,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RegioesAdapter extends RecyclerView.Adapter<RegioesAdapter.ViewHolder> {
 
     private List<Regiao> listaRegioes;
+    private RegioesListener regioesListener;
 
-    public RegioesAdapter(List<Regiao> listaRegioes) {
+    public RegioesAdapter(List<Regiao> listaRegioes, RegioesListener regioesListener) {
         this.listaRegioes = listaRegioes;
+        this.regioesListener = regioesListener;
     }
 
     @NonNull
@@ -34,8 +36,15 @@ public class RegioesAdapter extends RecyclerView.Adapter<RegioesAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Regiao regiao = listaRegioes.get(i);
+        final Regiao regiao = listaRegioes.get(i);
                 viewHolder.setupRegiao(regiao);
+
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        regioesListener.onRegiaoClicada(regiao);
+                    }
+                });
 
 
     }
@@ -60,6 +69,7 @@ public class RegioesAdapter extends RecyclerView.Adapter<RegioesAdapter.ViewHold
         public void setupRegiao(Regiao regiao){
 
             nomeRegiaoTextView.setText(regiao.getNomeRegiao());
+
 
             Picasso.get().load(regiao.getImagemRegiao()).into(regiaoCircleImageView);
         }

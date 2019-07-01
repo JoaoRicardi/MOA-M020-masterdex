@@ -11,6 +11,7 @@
         android:roundIcon="@drawable/masterdex_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".RegioesInformacoesActivity"></activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".EsqueciASenha" />
