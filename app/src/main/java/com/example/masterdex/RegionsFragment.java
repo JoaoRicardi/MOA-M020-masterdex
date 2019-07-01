@@ -1,7 +1,7 @@
 package com.example.masterdex;
 
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.masterdex.adapter.RegioesAdapter;
-import com.example.masterdex.interfaces.FragmentActionListener;
+
 import com.example.masterdex.interfaces.RegioesListener;
 import com.example.masterdex.models.Regiao;
 
