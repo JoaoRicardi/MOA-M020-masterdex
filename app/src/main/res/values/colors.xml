@@ -5,7 +5,8 @@
     <color name="colorAccent">#FFFFFF</color>
 
     <color name="branco">#FFFFFF</color>
-    <color name="roxo">#481052</color>
+    <color name="roxo">#480458</color>
     <color name="azulFace" >#2175F3</color>
     <color name="azulBackground">#100B5A</color>
+    <color name = "Preto">#FF000000</color>
 </resources>
