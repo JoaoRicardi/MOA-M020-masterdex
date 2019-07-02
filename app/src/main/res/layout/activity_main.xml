@@ -12,26 +12,41 @@
         android:id="@+id/viewpager_id"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/azulBackground"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        android:background="@color/branco"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
 
     </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/cinza"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintVertical_bias="1.0"></LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/branco"
+        app:itemIconTint="@drawable/bottom_navigation_home"
+        app:itemTextColor="@drawable/bottom_navigation_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:itemIconTint="@drawable/bottom_navigation_home"
-        app:itemTextColor="@drawable/bottom_navigation_home"
-        android:background="@color/branco"
-        app:menu="@menu/home_menu"/>
+        app:menu="@menu/home_menu" />
 
 
 </android.support.constraint.ConstraintLayout>
