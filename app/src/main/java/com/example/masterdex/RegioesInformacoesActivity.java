@@ -45,7 +45,7 @@ public class RegioesInformacoesActivity extends AppCompatActivity {
             voltarParaRegiao();
             }
         });
-        descricaoRegiaoTextView.setMovementMethod(new ScrollingMovementMethod());
+
 
     }
 
