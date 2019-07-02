@@ -51,9 +51,15 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.item_sair:
-                Intent intent = new Intent(getContext(), LoginActivity.class);
+
+            case R.id.item_editar_perfil:
+                Intent intent = new Intent(getContext(), EditarPerfilActivity.class);
                 startActivity(intent);
+                return true;
+
+            case R.id.item_sair:
+                Intent intent2 = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent2);
                 return true;
             default:
                 return false;

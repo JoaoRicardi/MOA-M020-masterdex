@@ -11,11 +11,10 @@
     <ImageView
         android:id="@+id/regioes_info_back_button"
         android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_height="26dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
         android:src="@drawable/button_voltar"
-        app:layout_constraintBottom_toTopOf="@+id/foto_informacoes_image_view"
+        app:layout_constraintBottom_toBottomOf="@+id/regioes_nome_text_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/regioes_nome_text_view" />
 
@@ -38,7 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/card_informacoes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +72,8 @@
         app:layout_constraintEnd_toEndOf="@+id/frameLayout"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/frameLayout"
-        app:layout_constraintTop_toBottomOf="@+id/foto_informacoes_image_view">
+        app:layout_constraintTop_toBottomOf="@+id/foto_informacoes_image_view"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"

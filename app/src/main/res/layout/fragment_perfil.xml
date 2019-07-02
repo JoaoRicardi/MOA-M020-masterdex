@@ -10,13 +10,18 @@
     android:background="@color/azulBackground">
 
 
+
     <Button
         android:id="@+id/button_opcoes_perfil"
         android:layout_width="28dp"
         android:layout_height="28dp"
-        android:layout_margin="16dp"
         android:background="@drawable/ic_opcoes_perfil"
-        android:layout_gravity="right"/>
+        android:layout_gravity="right"
+        android:layout_margin="32dp"
+        />
+
+
+
     
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="100dp"
@@ -31,6 +36,7 @@
         android:id="@+id/nome_perfil_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -40,18 +46,36 @@
         android:textSize="26sp"
         />
 
-    <android.support.design.card.MaterialCardView
-        android:id="@+id/cardview_principal_perfil"
-        android:layout_width="392dp"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
+        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:cardCornerRadius="40dp"
-        android:layout_gravity="center_horizontal"
-        >
+        android:background="@drawable/card_informacoes">
 
-    </android.support.design.card.MaterialCardView>
+        <android.support.design.widget.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favoritos" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Capturados" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Populares" />
+        </android.support.design.widget.TabLayout>
+    </FrameLayout>
+
+
 
 
 </LinearLayout>
