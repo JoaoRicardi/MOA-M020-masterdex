@@ -8,6 +8,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity{
 
     private BottomNavigationView bottomNavigationItemView;
     private ViewPager viewPager;
+    MenuItem prevMenuItem;
 
 
 
@@ -33,17 +35,17 @@ public class MainActivity extends AppCompatActivity{
 
         setupViewPager(viewPager);
 
-        viewPager.setCurrentItem(1,true);
+        //viewPager.setCurrentItem(1,true);
 
         bottomNavigationItemView = findViewById(R.id.bottom_navigation);
 
-        bottomNavigationItemView.getMenu().getItem(1).setChecked(true);
+        //bottomNavigationItemView.getMenu().getItem(1).setChecked(true);
 
         bottomNavigationItemView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem itemMenu) {
+                        switch (itemMenu.getItemId()) {
                             case R.id.perfil:
                                 viewPager.setCurrentItem(0);
                                 break;
@@ -58,9 +60,38 @@ public class MainActivity extends AppCompatActivity{
                     }
                 });
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (prevMenuItem != null) {
+                    prevMenuItem.setChecked(false);
+                } else {
+                    bottomNavigationItemView.getMenu().getItem(0).setChecked(false);
+                }
+                Log.d("page", "onPageSelected: " + position);
+                bottomNavigationItemView.getMenu().getItem(position).setChecked(true);
+                prevMenuItem = bottomNavigationItemView.getMenu().getItem(position);
+
+            }
+
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        setupViewPager(viewPager);
+        viewPager.setCurrentItem(1,true);
 
     }
+
+
 
 
         private void setupViewPager(ViewPager viewPager) {
@@ -76,7 +107,5 @@ public class MainActivity extends AppCompatActivity{
 
         }
 }
-
-
 
 
