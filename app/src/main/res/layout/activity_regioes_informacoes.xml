@@ -88,8 +88,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="75dp"
                 android:padding="8dp"
-
                 android:text="TextView"
                 android:textColor="@color/Preto" />
         </LinearLayout>
