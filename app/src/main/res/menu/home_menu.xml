@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/perfil"
+        android:title="Perfil"
+        android:icon="@drawable/perfil_icon"/>
+
+    <item android:id="@+id/dex"
+        android:title="Dex"
+        android:icon="@drawable/dex_icon"/>
+
+    <item android:id="@+id/regioes"
+        android:title="Regiões"
+        android:icon="@drawable/regioes_icon"/>
+
+</menu>

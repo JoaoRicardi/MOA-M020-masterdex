@@ -1,31 +1,25 @@
 package com.example.masterdex;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 
 import com.example.masterdex.adapter.ViewPagerAdapter;
-import com.example.masterdex.interfaces.FragmentActionListener;
-import com.example.masterdex.models.Regiao;
+
 
 public class MainActivity extends AppCompatActivity{
 
 
-    private TabLayout tabLayout;
+    private BottomNavigationView bottomNavigationItemView;
     private ViewPager viewPager;
-    private int[] tabIcons = {
-            R.drawable.perfil_icon,
-            R.drawable.dex_icon,
-            R.drawable.regioes_icon,
-    };
+
 
 
 
@@ -36,25 +30,39 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         viewPager = findViewById(R.id.viewpager_id);
+
         setupViewPager(viewPager);
 
         viewPager.setCurrentItem(1,true);
 
+        bottomNavigationItemView = findViewById(R.id.bottom_navigation);
 
-        tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        bottomNavigationItemView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.perfil:
+                                viewPager.setCurrentItem(0);
+                                break;
+                            case R.id.dex:
+                                viewPager.setCurrentItem(1);
+                                break;
+                            case R.id.regioes:
+                                viewPager.setCurrentItem(2);
+                                break;
+                        }
+                        return true;
+                    }
+                });
 
 
-        setupIcons();
 
     }
-        private void setupIcons() {
-            tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-            tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-            tabLayout.getTabAt(2).setIcon(tabIcons[2]);
-        }
+
 
         private void setupViewPager(ViewPager viewPager) {
+
             ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
             adapter.AddFragment(new PerfilFragment(), "Perfil");
@@ -63,6 +71,7 @@ public class MainActivity extends AppCompatActivity{
 
             adapter.AddFragment(new RegionsFragment(), "Regiões");
             viewPager.setAdapter(adapter);
+
         }
 }
 
