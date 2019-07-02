@@ -37,14 +37,17 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/card_informacoes"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regioes_nome_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/regioes_nome_text_view"
+        app:layout_constraintVertical_bias="1.0">
+
+    </FrameLayout>
 
 
     <ImageView
@@ -59,19 +62,37 @@
         app:layout_constraintStart_toStartOf="@+id/frameLayout"
         app:layout_constraintTop_toTopOf="@+id/frameLayout" />
 
-        <TextView
-            android:id="@+id/texto_informacoes_text_view"
-            android:layout_width="wrap_content"
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/foto_informacoes_image_view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:padding="8dp"
-            android:scrollbars="vertical"
-            android:text="TextView"
-            android:textColor="@color/Preto"
-            app:layout_constraintEnd_toEndOf="@+id/frameLayout"
-            app:layout_constraintStart_toStartOf="@+id/frameLayout"
-            app:layout_constraintTop_toBottomOf="@+id/foto_informacoes_image_view" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/texto_informacoes_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:scrollbars="vertical"
+                android:text="TextView"
+                android:textColor="@color/Preto" />
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
