@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Editar Perfil"
+        android:text="Editar Informações"
         android:textSize="20dp"
         android:textColor="@color/Preto"
         app:layout_constraintEnd_toEndOf="@+id/frameLayout2"

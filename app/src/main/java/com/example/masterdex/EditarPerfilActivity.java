@@ -36,7 +36,13 @@ public class EditarPerfilActivity extends AppCompatActivity {
     }
 
     public void sairEditarPerfil(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+
+            if (getFragmentManager().getBackStackEntryCount() == 0) {
+                this.finish();
+            } else {
+                getFragmentManager().popBackStack();
+            }
+
+
     }
 }

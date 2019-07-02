@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradiente"
+    android:background="@drawable/color_background_drawable"
     tools:context=".EsqueciASenha">
 
     <ImageView
@@ -99,14 +99,10 @@
 
     <ImageView
         android:id="@+id/botao_voltar_esqueci_senha"
-        android:layout_width="17dp"
-        android:layout_height="27dp"
+        android:layout_width="30dp"
+        android:layout_height="26dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toStartOf="@+id/logo_esqueci_senha"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/button_voltar" />

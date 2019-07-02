@@ -10,5 +10,6 @@
     <color name="azulBackground">#100B5A</color>
     <color name = "Preto">#FF000000</color>
     <color name = "cinza">#979797</color>
+    <color name="lilac">#463FA2</color>
 
 </resources>

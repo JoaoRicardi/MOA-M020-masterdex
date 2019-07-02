@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradiente"
+    android:background="@drawable/color_background_drawable"
     android:padding="16dp"
     tools:context=".CadastroActivity">
 
@@ -141,15 +141,10 @@
 
     <ImageView
         android:id="@+id/button_voltar_para_login"
-        android:layout_width="17dp"
-        android:layout_height="27dp"
+        android:layout_width="30dp"
+        android:layout_height="26dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/logo_cadastrar"
-        app:layout_constraintHorizontal_bias="0.416"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/button_voltar" />
