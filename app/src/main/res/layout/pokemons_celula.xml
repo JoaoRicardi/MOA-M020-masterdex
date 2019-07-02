@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="100dp"
     android:layout_height="150dp"
     android:layout_marginBottom="13dp"
@@ -10,20 +12,19 @@
 
 
 
-    <android.support.v7.widget.CardView
+    <android.support.design.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:backgroundTint="@color/branco"
         android:layout_gravity="center"
-        android:layout_marginBottom="1dp"
-        android:padding="4dp"
-        app:cardElevation="20dp"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="6dp"
+        app:strokeColor="@color/azulBackground"
+        app:strokeWidth="@dimen/cardview_default_elevation">
 
         <ImageView
             android:id="@+id/imageFotoPokemon"
             android:layout_width="100dp"
-            android:layout_height="160dp"
+            android:layout_height="130dp"
             android:gravity="center"
             android:layout_gravity="center"
             />
@@ -44,7 +45,7 @@
             android:textColor="@color/branco"/>
 
 
-    </android.support.v7.widget.CardView>
+    </android.support.design.card.MaterialCardView>
 
 
 </LinearLayout>

@@ -27,7 +27,7 @@ import java.util.ArrayList;
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_lista,viewGroup,false);// fazendo a conversao de um xlm para uma view
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_celula,viewGroup,false);// fazendo a conversao de um xlm para uma view
 
             return new MyViewHolder(view); // retornando uma nova view holder passando a view que era um xml
         }
