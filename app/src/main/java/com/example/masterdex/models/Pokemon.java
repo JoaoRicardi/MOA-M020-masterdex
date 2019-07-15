@@ -1,6 +1,6 @@
 package com.example.masterdex.models;
 
-public class Pokemon {
+public class Pokemon implements Comparable<Pokemon> {
 
 
     // aki nao tem segredo
@@ -8,8 +8,9 @@ public class Pokemon {
     private String url;
     private int number;
 
-    public int getNumber() { String [] urlSplit = url.split("/");
-        return Integer.parseInt(urlSplit[urlSplit.length -1]);
+    public int getNumber() {
+        String[] urlSplit = url.split("/");
+        return Integer.parseInt(urlSplit[urlSplit.length - 1]);
     }
 
     public void setNumber(int number) {
@@ -30,5 +31,16 @@ public class Pokemon {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public int compareTo(Pokemon outroPokemon) {
+        if (this.number > outroPokemon.getNumber()) {
+            return -1;
+        }
+        if (this.number < outroPokemon.getNumber()) {
+            return 1;
+        }
+        return 0;
     }
 }

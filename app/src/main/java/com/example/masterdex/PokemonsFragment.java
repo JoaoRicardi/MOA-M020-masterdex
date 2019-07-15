@@ -2,6 +2,7 @@ package com.example.masterdex;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,13 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.example.masterdex.adapter.AdapterPokemon;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.models.PokemonResposta;
 import com.example.masterdex.pokeApi.PokeApi;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,23 +43,46 @@ public class PokemonsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    // utilizado no método mostrarBotoes
+    private LinearLayout MostrarBotoes;
+    private boolean show;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
 
-    // ligando as coisas, lembrando que tudo está sendo instanciado em uma View
-    textNomePokemon = view.findViewById(R.id.textNomePokemon);
-    imageFotoPokemon = view.findViewById(R.id.imageFotoPokemon);
+        // ligando as coisas, lembrando que tudo está sendo instanciado em uma View
+        textNomePokemon = view.findViewById(R.id.textNomePokemon);
+        imageFotoPokemon = view.findViewById(R.id.imageFotoPokemon);
 
-    recyclerPokemons = view.findViewById(R.id.recyclerView);
-    pokemonAdapter = new AdapterPokemon();
-    GridLayoutManager LayoutManager = new GridLayoutManager(getContext(),3);
-    recyclerPokemons.setLayoutManager(LayoutManager);
-    recyclerPokemons.setAdapter(pokemonAdapter);
+        recyclerPokemons = view.findViewById(R.id.recyclerView);
+        pokemonAdapter = new AdapterPokemon();
+        GridLayoutManager LayoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerPokemons.setLayoutManager(LayoutManager);
+        recyclerPokemons.setAdapter(pokemonAdapter);
 
-    // retrofit em ação
+
+        //FloatingActionButton mostra/esconde os botões de ordem alfabética e ordem númerica, que por sua vez orenam a lista de Pokemons.
+        MostrarBotoes = view.findViewById(R.id.linearLayout_id);
+        FloatingActionButton floatActionButton = view.findViewById(R.id.button_mostrar_botoes_poke_home_id);
+        floatActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(show){
+                    MostrarBotoes.setVisibility(View.INVISIBLE);
+                    show = false;
+                }else{
+                    MostrarBotoes.setVisibility(View.VISIBLE);
+                    show = true;
+                }
+
+            }
+        });
+
+        // retrofit em ação
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://pokeapi.co/api/v2/")// url que ira ser passada para ser consumida
                 .addConverterFactory(GsonConverterFactory.create())// conversor que ira converter um json em objeto
@@ -66,7 +94,7 @@ public class PokemonsFragment extends Fragment {
 
     }
 
-    private void receberDados(){
+    private void receberDados() {
 
         final PokeApi service = retrofit.create(PokeApi.class);
         Call<PokemonResposta> pokemonRespostaCall = service.obterListaPokemon();

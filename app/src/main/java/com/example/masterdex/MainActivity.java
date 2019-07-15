@@ -1,29 +1,30 @@
 package com.example.masterdex;
 
 
-
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.masterdex.adapter.ViewPagerAdapter;
+import com.example.masterdex.models.Pokemon;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
 
     private BottomNavigationView bottomNavigationItemView;
     private ViewPager viewPager;
     MenuItem prevMenuItem;
-
-
-
 
 
     @Override
@@ -87,25 +88,35 @@ public class MainActivity extends AppCompatActivity{
         });
 
         setupViewPager(viewPager);
-        viewPager.setCurrentItem(1,true);
+        viewPager.setCurrentItem(1, true);
 
     }
 
 
+    private void setupViewPager(ViewPager viewPager) {
 
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        private void setupViewPager(ViewPager viewPager) {
+        adapter.AddFragment(new PerfilFragment(), "Perfil");
 
-            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.AddFragment(new PokemonsFragment(), "Dex");
 
-            adapter.AddFragment(new PerfilFragment(), "Perfil");
+        adapter.AddFragment(new RegionsFragment(), "Regiões");
+        viewPager.setAdapter(adapter);
 
-            adapter.AddFragment(new PokemonsFragment(), "Dex");
+    }
 
-            adapter.AddFragment(new RegionsFragment(), "Regiões");
-            viewPager.setAdapter(adapter);
+    List<Pokemon> pokemonDados= new ArrayList<>();
 
-        }
+    public void ordemAz(View view) {
+        Toast.makeText(getApplicationContext(),"Ordena  A-Z", Toast.LENGTH_SHORT).show();
+        Collections.sort(pokemonDados,new OrdenaPorNome());
+
+    }
+
+    public void ordemNum(View view) {
+        Toast.makeText(getApplicationContext(),"Ordena  Numericamente", Toast.LENGTH_SHORT).show();
+    }
 }
 
 
