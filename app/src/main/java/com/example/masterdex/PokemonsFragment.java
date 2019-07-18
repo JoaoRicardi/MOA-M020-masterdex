@@ -19,8 +19,6 @@ import com.example.masterdex.models.PokemonResposta;
 import com.example.masterdex.pokeApi.PokeApi;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import retrofit2.Call;
 import retrofit2.Callback;

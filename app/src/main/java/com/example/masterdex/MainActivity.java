@@ -14,12 +14,8 @@ import android.widget.Toast;
 import com.example.masterdex.adapter.ViewPagerAdapter;
 import com.example.masterdex.models.Pokemon;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
 
     private BottomNavigationView bottomNavigationItemView;
@@ -106,11 +102,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    List<Pokemon> pokemonDados= new ArrayList<>();
-
     public void ordemAz(View view) {
         Toast.makeText(getApplicationContext(),"Ordena  A-Z", Toast.LENGTH_SHORT).show();
-        Collections.sort(pokemonDados,new OrdenaPorNome());
 
     }
 
