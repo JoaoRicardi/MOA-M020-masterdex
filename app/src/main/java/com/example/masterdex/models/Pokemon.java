@@ -1,6 +1,8 @@
 package com.example.masterdex.models;
 
-public class Pokemon {
+import java.io.Serializable;
+
+public class Pokemon implements Serializable {
 
 
     // aki nao tem segredo
