@@ -123,5 +123,4 @@
             android:text="Evoluções" />
     </android.support.design.widget.TabLayout>
 
-
 </android.support.constraint.ConstraintLayout>
