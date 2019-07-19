@@ -1,7 +1,8 @@
 package com.example.masterdex.models;
 
-public class Pokemon implements Comparable<Pokemon> {
+import java.io.Serializable;
 
+public class Pokemon implements Serializable {
 
     // aki nao tem segredo
     private String name;
@@ -33,14 +34,4 @@ public class Pokemon implements Comparable<Pokemon> {
         this.url = url;
     }
 
-    @Override
-    public int compareTo(Pokemon outroPokemon) {
-        if (this.number > outroPokemon.getNumber()) {
-            return -1;
-        }
-        if (this.number < outroPokemon.getNumber()) {
-            return 1;
-        }
-        return 0;
-    }
 }

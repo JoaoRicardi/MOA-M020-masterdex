@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.masterdex.interfaces.PokemonListener;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.R;
 import com.squareup.picasso.Picasso;
@@ -18,9 +19,11 @@ import java.util.ArrayList;
 
 
         private ArrayList<Pokemon> pokemonsDados;
+        private PokemonListener pokemonListener;
 
-        public AdapterPokemon (){ // construtor
-            pokemonsDados = new ArrayList<>();
+        public AdapterPokemon (PokemonListener pokemonListener, ArrayList<Pokemon> pokemonsDados){ // construtor
+            this.pokemonsDados = pokemonsDados;
+            this.pokemonListener = pokemonListener;
         }
 
         @NonNull
@@ -35,12 +38,19 @@ import java.util.ArrayList;
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
-            Pokemon pokemon = pokemonsDados.get(i);
+            final Pokemon pokemon = pokemonsDados.get(i);
             myViewHolder.textNomePokemon.setText(pokemon.getName());
 
 
             Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.getNumber()+".png")
                     .into(myViewHolder.imageFotoPokemon);
+
+            myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pokemonListener.onPokemonClicado(pokemon);
+                }
+            });
 
         }
 

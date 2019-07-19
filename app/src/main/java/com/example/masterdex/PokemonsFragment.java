@@ -1,6 +1,7 @@
 package com.example.masterdex;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.masterdex.adapter.AdapterPokemon;
+import com.example.masterdex.interfaces.PokemonListener;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.models.PokemonResposta;
 import com.example.masterdex.pokeApi.PokeApi;
@@ -27,7 +29,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class PokemonsFragment extends Fragment {
+public class PokemonsFragment extends Fragment implements PokemonListener {
 
     //criando as referencias
     private Retrofit retrofit;
@@ -55,12 +57,13 @@ public class PokemonsFragment extends Fragment {
         textNomePokemon = view.findViewById(R.id.textNomePokemon);
         imageFotoPokemon = view.findViewById(R.id.imageFotoPokemon);
 
+        ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
+
         recyclerPokemons = view.findViewById(R.id.recyclerView);
-        pokemonAdapter = new AdapterPokemon();
+        pokemonAdapter = new AdapterPokemon(this, pokemonArrayList);
         GridLayoutManager LayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerPokemons.setLayoutManager(LayoutManager);
         recyclerPokemons.setAdapter(pokemonAdapter);
-
 
         //FloatingActionButton mostra/esconde os botões de ordem alfabética e ordem númerica, que por sua vez orenam a lista de Pokemons.
         MostrarBotoes = view.findViewById(R.id.linearLayout_id);
@@ -69,10 +72,10 @@ public class PokemonsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(show){
+                if (show) {
                     MostrarBotoes.setVisibility(View.INVISIBLE);
                     show = false;
-                }else{
+                } else {
                     MostrarBotoes.setVisibility(View.VISIBLE);
                     show = true;
                 }
@@ -124,4 +127,16 @@ public class PokemonsFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onPokemonClicado(Pokemon pokemon) {
+        Intent intent = new Intent(getContext(), DetalhesPokemonActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("POKEMON", pokemon);
+
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+    }
 }
