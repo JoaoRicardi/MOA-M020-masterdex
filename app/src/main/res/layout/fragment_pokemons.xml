@@ -100,6 +100,7 @@
     </LinearLayout>
 
     <SearchView
+        style="@style/SearchViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -16,4 +16,8 @@
 
     </style>
 
+    <style name="SearchViewStyle">
+        <item name="queryBackground">@color/branco</item>
+    </style>
+
 </resources>
