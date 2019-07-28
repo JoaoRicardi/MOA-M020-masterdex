@@ -2,11 +2,11 @@
 <LinearLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
-    android:layout_height="150dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_width="110dp"
+    android:layout_height="170dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
 
@@ -19,32 +19,32 @@
         android:layout_height="match_parent"
         android:backgroundTint="@color/branco"
         android:layout_gravity="center"
-        app:cardCornerRadius="6dp"
+        app:cardCornerRadius="8dp"
         app:strokeColor="@color/azulBackground"
         app:strokeWidth="@dimen/cardview_default_elevation">
 
         <ImageView
             android:id="@+id/imageFotoPokemon"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="130dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center|top"
+
+            android:cropToPadding="true"
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/textNomePokemon"
-            android:layout_width="90dp"
-            android:layout_height="38dp"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:gravity="center"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="3dp"
             android:background="@drawable/circle"
+            android:backgroundTint="@color/azulBackground"
+            android:gravity="center|top"
             android:text="Pokemons"
             android:textAllCaps="false"
-            android:backgroundTint="@color/azulBackground"
-            android:textColor="@color/branco"/>
+            android:textColor="@color/branco"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
 
     </android.support.design.card.MaterialCardView>

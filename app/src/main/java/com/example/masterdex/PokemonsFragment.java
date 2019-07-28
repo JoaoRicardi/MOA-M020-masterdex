@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.masterdex.adapter.AdapterPokemon;
@@ -21,6 +22,7 @@ import com.example.masterdex.models.PokemonResposta;
 import com.example.masterdex.pokeApi.PokeApi;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +31,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class PokemonsFragment extends Fragment implements PokemonListener {
+public class PokemonsFragment extends Fragment implements PokemonListener, SearchView.OnQueryTextListener
+{
 
     //criando as referencias
     private Retrofit retrofit;
@@ -39,18 +42,21 @@ public class PokemonsFragment extends Fragment implements PokemonListener {
     private AdapterPokemon pokemonAdapter;
 
 
-    public PokemonsFragment() {
+    public PokemonsFragment()
+    {
         // Required empty public constructor
     }
 
     // utilizado no método mostrarBotoes
     private LinearLayout MostrarBotoes;
     private boolean show;
-
+    private SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
+
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
 
         // ligando as coisas, lembrando que tudo está sendo instanciado em uma View
@@ -59,11 +65,15 @@ public class PokemonsFragment extends Fragment implements PokemonListener {
 
         ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
 
+        searchView = view.findViewById(R.id.search_view);
+
         recyclerPokemons = view.findViewById(R.id.recyclerView);
         pokemonAdapter = new AdapterPokemon(this, pokemonArrayList);
         GridLayoutManager LayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerPokemons.setLayoutManager(LayoutManager);
         recyclerPokemons.setAdapter(pokemonAdapter);
+
+
 
         //FloatingActionButton mostra/esconde os botões de ordem alfabética e ordem númerica, que por sua vez orenam a lista de Pokemons.
         MostrarBotoes = view.findViewById(R.id.linearLayout_id);
@@ -72,16 +82,24 @@ public class PokemonsFragment extends Fragment implements PokemonListener {
             @Override
             public void onClick(View v) {
 
-                if (show) {
+                receberDados();
+
+                if (show)
+                {
                     MostrarBotoes.setVisibility(View.INVISIBLE);
                     show = false;
-                } else {
+                } else
+                    {
+
                     MostrarBotoes.setVisibility(View.VISIBLE);
                     show = true;
                 }
 
             }
         });
+
+
+
 
         // retrofit em ação
         retrofit = new Retrofit.Builder()
@@ -95,12 +113,11 @@ public class PokemonsFragment extends Fragment implements PokemonListener {
 
     }
 
-    private void receberDados() {
+    private void receberDados()
+    {
 
         final PokeApi service = retrofit.create(PokeApi.class);
         Call<PokemonResposta> pokemonRespostaCall = service.obterListaPokemon();
-
-
         pokemonRespostaCall.enqueue(new Callback<PokemonResposta>() {
             @Override
             public void onResponse(Call<PokemonResposta> call, Response<PokemonResposta> response) {
@@ -112,24 +129,16 @@ public class PokemonsFragment extends Fragment implements PokemonListener {
                     pokemonAdapter.adicionarListaPokemon(pokemonArrayList);// adicionando todos os objetos num array
 
                 } else {
-
-
                 }
             }
-
             @Override
             public void onFailure(Call<PokemonResposta> call, Throwable t) {
-
-
             }
         });
-
-
     }
-
-
     @Override
-    public void onPokemonClicado(Pokemon pokemon) {
+    public void onPokemonClicado(Pokemon pokemon)
+    {
         Intent intent = new Intent(getContext(), DetalhesPokemonActivity.class);
 
         Bundle bundle = new Bundle();
@@ -138,5 +147,22 @@ public class PokemonsFragment extends Fragment implements PokemonListener {
         intent.putExtras(bundle);
 
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        String userInput = query.toLowerCase();
+        List<String> filtrados = new ArrayList<>();
+        for (String filtrado : filtrados) {
+            
+        }
+            return false;
+        }
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

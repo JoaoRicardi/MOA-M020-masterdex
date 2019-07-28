@@ -84,7 +84,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:onClick="ordemAz"
             app:srcCompat="@drawable/button_az" />
 
         <ImageView
@@ -93,16 +92,21 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:onClick="ordemNum"
             app:srcCompat="@drawable/button_num" />
 
 
     </LinearLayout>
 
     <SearchView
-        style="@style/SearchViewStyle"
+        android:id="@+id/search_view"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:closeIcon="@drawable/ic_cancel"
+        android:queryBackground="@color/colorAccent"
+        android:queryHint="Procurar Pokemon"
+        android:searchIcon="@drawable/ic_search_white_24dp"
+        android:tooltipText="Pesquisar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

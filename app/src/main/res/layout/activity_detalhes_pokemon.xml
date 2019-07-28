@@ -8,33 +8,33 @@
     android:background="@drawable/detalhes_background_agua"
     >
 
-    <ImageView
+    <ImageButton
         android:id="@+id/detalhes_pokemon_voltar"
         android:layout_width="30dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="16dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/button_voltar"
+        android:background="@drawable/button_voltar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/detalhes_pokemon_favorito"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_favoritar"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/check_box_favorito"
         app:layout_constraintEnd_toStartOf="@+id/detalhes_pokemon_capturado"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/detalhes_pokemon_capturado"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_capturar"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/check_box_capturado"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

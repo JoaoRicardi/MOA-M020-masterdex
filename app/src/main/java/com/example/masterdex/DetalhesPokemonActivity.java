@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.masterdex.models.Pokemon;
 import com.squareup.picasso.Picasso;
@@ -18,8 +20,8 @@ import com.squareup.picasso.Picasso;
 public class DetalhesPokemonActivity extends AppCompatActivity {
 
     private ImageView botaoVoltar;
-    private ImageView botaoFavorito;
-    private ImageView botaoCapturado;
+    private ImageButton botaoFavorito;
+    private ImageButton botaoCapturado;
     private ImageView imagemPokemon;
     private TextView nomePokemon;
     private ImageView tipoPokemon;
@@ -44,7 +46,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 voltarHome();
             }
         });
-        
+
 
         Intent intent = getIntent();
 
@@ -54,14 +56,43 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
         nomePokemon.setText(pokemon.getName());
 
-        Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.getNumber()+".png").into(imagemPokemon);
+        Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png").into(imagemPokemon);
 
 
+        botaoFavorito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.isSelected()) {
+                    v.setSelected(false);
+                } else {
+                    botaoFavorito.setSelected(false);
+                    //put all the other buttons you might want to disable here...
+                    v.setSelected(true);
+                    Toast.makeText(DetalhesPokemonActivity.this, "Pokemon Favoritado", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        botaoCapturado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.isSelected()) {
+                    v.setSelected(false);
+                } else {
+                    botaoCapturado.setSelected(false);
+
+                    v.setSelected(true);
+                    Toast.makeText(DetalhesPokemonActivity.this, "Pokemon Capturado", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
 
     }
-
-    private void voltarHome() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        private void voltarHome () {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
-}

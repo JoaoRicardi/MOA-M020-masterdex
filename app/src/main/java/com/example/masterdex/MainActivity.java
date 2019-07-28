@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.masterdex.adapter.ViewPagerAdapter;
@@ -23,12 +24,14 @@ public class MainActivity extends AppCompatActivity{
     MenuItem prevMenuItem;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         viewPager = findViewById(R.id.viewpager_id);
+
 
         setupViewPager(viewPager);
 
@@ -86,6 +89,8 @@ public class MainActivity extends AppCompatActivity{
         setupViewPager(viewPager);
         viewPager.setCurrentItem(1, true);
 
+
+
     }
 
 
@@ -110,6 +115,8 @@ public class MainActivity extends AppCompatActivity{
     public void ordemNum(View view) {
         Toast.makeText(getApplicationContext(),"Ordena  Numericamente", Toast.LENGTH_SHORT).show();
     }
+
+
 }
 
 
