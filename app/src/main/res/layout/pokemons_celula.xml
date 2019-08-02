@@ -25,8 +25,8 @@
 
         <ImageView
             android:id="@+id/imageFotoPokemon"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center|top"
 
             android:cropToPadding="true"
