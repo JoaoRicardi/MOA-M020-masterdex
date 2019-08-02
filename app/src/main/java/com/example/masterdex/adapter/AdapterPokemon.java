@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -19,48 +18,96 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHolder>  {
+public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHolder> implements Filterable  {
+
+    private List<Pokemon> pokemonsList;
+    private List<Pokemon> pokemonsListFull;
+    private PokemonListener pokemonListener;
 
 
-        private ArrayList<Pokemon> pokemonsDados;
+    AdapterPokemon(List<Pokemon> pokemonsList){
+        this.pokemonsList = pokemonsList;
+        pokemonsListFull = new ArrayList<>(pokemonsList);
+    }
 
 
-        private PokemonListener pokemonListener;
+    public AdapterPokemon (PokemonListener pokemonListener, ArrayList<Pokemon> pokemonsList){ // construtor
+        this.pokemonsListFull = pokemonsList;
+        this.pokemonListener = pokemonListener;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_celula,viewGroup,false);// fazendo a conversao de um xlm para uma view
+
+        return new ViewHolder(view); // retornando uma nova view holder passando a view que era um xml
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+
+        final Pokemon pokemon = pokemonsListFull.get(position);
+
+        viewHolder.textNomePokemon.setText(pokemon.getName());
 
 
-        public AdapterPokemon (PokemonListener pokemonListener, ArrayList<Pokemon> pokemonsDados){ // construtor
-            this.pokemonsDados = pokemonsDados;
-            this.pokemonListener = pokemonListener;
+        Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.getNumber()+".png")
+                .into(viewHolder.imageFotoPokemon);
 
-        }
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pokemonListener.onPokemonClicado(pokemon);
+            }
+        });
+    }
 
-        @NonNull
+    @Override
+    public int getItemCount() {
+        return pokemonsListFull.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return pokemonFilter;
+    }
+
+    private Filter pokemonFilter = new Filter() {
         @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Pokemon> filteredList = new ArrayList<>();
 
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_celula,viewGroup,false);// fazendo a conversao de um xlm para uma view
+            if (constraint == null || constraint.length() == 0) {
 
-            return new ViewHolder(view); // retornando uma nova view holder passando a view que era um xml
-        }
+                filteredList.addAll(pokemonsListFull);
 
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
 
-            final Pokemon pokemon = pokemonsDados.get(i);
-            viewHolder.textNomePokemon.setText(pokemon.getName());
-
-
-            Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.getNumber()+".png")
-                    .into(viewHolder.imageFotoPokemon);
-
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pokemonListener.onPokemonClicado(pokemon);
+                for (Pokemon pokemon : pokemonsListFull) {
+                    if (pokemon.getName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(pokemon);
+                    }
                 }
-            });
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
         }
-        class ViewHolder extends RecyclerView.ViewHolder{
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            pokemonsListFull.clear();
+            pokemonsListFull.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textNomePokemon;
         private ImageView imageFotoPokemon;
@@ -73,26 +120,20 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
         }
     }
 
-        @Override
-        public int getItemCount() {
-            return pokemonsDados.size();
-        }
 
-        public void adicionarListaPokemon(ArrayList<Pokemon> pokemonArrayList) {
+    public void adicionarListaPokemon(ArrayList<Pokemon> pokemonArrayList) {
 
-            pokemonsDados.addAll(pokemonArrayList);
-            notifyDataSetChanged();
-        }
+        pokemonsListFull.addAll(pokemonArrayList);
+        notifyDataSetChanged();
+    }
 
 
     public void atualizarListaPokemons(List<Pokemon> listaFiltrada) {
 
-            pokemonsDados = new ArrayList<>();
-            pokemonsDados.addAll(listaFiltrada);
-            notifyDataSetChanged();
-
+        pokemonsListFull = new ArrayList<>();
+        pokemonsListFull.addAll(listaFiltrada);
+        notifyDataSetChanged();
     }
-
 }
 
 

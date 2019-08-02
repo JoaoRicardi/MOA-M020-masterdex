@@ -1,6 +1,4 @@
 package com.example.masterdex;
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,22 +6,23 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
-
 import com.example.masterdex.adapter.AdapterPokemon;
 import com.example.masterdex.interfaces.PokemonListener;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.models.PokemonResposta;
 import com.example.masterdex.pokeApi.PokeApi;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.cache.DiskLruCache;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,9 +30,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class PokemonsFragment extends Fragment implements PokemonListener, SearchView.OnQueryTextListener
-{
-
+public class PokemonsFragment extends Fragment implements PokemonListener{
     //criando as referencias
     private Retrofit retrofit;
     private TextView textNomePokemon;
@@ -41,16 +38,18 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Searc
     private RecyclerView recyclerPokemons;
     private AdapterPokemon pokemonAdapter;
 
+    // utilizado no método mostrarBotoes
+
+    private LinearLayout MostrarBotoes;
+    private boolean show;
+    private SearchView searchView;
+
+
 
     public PokemonsFragment()
     {
         // Required empty public constructor
     }
-
-    // utilizado no método mostrarBotoes
-    private LinearLayout MostrarBotoes;
-    private boolean show;
-    private SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,15 +59,45 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Searc
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
 
         // ligando as coisas, lembrando que tudo está sendo instanciado em uma View
+
         textNomePokemon = view.findViewById(R.id.textNomePokemon);
         imageFotoPokemon = view.findViewById(R.id.imageFotoPokemon);
 
-        ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
+        final ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
+
+        //SearchView
 
         searchView = view.findViewById(R.id.search_view);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.length() ==0 ||newText ==null){
+                    pokemonArrayList.clear();
+                    receberDados();
+                }else{
+                    pokemonAdapter.getFilter().filter(newText);
+
+
+                }
+
+                return false;
+            }
+        });
+
+
+        // SetupRecyclerView
 
         recyclerPokemons = view.findViewById(R.id.recyclerView);
         pokemonAdapter = new AdapterPokemon(this, pokemonArrayList);
+
         GridLayoutManager LayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerPokemons.setLayoutManager(LayoutManager);
         recyclerPokemons.setAdapter(pokemonAdapter);
@@ -89,7 +118,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Searc
                     MostrarBotoes.setVisibility(View.INVISIBLE);
                     show = false;
                 } else
-                    {
+                {
 
                     MostrarBotoes.setVisibility(View.VISIBLE);
                     show = true;
@@ -97,9 +126,6 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Searc
 
             }
         });
-
-
-
 
         // retrofit em ação
         retrofit = new Retrofit.Builder()
@@ -110,8 +136,9 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Searc
         receberDados();
 
         return view;
-
     }
+
+
 
     private void receberDados()
     {
@@ -136,6 +163,10 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Searc
             }
         });
     }
+
+
+
+
     @Override
     public void onPokemonClicado(Pokemon pokemon)
     {
@@ -149,20 +180,5 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Searc
         startActivity(intent);
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
 
-        String userInput = query.toLowerCase();
-        List<String> filtrados = new ArrayList<>();
-        for (String filtrado : filtrados) {
-            
-        }
-            return false;
-        }
-
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
-    }
 }
