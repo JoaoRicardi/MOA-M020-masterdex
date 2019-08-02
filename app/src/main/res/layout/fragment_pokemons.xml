@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:adjustViewBounds="true"
         android:cropToPadding="true"
         android:src="@drawable/masterdex_banner"
@@ -19,7 +19,7 @@
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="65dp"
         android:background="@color/azulBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,15 +29,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Masterdex"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="MasterDex"
         android:textColor="@color/branco"
-        android:textSize="28sp"
-        android:textStyle="normal"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23" />
 
 
     <android.support.v7.widget.RecyclerView
@@ -45,6 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:paddingTop="14dp"
@@ -52,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintTop_toBottomOf="@+id/search_view" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_mostrar_botoes_poke_home_id"
@@ -101,13 +104,17 @@
         android:id="@+id/search_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:closeIcon="@drawable/ic_cancel"
-        android:queryBackground="@color/colorAccent"
+        android:queryBackground="@color/branco"
         android:queryHint="Procurar Pokemon"
         android:searchIcon="@drawable/ic_search_white_24dp"
         android:tooltipText="Pesquisar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
