@@ -7,6 +7,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import android.os.Handler;
 import android.view.LayoutInflater;
 
 import android.view.View;
@@ -32,7 +35,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class PokemonsFragment extends Fragment  implements PokemonListener
+public class PokemonsFragment extends Fragment  implements PokemonListener,SwipeRefreshLayout.OnRefreshListener
 {
 
     //criando as referencias
@@ -41,6 +44,7 @@ public class PokemonsFragment extends Fragment  implements PokemonListener
     private ImageView imageFotoPokemon;
     private RecyclerView recyclerPokemons;
     private AdapterPokemon pokemonAdapter;
+    private SwipeRefreshLayout swipe;
 
 
 
@@ -60,6 +64,12 @@ public class PokemonsFragment extends Fragment  implements PokemonListener
                              Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
+
+
+        //swipe to refresh
+        swipe = view.findViewById(R.id.swipe_refresh);
+        swipe.setOnRefreshListener(this);
+        swipe.setColorSchemeResources(R.color.azulBackground);
 
 
 
@@ -110,7 +120,7 @@ public class PokemonsFragment extends Fragment  implements PokemonListener
             @Override
             public void onClick(View v) {
 
-                receberDados();
+
 
                 if (show)
                 {
@@ -152,6 +162,9 @@ public class PokemonsFragment extends Fragment  implements PokemonListener
             public void onFailure(Call<PokemonResposta> call, Throwable t) {
             }
         });
+
+
+
     }
     @Override
     public void onPokemonClicado(Pokemon pokemon)
@@ -164,4 +177,15 @@ public class PokemonsFragment extends Fragment  implements PokemonListener
     }
 
 
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                receberDados();
+                swipe.setRefreshing(false);
+            }
+        },4000);
+    }
 }

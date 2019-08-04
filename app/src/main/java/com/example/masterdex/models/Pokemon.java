@@ -35,7 +35,8 @@ public class Pokemon implements Serializable {
     }
 
     public int getNumber() {
-        return number;
+        String[] urlSplit = url.split("/");
+        return Integer.parseInt(urlSplit[urlSplit.length - 1]);
     }
 
     public void setNumber(int number) {
