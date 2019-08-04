@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM" />
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/motorola-moto_g__5s_-0038753662/data/data/com.example.masterdex/databases/MASTERDEX_DATABASE" charset="windows-1252" />
+  </component>
 </project>

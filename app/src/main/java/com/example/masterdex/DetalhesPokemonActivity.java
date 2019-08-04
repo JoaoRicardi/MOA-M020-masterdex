@@ -11,25 +11,29 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.example.masterdex.database.MasterdexDatabase;
-import com.example.masterdex.database.PokemonDao;
+import com.example.masterdex.database.CapturadosDao;
+import com.example.masterdex.database.CapturadosDb;
+import com.example.masterdex.database.FavoritosDao;
+import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.models.Pokemon;
 import com.squareup.picasso.Picasso;
 
 import io.reactivex.Completable;
-import io.reactivex.ObservableConverter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 
 public class DetalhesPokemonActivity extends AppCompatActivity {
 
+    public static final String FAVORITOS_DB = "favoritos_Db";
+    public static final String CAPTURADOS_DB = "capturados_Db";
+
     private ToggleButton botaoFavorito;
     private ToggleButton botaoCapturado;
-    private MasterdexDatabase db;
+    private FavoritosDb favoritosDb;
+    private CapturadosDb capturadosDb;
 
 
     @Override
@@ -52,97 +56,113 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             }
         });
 
-        db = Room.databaseBuilder(this,
-                MasterdexDatabase.class, "MASTERDEX_DATABASE").build();
+        favoritosDb = Room.databaseBuilder(this,
+                FavoritosDb.class, FAVORITOS_DB).build();
+
+        capturadosDb = Room.databaseBuilder(this,
+                CapturadosDb.class, CAPTURADOS_DB).build();
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
 // aki faço o nome do pokemon ficar com a primeira letra maiuscula.
+
+
         String pok = pokemon.getName();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
         nomePokemon.setText(pok);
+
         Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png").into(imagemPokemon);
         //como o proprio nome ja diz kkk
 
 
-        System.out.println("Favoritado");
-        System.out.println(pokemon.getFavorito());
-        System.out.println("capturado");
-        System.out.println(pokemon.getCapturado());
-        consultaPokemonBanco(pokemon);
+        System.out.println(pokemon.getName());
+        System.out.println("****************");
+        consultaPokemonFavoritado(pokemon);
+        consultaPokemonCapturado(pokemon);
+
         botaoFavorito.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()) {
-                    pokemonFavoritado(pokemon);
-                    System.out.println("Favoritado");
-                    System.out.println(pokemon.getFavorito());
-                    inserirPokemonBanco(pokemon);
+                    inserirPokemonFavorito(pokemon);
                 } else {
-                    pokemon.setFavorito(false);
+                    deletarPokemonFavorito(pokemon);
                 }
             }
         });
-
         botaoCapturado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()) {
-                    pokemon.setCapturado(true);
-                    System.out.println("capturado");
-                    System.out.println(pokemon.getCapturado());
-                    inserirPokemonBanco(pokemon);
+                    inserirPokemonCapturado(pokemon);
                 } else {
-                    pokemon.setCapturado(false);
-
+                    deletarPokemonCapturado(pokemon);
                 }
             }
         });
     }
 
-    private Pokemon pokemonFavoritado(Pokemon pokemon) {
-        pokemon.setFavorito(true);
-        return pokemon;
-    }
-    private Pokemon pokemonCapturado(Pokemon pokemon) {
-        pokemon.setCapturado(true);
-        return pokemon;
-    }
-
-    private void deletarPokemonBanco(Pokemon pokemon) {
-        Completable.fromAction(() -> db.pokemonDao().delete(pokemon))
+    private void deletarPokemonFavorito(Pokemon pokemon) {
+        Completable.fromAction(() -> favoritosDb.favoritosDao().deleteByName(pokemon.getName()))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
     }
 
-    private void inserirPokemonBanco(Pokemon pokemon) {
-        Completable.fromAction(() -> db.pokemonDao().insert(pokemon))
+    private void inserirPokemonFavorito(Pokemon pokemon) {
+        Completable.fromAction(() -> favoritosDb.favoritosDao().insert(pokemon))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
-            }
+    }
 
-    private void consultaPokemonBanco(Pokemon pokemon) {
+    private void deletarPokemonCapturado(Pokemon pokemon) {
+        Completable.fromAction(() -> capturadosDb.capturadosDao().deleteByName(pokemon.getName()))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
+    }
 
-        PokemonDao pokemonDao = db.pokemonDao();
-        pokemonDao.pegaPeloNome(pokemon.getName())
+    private void inserirPokemonCapturado(Pokemon pokemon) {
+        Completable.fromAction(() -> capturadosDb.capturadosDao().insert(pokemon))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
+    }
+
+    private void consultaPokemonCapturado(Pokemon pokemon) {
+        CapturadosDao capturadosDao = capturadosDb.capturadosDao();
+        capturadosDao.getName(pokemon.getName())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(pokemonEncontrado -> {
-                    if (pokemonEncontrado.getFavorito().equals(pokemon)){
-                        botaoFavorito.setChecked(false);
-                    }else{
-                        botaoFavorito.setChecked(true);
+                    System.out.println(pokemonEncontrado.getName());
+                    if (pokemonEncontrado.getName().equals(pokemon.getName())) {
+                        System.out.println("pokemon foi encontrado no banco $$$");
+                        botaoCapturado.setChecked(true);
+                    } else {
+                        System.out.println("pokemon nao encontrado no banco $$$");
+                        botaoCapturado.setChecked(false);
                     }
                 });
     }
 
-    private void atualizarPokemonBanco(Pokemon pokemon) {
-        Completable.fromAction(() -> db.pokemonDao().update(pokemon))
-                .subscribeOn(Schedulers.newThread())
+    private void consultaPokemonFavoritado(Pokemon pokemon) {
+        FavoritosDao favoritosDao = favoritosDb.favoritosDao();
+        favoritosDao.getName(pokemon.getName())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(pokemonEncontrado -> {
+                    System.out.println(pokemonEncontrado.getName());
+                    if (pokemonEncontrado.getName().equals(pokemon.getName())) {
+                        System.out.println("pokemon foi encontrado no banco $$$");
+                        botaoFavorito.setChecked(true);
+                    } else {
+                        System.out.println("pokemon nao encontrado no banco $$$");
+                        botaoFavorito.setChecked(false);
+                    }
+                });
     }
 
     private void voltarHome() {

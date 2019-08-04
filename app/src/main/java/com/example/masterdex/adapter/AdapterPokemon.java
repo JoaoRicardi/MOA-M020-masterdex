@@ -45,7 +45,10 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
 
         final Pokemon pokemon = pokemonsListFull.get(position);
 
-        viewHolder.textNomePokemon.setText(pokemon.getName());
+        String pok = pokemon.getName();
+        pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
+
+        viewHolder.textNomePokemon.setText(pok);
 
 
         Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.getNumber()+".png")

@@ -2,7 +2,6 @@
 
         package com.example.masterdex.models;
 
-        import androidx.annotation.Nullable;
         import androidx.room.ColumnInfo;
         import androidx.room.Entity;
         import androidx.room.PrimaryKey;
@@ -11,8 +10,6 @@
 
 @Entity(tableName = "pokemons")
 public class Pokemon implements Serializable {
-
-
 
     // aki nao tem segredo
 
@@ -28,35 +25,21 @@ public class Pokemon implements Serializable {
     @ColumnInfo(name = "name")
     private String name;
 
-    @ColumnInfo(name = "favorito")
-    private Boolean favorito = false;
 
-    @ColumnInfo(name = "capturado")
-    private Boolean capturado = false;
+    public int getId() {
+        return id;
+    }
 
-
-
-
-
-
-
-
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getNumber() {
-        String[] urlSplit = url.split("/");
-        return Integer.parseInt(urlSplit[urlSplit.length - 1]);
+        return number;
     }
 
     public void setNumber(int number) {
         this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getUrl() {
@@ -67,35 +50,12 @@ public class Pokemon implements Serializable {
         this.url = url;
     }
 
-    public int getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-    public Boolean getFavorito() {
-        return favorito;
-    }
-
-    public void setFavorito(Boolean favorito) {
-        this.favorito = favorito;
-    }
-
-    public Boolean getCapturado() {
-        return capturado;
-    }
-
-    public void setCapturado(Boolean capturado) {
-        this.capturado = capturado;
-    }
-
-    @Override
-    public boolean equals(@Nullable Object obj) {
-        Pokemon outro = (Pokemon) obj;
-        return this.getFavorito().equals(outro.getFavorito());
+    public void setName(String name) {
+        this.name = name;
     }
 
 
