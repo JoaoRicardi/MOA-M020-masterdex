@@ -8,11 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -62,11 +61,41 @@ public class PokemonsFragment extends Fragment  implements PokemonListener
     {
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
 
+
+
         // ligando as coisas, lembrando que tudo está sendo instanciado em uma View
+        ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
         textNomePokemon = view.findViewById(R.id.textNomePokemon);
         imageFotoPokemon = view.findViewById(R.id.imageFotoPokemon);
 
-        ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
+        //SearchView
+
+        searchView = view.findViewById(R.id.search_view);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.length() ==0 ||newText ==null){
+                    pokemonArrayList.clear();
+                    receberDados();
+                }else{
+                    pokemonAdapter.getFilter().filter(newText);
+
+
+                }
+
+                return false;
+            }
+        });
+
+        // SetupRecyclerView
 
         recyclerPokemons = view.findViewById(R.id.recyclerView);
         pokemonAdapter = new AdapterPokemon(this, pokemonArrayList);
@@ -133,31 +162,6 @@ public class PokemonsFragment extends Fragment  implements PokemonListener
         intent.putExtras(bundle);
         startActivity(intent);
     }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.menu, menu);
-        MenuItem item = menu.findItem(R.id.search_view);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        SearchView searchView = (SearchView) item.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                pokemonAdapter.getFilter().filter(newText);
-                return true;
-            }
-        });
-    }
-
-
-
 
 
 }
