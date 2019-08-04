@@ -6,7 +6,7 @@
         android:drawable="@drawable/ic_favoritar_on"/>
         <item
             android:state_selected="false"
-            android:drawable="@drawable/ic_favoritar"
+            android:drawable="@drawable/ic_favoritar_off"
 
             />
 

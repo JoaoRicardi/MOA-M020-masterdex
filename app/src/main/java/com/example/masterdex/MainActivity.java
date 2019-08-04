@@ -2,18 +2,16 @@ package com.example.masterdex;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.masterdex.adapter.ViewPagerAdapter;
-import com.example.masterdex.models.Pokemon;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -94,6 +92,16 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+
+
+
+
+
+
+
+
+
+
     private void setupViewPager(ViewPager viewPager) {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -115,6 +123,8 @@ public class MainActivity extends AppCompatActivity{
     public void ordemNum(View view) {
         Toast.makeText(getApplicationContext(),"Ordena  Numericamente", Toast.LENGTH_SHORT).show();
     }
+
+
 
 
 }

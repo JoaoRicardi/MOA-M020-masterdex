@@ -1,28 +1,31 @@
 package com.example.masterdex;
+
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+
 import com.example.masterdex.adapter.AdapterPokemon;
 import com.example.masterdex.interfaces.PokemonListener;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.models.PokemonResposta;
 import com.example.masterdex.pokeApi.PokeApi;
-import java.util.ArrayList;
-import java.util.List;
 
-import okhttp3.internal.cache.DiskLruCache;
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +33,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class PokemonsFragment extends Fragment implements PokemonListener{
+public class PokemonsFragment extends Fragment  implements PokemonListener
+{
+
     //criando as referencias
     private Retrofit retrofit;
     private TextView textNomePokemon;
@@ -38,11 +43,6 @@ public class PokemonsFragment extends Fragment implements PokemonListener{
     private RecyclerView recyclerPokemons;
     private AdapterPokemon pokemonAdapter;
 
-    // utilizado no método mostrarBotoes
-
-    private LinearLayout MostrarBotoes;
-    private boolean show;
-    private SearchView searchView;
 
 
 
@@ -51,58 +51,28 @@ public class PokemonsFragment extends Fragment implements PokemonListener{
         // Required empty public constructor
     }
 
+    // utilizado no método mostrarBotoes
+    private LinearLayout MostrarBotoes;
+    private boolean show;
+    private SearchView searchView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
 
         // ligando as coisas, lembrando que tudo está sendo instanciado em uma View
-
         textNomePokemon = view.findViewById(R.id.textNomePokemon);
         imageFotoPokemon = view.findViewById(R.id.imageFotoPokemon);
 
-        final ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
-
-        //SearchView
-
-        searchView = view.findViewById(R.id.search_view);
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if(newText.length() ==0 ||newText ==null){
-                    pokemonArrayList.clear();
-                    receberDados();
-                }else{
-                    pokemonAdapter.getFilter().filter(newText);
-
-
-                }
-
-                return false;
-            }
-        });
-
-
-        // SetupRecyclerView
+        ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
 
         recyclerPokemons = view.findViewById(R.id.recyclerView);
         pokemonAdapter = new AdapterPokemon(this, pokemonArrayList);
-
         GridLayoutManager LayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerPokemons.setLayoutManager(LayoutManager);
         recyclerPokemons.setAdapter(pokemonAdapter);
-
-
 
         //FloatingActionButton mostra/esconde os botões de ordem alfabética e ordem númerica, que por sua vez orenam a lista de Pokemons.
         MostrarBotoes = view.findViewById(R.id.linearLayout_id);
@@ -118,7 +88,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener{
                     MostrarBotoes.setVisibility(View.INVISIBLE);
                     show = false;
                 } else
-                {
+                    {
 
                     MostrarBotoes.setVisibility(View.VISIBLE);
                     show = true;
@@ -132,17 +102,11 @@ public class PokemonsFragment extends Fragment implements PokemonListener{
                 .baseUrl("https://pokeapi.co/api/v2/")// url que ira ser passada para ser consumida
                 .addConverterFactory(GsonConverterFactory.create())// conversor que ira converter um json em objeto
                 .build();
-
         receberDados();
-
         return view;
     }
-
-
-
     private void receberDados()
     {
-
         final PokeApi service = retrofit.create(PokeApi.class);
         Call<PokemonResposta> pokemonRespostaCall = service.obterListaPokemon();
         pokemonRespostaCall.enqueue(new Callback<PokemonResposta>() {
@@ -150,11 +114,8 @@ public class PokemonsFragment extends Fragment implements PokemonListener{
             public void onResponse(Call<PokemonResposta> call, Response<PokemonResposta> response) {
                 if (response.isSuccessful()) {
                     PokemonResposta pokemonResposta = response.body(); //colocando na variavel os dados recuperados pelo metodo @GET
-
                     ArrayList<Pokemon> pokemonArrayList = pokemonResposta.getResults(); //
-
                     pokemonAdapter.adicionarListaPokemon(pokemonArrayList);// adicionando todos os objetos num array
-
                 } else {
                 }
             }
@@ -163,22 +124,40 @@ public class PokemonsFragment extends Fragment implements PokemonListener{
             }
         });
     }
-
-
-
-
     @Override
     public void onPokemonClicado(Pokemon pokemon)
     {
         Intent intent = new Intent(getContext(), DetalhesPokemonActivity.class);
-
         Bundle bundle = new Bundle();
         bundle.putSerializable("POKEMON", pokemon);
-
         intent.putExtras(bundle);
-
         startActivity(intent);
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.menu, menu);
+        MenuItem item = menu.findItem(R.id.search_view);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                pokemonAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+    }
+
+
+
 
 
 }

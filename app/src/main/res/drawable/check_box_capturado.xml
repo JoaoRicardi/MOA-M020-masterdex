@@ -6,7 +6,7 @@
         android:drawable="@drawable/ic_capturado_on"/>
     <item
         android:state_selected="false"
-        android:drawable="@drawable/ic_capturado"
+        android:drawable="@drawable/ic_capturado_off"
 
         />
 
