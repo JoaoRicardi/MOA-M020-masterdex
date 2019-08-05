@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.masterdex.R;
+import com.example.masterdex.viewmodel.PokemonViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -47,9 +51,8 @@ public class PokemonsFragment extends Fragment  implements PokemonListener,Swipe
     private RecyclerView recyclerPokemons;
     private AdapterPokemon pokemonAdapter;
     private SwipeRefreshLayout swipe;
-
-
-
+    private static final int LIMIT = 20;
+    private int offset =0;
 
     public PokemonsFragment()
     {
@@ -68,11 +71,29 @@ public class PokemonsFragment extends Fragment  implements PokemonListener,Swipe
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
 
 
-        //swipe to refresh
-        swipe = view.findViewById(R.id.swipe_refresh);
-        swipe.setOnRefreshListener(this);
-        swipe.setColorSchemeResources(R.color.azulBackground);
 
+        PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
+        pokemonViewModel.atualizarPokemon(LIMIT,offset);
+        pokemonViewModel.getPokemonLiveData()
+                .observe(this,pokemons -> {
+                    pokemonAdapter.atualizarListaPokemons(pokemons);
+                    swipe.setRefreshing(false);
+                });
+
+      //  swipe.setOnRefreshListener(() -> pokemonViewModel.atualizarPokemon(LIMIT,offset));
+
+
+//        recyclerPokemons.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//
+//                if (recyclerView.canScrollVertically(1)){
+//                    offset += LIMIT;
+//                    pokemonViewModel.atualizarPokemon(LIMIT,offset);
+//                }
+//            }
+//        });
 
 
         // ligando as coisas, lembrando que tudo está sendo instanciado em uma View
@@ -96,7 +117,7 @@ public class PokemonsFragment extends Fragment  implements PokemonListener,Swipe
             public boolean onQueryTextChange(String newText) {
                 if(newText.length() ==0 ||newText ==null){
                     pokemonArrayList.clear();
-                    receberDados();
+                  //  receberDados();
                 }else{
                     pokemonAdapter.getFilter().filter(newText);
 
@@ -138,36 +159,36 @@ public class PokemonsFragment extends Fragment  implements PokemonListener,Swipe
             }
         });
 
-        // retrofit em ação
-        retrofit = new Retrofit.Builder()
-                .baseUrl("https://pokeapi.co/api/v2/")// url que ira ser passada para ser consumida
-                .addConverterFactory(GsonConverterFactory.create())// conversor que ira converter um json em objeto
-                .build();
-        receberDados();
+//        // retrofit em ação
+//        retrofit = new Retrofit.Builder()
+//                .baseUrl("https://pokeapi.co/api/v2/")// url que ira ser passada para ser consumida
+//                .addConverterFactory(GsonConverterFactory.create())// conversor que ira converter um json em objeto
+//                .build();
+//        receberDados();
         return view;
     }
-    private void receberDados()
-    {
-        final PokeApi service = retrofit.create(PokeApi.class);
-        Call<PokemonResponse> pokemonRespostaCall = service.obterListaPokemon();
-        pokemonRespostaCall.enqueue(new Callback<PokemonResponse>() {
-            @Override
-            public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
-                if (response.isSuccessful()) {
-                    PokemonResponse pokemonResposta = response.body(); //colocando na variavel os dados recuperados pelo metodo @GET
-                    ArrayList<Pokemon> pokemonArrayList = pokemonResposta.getResults(); //
-                    pokemonAdapter.adicionarListaPokemon(pokemonArrayList);// adicionando todos os objetos num array
-                } else {
-                }
-            }
-            @Override
-            public void onFailure(Call<PokemonResponse> call, Throwable t) {
-            }
-        });
-
-
-
-    }
+//    private void receberDados()
+//    {
+//        final PokeApi service = retrofit.create(PokeApi.class);
+//        Call<PokemonResponse> pokemonRespostaCall = service.obterListaPokemon();
+//        pokemonRespostaCall.enqueue(new Callback<PokemonResponse>() {
+//            @Override
+//            public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
+//                if (response.isSuccessful()) {
+//                    PokemonResponse pokemonResposta = response.body(); //colocando na variavel os dados recuperados pelo metodo @GET
+//                    ArrayList<Pokemon> pokemonArrayList = pokemonResposta.getResults(); //
+//                    pokemonAdapter.adicionarListaPokemon(pokemonArrayList);// adicionando todos os objetos num array
+//                } else {
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<PokemonResponse> call, Throwable t) {
+//            }
+//        });
+//
+//
+//
+//    }
     @Override
     public void onPokemonClicado(Pokemon pokemon)
     {
@@ -178,16 +199,8 @@ public class PokemonsFragment extends Fragment  implements PokemonListener,Swipe
         startActivity(intent);
     }
 
-
-
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                receberDados();
-                swipe.setRefreshing(false);
-            }
-        },4000);
+
     }
 }
