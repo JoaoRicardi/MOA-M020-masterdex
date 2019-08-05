@@ -32,7 +32,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'com.google.android.material:material:1.0.0'
 
-
     //implementacao retrofit e gson converter picasso e cardview
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
@@ -58,4 +57,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.0.0"
     implementation "androidx.lifecycle:lifecycle-reactivestreams:2.0.0"
+
+    implementation 'com.facebook.android:facebook-login:[5,6)'
 }
