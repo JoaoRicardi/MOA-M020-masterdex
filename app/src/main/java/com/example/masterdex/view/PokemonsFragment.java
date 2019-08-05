@@ -1,8 +1,10 @@
-package com.example.masterdex;
+package com.example.masterdex.view;
 
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.masterdex.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -23,8 +25,8 @@ import android.widget.TextView;
 import com.example.masterdex.adapter.AdapterPokemon;
 import com.example.masterdex.interfaces.PokemonListener;
 import com.example.masterdex.models.Pokemon;
-import com.example.masterdex.models.PokemonResposta;
-import com.example.masterdex.pokeApi.PokeApi;
+import com.example.masterdex.models.PokemonResponse;
+import com.example.masterdex.service.pokeApi.PokeApi;
 
 import java.util.ArrayList;
 
@@ -147,19 +149,19 @@ public class PokemonsFragment extends Fragment  implements PokemonListener,Swipe
     private void receberDados()
     {
         final PokeApi service = retrofit.create(PokeApi.class);
-        Call<PokemonResposta> pokemonRespostaCall = service.obterListaPokemon();
-        pokemonRespostaCall.enqueue(new Callback<PokemonResposta>() {
+        Call<PokemonResponse> pokemonRespostaCall = service.obterListaPokemon();
+        pokemonRespostaCall.enqueue(new Callback<PokemonResponse>() {
             @Override
-            public void onResponse(Call<PokemonResposta> call, Response<PokemonResposta> response) {
+            public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
                 if (response.isSuccessful()) {
-                    PokemonResposta pokemonResposta = response.body(); //colocando na variavel os dados recuperados pelo metodo @GET
+                    PokemonResponse pokemonResposta = response.body(); //colocando na variavel os dados recuperados pelo metodo @GET
                     ArrayList<Pokemon> pokemonArrayList = pokemonResposta.getResults(); //
                     pokemonAdapter.adicionarListaPokemon(pokemonArrayList);// adicionando todos os objetos num array
                 } else {
                 }
             }
             @Override
-            public void onFailure(Call<PokemonResposta> call, Throwable t) {
+            public void onFailure(Call<PokemonResponse> call, Throwable t) {
             }
         });
 

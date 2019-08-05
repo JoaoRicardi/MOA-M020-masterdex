@@ -1,13 +1,16 @@
-package com.example.masterdex.pokeApi;
+package com.example.masterdex.service.pokeApi;
 
-import com.example.masterdex.models.PokemonResposta;
+import com.example.masterdex.models.PokemonResponse;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface PokeApi {
 
         @GET("pokemon?offset=0&limit=964")
-        Call<PokemonResposta> obterListaPokemon();
+        Observable<PokemonResponse> getPokemon (@Query("limit") int limit,
+                                                @Query("offset") int offset);
+
 
 }

@@ -1,4 +1,4 @@
-package com.example.masterdex;
+package com.example.masterdex.view;
 
 import android.content.Intent;
 
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.masterdex.R;
 import com.example.masterdex.models.Regiao;
 import com.squareup.picasso.Picasso;
 

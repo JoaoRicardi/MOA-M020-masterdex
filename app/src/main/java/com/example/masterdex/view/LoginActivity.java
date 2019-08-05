@@ -1,6 +1,8 @@
-package com.example.masterdex;
+package com.example.masterdex.view;
 
 import android.content.Intent;
+
+import com.example.masterdex.R;
 import com.google.android.material.textfield.TextInputEditText;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;

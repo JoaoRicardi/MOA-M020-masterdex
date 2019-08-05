@@ -1,4 +1,4 @@
-package com.example.masterdex;
+package com.example.masterdex.view;
 
 
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
+
+import com.example.masterdex.R;
 
 
 public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {

@@ -1,9 +1,11 @@
-package com.example.masterdex;
+package com.example.masterdex.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.masterdex.R;
 
 public class EditarPerfilActivity extends AppCompatActivity {
 

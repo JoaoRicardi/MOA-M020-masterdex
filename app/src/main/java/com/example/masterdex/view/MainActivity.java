@@ -1,8 +1,10 @@
-package com.example.masterdex;
+package com.example.masterdex.view;
 
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.example.masterdex.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;

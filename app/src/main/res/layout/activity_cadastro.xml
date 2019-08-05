@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/color_background_drawable"
     android:padding="16dp"
-    tools:context=".CadastroActivity">
+    tools:context=".view.CadastroActivity">
 
     <ImageView
         android:id="@+id/logo_cadastrar"

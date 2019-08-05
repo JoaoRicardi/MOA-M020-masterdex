@@ -1,4 +1,4 @@
-package com.example.masterdex;
+package com.example.masterdex.view;
 
 import androidx.room.Room;
 
@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.example.masterdex.R;
 import com.example.masterdex.database.CapturadosDao;
 import com.example.masterdex.database.CapturadosDb;
 import com.example.masterdex.database.FavoritosDao;

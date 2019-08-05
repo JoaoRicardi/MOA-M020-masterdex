@@ -2,14 +2,15 @@ package com.example.masterdex.models;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class PokemonResposta {
-
-
-    ArrayList<Pokemon> results; // armazenando no arrays o arquivo  json
+public class PokemonResponse {
 
 
-    public ArrayList<Pokemon> getResults() {
+    private List<Pokemon> results; // armazenando no arrays o arquivo  json
+
+
+    public List<Pokemon> getResults() {
         return results; //metodo que retorna os objetos
     }
 

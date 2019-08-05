@@ -1,4 +1,4 @@
-package com.example.masterdex;
+package com.example.masterdex.view;
 
 
 
@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.masterdex.R;
 import com.example.masterdex.adapter.RegioesAdapter;
 
 import com.example.masterdex.interfaces.RegioesListener;
