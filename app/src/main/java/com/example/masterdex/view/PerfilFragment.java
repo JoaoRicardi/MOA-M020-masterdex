@@ -3,7 +3,9 @@ package com.example.masterdex.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 
 import android.view.MenuInflater;
@@ -32,6 +34,7 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
 
         buttonOpcoesPerfil = view.findViewById(R.id.button_opcoes_perfil);
+
         buttonOpcoesPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

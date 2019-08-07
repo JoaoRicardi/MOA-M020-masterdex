@@ -5,7 +5,9 @@ import android.content.Intent;
 import com.example.masterdex.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,10 +24,9 @@ public class EsqueciASenha extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esqueci_asenha);
 
-
-        initComponents();
-
-
+        emailDigitado = findViewById(R.id.email_textinput);
+        buttonVoltar = findViewById(R.id.botao_voltar_esqueci_senha);
+        buttonEnviar = findViewById(R.id.enviar_button);
 
 
         buttonEnviar.setOnClickListener(new View.OnClickListener() {
@@ -46,27 +47,17 @@ public class EsqueciASenha extends AppCompatActivity {
     }
 
 
+    public void enviarClicado(View view) {
 
-    private void initComponents() {
+        android.view.inputmethod.InputMethodManager teclado = (android.view.inputmethod.InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
-        emailDigitado = findViewById(R.id.email_textinput);
-        buttonVoltar = findViewById(R.id.botao_voltar_esqueci_senha);
-        buttonEnviar = findViewById(R.id.enviar_button);
-
-    }
-
-
-    public void enviarClicado (View view){
-
-        android.view.inputmethod.InputMethodManager teclado = (android.view.inputmethod.InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-
-        if (teclado.isAcceptingText()){
-            teclado.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);}
+        if (teclado.isAcceptingText()) {
+            teclado.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
         //Em caso de teclado visível, este método esconde ele
 
 
-
-        if (emailDigitado.getText().toString().equals("")){
+        if (emailDigitado.getText().toString().equals("")) {
             //Se não houver texto no campo do email, ele irá exibir o erro abaixo
 
             emailDigitado.setError("Digite seu email");
@@ -88,11 +79,9 @@ public class EsqueciASenha extends AppCompatActivity {
         }
 
 
-
-
     }
 
-    public void voltarParaLogin(){
+    public void voltarParaLogin() {
         //Ao clicar na seta de voltar ele irá para a tela de login
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);

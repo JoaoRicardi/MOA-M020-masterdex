@@ -5,9 +5,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-public class RegioesInformacoesViewModel extends AndroidViewModel {
+public class EditarPefilViewModel extends AndroidViewModel {
 
-    public RegioesInformacoesViewModel(@NonNull Application application) {
+    public EditarPefilViewModel(@NonNull Application application) {
         super(application);
     }
 }

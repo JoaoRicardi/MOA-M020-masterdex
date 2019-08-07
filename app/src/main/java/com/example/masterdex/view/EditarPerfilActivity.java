@@ -1,6 +1,7 @@
 package com.example.masterdex.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -36,13 +37,13 @@ public class EditarPerfilActivity extends AppCompatActivity {
         });
     }
 
-    public void sairEditarPerfil(){
+    public void sairEditarPerfil() {
 
-            if (getFragmentManager().getBackStackEntryCount() == 0) {
-                this.finish();
-            } else {
-                getFragmentManager().popBackStack();
-            }
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            this.finish();
+        } else {
+            getFragmentManager().popBackStack();
+        }
 
 
     }
