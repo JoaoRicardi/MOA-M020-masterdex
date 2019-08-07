@@ -2,12 +2,15 @@ package com.example.masterdex.view;
 
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
 import com.example.masterdex.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,13 +19,12 @@ import android.widget.Toast;
 import com.example.masterdex.adapter.ViewPagerAdapter;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
 
     private BottomNavigationView bottomNavigationItemView;
     private ViewPager viewPager;
     MenuItem prevMenuItem;
-
 
 
     @Override
@@ -31,15 +33,9 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         viewPager = findViewById(R.id.viewpager_id);
-
-
-        setupViewPager(viewPager);
-
-        //viewPager.setCurrentItem(1,true);
-
         bottomNavigationItemView = findViewById(R.id.bottom_navigation);
 
-        //bottomNavigationItemView.getMenu().getItem(1).setChecked(true);
+        setupViewPager(viewPager);
 
         bottomNavigationItemView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -90,18 +86,7 @@ public class MainActivity extends AppCompatActivity{
         viewPager.setCurrentItem(1, true);
 
 
-
     }
-
-
-
-
-
-
-
-
-
-
 
 
     private void setupViewPager(ViewPager viewPager) {
@@ -118,15 +103,13 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void ordemAz(View view) {
-        Toast.makeText(getApplicationContext(),"Ordena  A-Z", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Ordena  A-Z", Toast.LENGTH_SHORT).show();
 
     }
 
     public void ordemNum(View view) {
-        Toast.makeText(getApplicationContext(),"Ordena  Numericamente", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Ordena  Numericamente", Toast.LENGTH_SHORT).show();
     }
-
-
 
 
 }
