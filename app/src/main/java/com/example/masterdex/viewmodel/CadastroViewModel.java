@@ -10,4 +10,6 @@ public class CadastroViewModel extends AndroidViewModel {
     public CadastroViewModel(@NonNull Application application) {
         super(application);
     }
+
+
 }
