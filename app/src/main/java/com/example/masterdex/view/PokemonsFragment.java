@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.masterdex.adapter.AdapterPokemon;
 import com.example.masterdex.interfaces.PokemonListener;
@@ -79,6 +80,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
         recyclerPokemons.setLayoutManager(LayoutManager);
         recyclerPokemons.setAdapter(pokemonAdapter);
 
+
         PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
         pokemonViewModel.atualizarPokemon(LIMIT, offset);
         pokemonViewModel.getPokemonLiveData()
@@ -87,27 +89,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
                     swipe.setRefreshing(false);
                 });
 
-        //  swipe.setOnRefreshListener(() -> pokemonViewModel.atualizarPokemon(LIMIT,offset));
-
-
-//        recyclerPokemons.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//
-//                if (recyclerView.canScrollVertically(1)){
-//                    offset += LIMIT;
-//                    pokemonViewModel.atualizarPokemon(LIMIT,offset);
-//                }
-//            }
-//        });
-
-
-        // ligando as coisas, lembrando que tudo está sendo instanciado em uma View
-
-
         //SearchView
-
 
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -116,17 +98,11 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
                 return false;
             }
 
+
+
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText.length() == 0 || newText == null) {
-                    pokemonArrayList.clear();
-                    //  receberDados();
-                } else {
-                    pokemonAdapter.getFilter().filter(newText);
-
-
-                }
-
+                pokemonAdapter.getFilter().filter(newText);
                 return false;
             }
         });
