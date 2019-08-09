@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
 import android.widget.CompoundButton;
@@ -19,6 +20,9 @@ import com.example.masterdex.database.CapturadosDb;
 import com.example.masterdex.database.FavoritosDao;
 import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.models.Pokemon;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.ViewPagerItems;
 import com.squareup.picasso.Picasso;
 
 import io.reactivex.Completable;
@@ -41,6 +45,21 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_pokemon);
+
+
+        ViewPagerItemAdapter adapter = new ViewPagerItemAdapter(ViewPagerItems.with(this)
+                .add("HABILIDADES", R.layout.fragment_habilidades)
+                .add("STATS", R.layout.fragment_stats)
+                .add("EVOLUÇÕES", R.layout.fragment_evolucoes)
+                .create());
+
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        viewPager.setAdapter(adapter);
+
+        SmartTabLayout viewPagerTab = findViewById(R.id.smart);
+        viewPagerTab.setViewPager(viewPager);
+
+
 
         ImageView botaoVoltar = findViewById(R.id.detalhes_pokemon_voltar);
         botaoFavorito = findViewById(R.id.toggle_favorito_Button);
