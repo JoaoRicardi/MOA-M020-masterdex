@@ -32,6 +32,7 @@ import com.example.masterdex.interfaces.PokemonListener;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.models.PokemonResponse;
 import com.example.masterdex.service.pokeApi.PokeApi;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 
@@ -91,7 +92,6 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
 
         //SearchView
 
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
