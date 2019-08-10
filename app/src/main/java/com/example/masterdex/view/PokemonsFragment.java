@@ -45,9 +45,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PokemonsFragment extends Fragment implements PokemonListener, SwipeRefreshLayout.OnRefreshListener {
 
-    private Retrofit retrofit;
-    private TextView textNomePokemon;
-    private ImageView imageFotoPokemon;
+
     private RecyclerView recyclerPokemons;
     private AdapterPokemon pokemonAdapter;
     private SwipeRefreshLayout swipe;
@@ -68,9 +66,11 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
 
         ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
-        textNomePokemon = view.findViewById(R.id.textNomePokemon);
-        imageFotoPokemon = view.findViewById(R.id.imageFotoPokemon);
+
         searchView = view.findViewById(R.id.search_view);
+        swipe = view.findViewById(R.id.swipe_refresh);
+        swipe.setOnRefreshListener(() -> swipe.setRefreshing(false));
+
         recyclerPokemons = view.findViewById(R.id.recyclerView);
         MostrarBotoes = view.findViewById(R.id.linearLayout_id);
         FloatingActionButton floatActionButton = view.findViewById(R.id.button_mostrar_botoes_poke_home_id);
@@ -85,10 +85,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
         PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
         pokemonViewModel.atualizarPokemon(LIMIT, offset);
         pokemonViewModel.getPokemonLiveData()
-                .observe(this, pokemons -> {
-                    pokemonAdapter.atualizarListaPokemons(pokemons);
-                    swipe.setRefreshing(false);
-                });
+                .observe(this, pokemons -> pokemonAdapter.atualizarListaPokemons(pokemons));
 
         //SearchView
 
@@ -97,8 +94,6 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
-
 
             @Override
             public boolean onQueryTextChange(String newText) {
