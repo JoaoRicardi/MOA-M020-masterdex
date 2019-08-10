@@ -23,6 +23,11 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         cadastrar = findViewById(R.id.cadastrar_button);
+        textEditNick =findViewById(R.id.textEditNick);
+        textEditEmail =findViewById(R.id.email_textinput);
+        textEditSenha =findViewById(R.id.textEditSenha);
+        textEditConfirmarSenha = findViewById(R.id.textEditConfirmarSenha);
+        botaoVoltarParaLogin = findViewById(R.id.button_voltar_para_login);
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,7 +37,6 @@ public class CadastroActivity extends AppCompatActivity {
         });
 
 
-        initComponents();
 
         botaoVoltarParaLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,20 +44,8 @@ public class CadastroActivity extends AppCompatActivity {
                 voltarParaLogin();
             }
         });
-
-
-
     }
 
-    private void initComponents() {
-
-        textEditNick =findViewById(R.id.textEditNick);
-        textEditEmail =findViewById(R.id.email_textinput);
-        textEditSenha =findViewById(R.id.textEditSenha);
-        textEditConfirmarSenha = findViewById(R.id.textEditConfirmarSenha);
-        botaoVoltarParaLogin = findViewById(R.id.button_voltar_para_login);
-
-    }
 
     public void voltarParaLogin(){
 
@@ -63,7 +55,7 @@ public class CadastroActivity extends AppCompatActivity {
 
 
 
-    public void cadastroRealizado(){
+    public void cadastroRealizado(View view){
 
         android.view.inputmethod.InputMethodManager teclado = (android.view.inputmethod.InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
@@ -91,25 +83,22 @@ public class CadastroActivity extends AppCompatActivity {
             //Se nãp huver nada no campo de senha aparecerá essa mensagem
             textEditConfirmarSenha.setError("Digite uma Senha");
         } else {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            Snackbar.make(view, "Cadastro realizado com sucesso", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            voltarParaLogin();
+
+                        }
+                    }).setActionTextColor(getResources().getColor(R.color.branco)).show();
         }
 
     }
-    public void cadastroRealizado(View view){
 
-        Snackbar.make(view, "Cadastro realizado com sucesso", Snackbar.LENGTH_INDEFINITE)
-                .setAction("OK", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        voltarParaLogin();
-
-                    }
-                }).setActionTextColor(getResources().getColor(R.color.branco)).show();
     }
 
 
 
 
-}
+
