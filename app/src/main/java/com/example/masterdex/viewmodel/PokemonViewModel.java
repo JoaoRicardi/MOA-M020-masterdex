@@ -39,4 +39,6 @@ public class PokemonViewModel extends AndroidViewModel {
                         Throwable::printStackTrace)
         );
     }
+
+
 }

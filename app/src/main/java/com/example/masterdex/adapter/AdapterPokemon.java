@@ -24,11 +24,13 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
 
     private List<Pokemon> pokemonsListFull;
     private PokemonListener pokemonListener;
+    private List<Pokemon> filteredList;
 
 
     public AdapterPokemon (PokemonListener pokemonListener, ArrayList<Pokemon> pokemonsList){ // construtor
         this.pokemonsListFull = pokemonsList;
         this.pokemonListener = pokemonListener;
+        this.filteredList = new ArrayList<>(pokemonsListFull);
     }
 
     @NonNull
@@ -43,7 +45,7 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
-        final Pokemon pokemon = pokemonsListFull.get(position);
+        final Pokemon pokemon = filteredList.get(position);
 
         String pok = pokemon.getName();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
@@ -64,7 +66,7 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
 
     @Override
     public int getItemCount() {
-        return pokemonsListFull.size();
+        return filteredList.size();
     }
 
     @Override
@@ -99,8 +101,8 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            pokemonsListFull.clear();
-            pokemonsListFull.addAll((List) results.values);
+            filteredList.clear();
+            filteredList.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };
@@ -126,10 +128,10 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
     }
 
 
-    public void atualizarListaPokemons(List<Pokemon> listaFiltrada) {
+    public void atualizarListaPokemons(List<Pokemon> listaPokemon) {
 
-        pokemonsListFull = new ArrayList<>();
-        pokemonsListFull.addAll(listaFiltrada);
+        pokemonsListFull = listaPokemon;
+        filteredList.addAll(pokemonsListFull);
         notifyDataSetChanged();
     }
 }

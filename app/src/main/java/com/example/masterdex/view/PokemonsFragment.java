@@ -25,12 +25,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.masterdex.adapter.AdapterPokemon;
 import com.example.masterdex.interfaces.PokemonListener;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.models.PokemonResponse;
 import com.example.masterdex.service.pokeApi.PokeApi;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 
@@ -43,9 +45,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PokemonsFragment extends Fragment implements PokemonListener, SwipeRefreshLayout.OnRefreshListener {
 
-    private Retrofit retrofit;
-    private TextView textNomePokemon;
-    private ImageView imageFotoPokemon;
+
     private RecyclerView recyclerPokemons;
     private AdapterPokemon pokemonAdapter;
     private SwipeRefreshLayout swipe;
@@ -66,9 +66,11 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
 
         ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
-        textNomePokemon = view.findViewById(R.id.textNomePokemon);
-        imageFotoPokemon = view.findViewById(R.id.imageFotoPokemon);
+
         searchView = view.findViewById(R.id.search_view);
+        swipe = view.findViewById(R.id.swipe_refresh);
+        swipe.setOnRefreshListener(() -> swipe.setRefreshing(false));
+
         recyclerPokemons = view.findViewById(R.id.recyclerView);
         MostrarBotoes = view.findViewById(R.id.linearLayout_id);
         FloatingActionButton floatActionButton = view.findViewById(R.id.button_mostrar_botoes_poke_home_id);
@@ -79,37 +81,14 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
         recyclerPokemons.setLayoutManager(LayoutManager);
         recyclerPokemons.setAdapter(pokemonAdapter);
 
+
         PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
         pokemonViewModel.atualizarPokemon(LIMIT, offset);
         pokemonViewModel.getPokemonLiveData()
-                .observe(this, pokemons -> {
-                    pokemonAdapter.atualizarListaPokemons(pokemons);
-                    swipe.setRefreshing(false);
-                });
-
-        //  swipe.setOnRefreshListener(() -> pokemonViewModel.atualizarPokemon(LIMIT,offset));
-
-
-//        recyclerPokemons.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//
-//                if (recyclerView.canScrollVertically(1)){
-//                    offset += LIMIT;
-//                    pokemonViewModel.atualizarPokemon(LIMIT,offset);
-//                }
-//            }
-//        });
-
-
-        // ligando as coisas, lembrando que tudo está sendo instanciado em uma View
-
+                .observe(this, pokemons -> pokemonAdapter.atualizarListaPokemons(pokemons));
 
         //SearchView
 
-
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -118,15 +97,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText.length() == 0 || newText == null) {
-                    pokemonArrayList.clear();
-                    //  receberDados();
-                } else {
-                    pokemonAdapter.getFilter().filter(newText);
-
-
-                }
-
+                pokemonAdapter.getFilter().filter(newText);
                 return false;
             }
         });
