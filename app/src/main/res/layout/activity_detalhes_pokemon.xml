@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.DetalhesPokemonActivity"
     android:background="@drawable/detalhes_background_agua"
+    android:id="@+id/background_constraint_detalhe_pokemon"
     >
 
     <ImageButton

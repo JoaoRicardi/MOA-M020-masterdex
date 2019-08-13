@@ -27,6 +27,7 @@ public interface CapturadosDao {
     @Query("SELECT * FROM pokemons WHERE name = :name")
     Observable<Pokemon> getName(String name);
 
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Pokemon pokemon);
 

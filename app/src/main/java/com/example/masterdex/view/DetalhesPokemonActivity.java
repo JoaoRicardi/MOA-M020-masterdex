@@ -2,10 +2,13 @@ package com.example.masterdex.view;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.text.Layout;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -22,6 +25,9 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
     private ToggleButton botaoFavorito;
     private ToggleButton botaoCapturado;
+    private ConstraintLayout backgroundPokemon;
+
+
 
     private DetalhesPokemonViewModel detalhesPokemonViewModel;
 
@@ -38,6 +44,12 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         TextView nomePokemon = findViewById(R.id.detalhes_pokemon_nome);
         ImageView tipoPokemon = findViewById(R.id.detalhes_pokemon_tipo_image_view);
         TextView descricaoPokemon = findViewById(R.id.detalhes_pokemon_descricao_text_view);
+        backgroundPokemon = findViewById(R.id.background_constraint_detalhe_pokemon);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
+
 
         botaoVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,25 +59,22 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         });
 
 
-
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
-// aki faço o nome do pokemon ficar com a primeira letra maiuscula.
-
-
         String pok = pokemon.getName();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
         nomePokemon.setText(pok);
 
         Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png").into(imagemPokemon);
-        //como o proprio nome ja diz kkk
 
+        if (pokemon.getName().equals("squirtle")){
+            backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_agua));
+        } else {
+            backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fogo));
+        }
 
         System.out.println(pokemon.getName());
         System.out.println("****************");
-        detalhesPokemonViewModel.getPokemonRepository().consultaPokemonFavoritado(pokemon);
-        detalhesPokemonViewModel.getPokemonRepository().consultaPokemonCapturado(pokemon);
+        //detalhesPokemonViewModel.getPokemonRepository().consultaPokemonFavoritado(pokemon);
+        //detalhesPokemonViewModel.getPokemonRepository().consultaPokemonCapturado(pokemon);
 
         botaoFavorito.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -94,5 +103,6 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
 }
 
