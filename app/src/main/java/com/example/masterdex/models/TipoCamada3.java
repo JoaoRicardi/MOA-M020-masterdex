@@ -2,7 +2,7 @@ package com.example.masterdex.models;
 
 import java.io.Serializable;
 
-public class TipoCamada3 implements Serializable {
+public class TipoCamada3 {
 
     private String name;
 

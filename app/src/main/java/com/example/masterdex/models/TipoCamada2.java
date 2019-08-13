@@ -2,7 +2,7 @@ package com.example.masterdex.models;
 
 import java.io.Serializable;
 
-public class TipoCamada2 implements Serializable {
+public class TipoCamada2 {
 
     private int slot;
 

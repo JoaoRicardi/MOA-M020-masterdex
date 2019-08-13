@@ -28,16 +28,17 @@ public class Pokemon implements Serializable {
 
     @ColumnInfo(name = "name")
     private String name;
-//
-//    private TipoCamada1 types;
-//
-//    public TipoCamada1 getTypes() {
-//        return types;
-//    }
-//
-//    public void setTypes(TipoCamada1 types) {
-//        this.types = types;
-//    }
+
+
+    private TipoCamada1 types;
+
+    public TipoCamada1 getTypes() {
+        return types;
+    }
+
+    public void setTypes(TipoCamada1 types) {
+        this.types = types;
+    }
 
     public int getId() {
         return id;
