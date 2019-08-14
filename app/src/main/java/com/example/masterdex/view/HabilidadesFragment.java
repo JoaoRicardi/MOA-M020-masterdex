@@ -18,7 +18,6 @@ public class HabilidadesFragment extends Fragment {
 
 
     public HabilidadesFragment() {
-        // Required empty public constructor
     }
 
 
