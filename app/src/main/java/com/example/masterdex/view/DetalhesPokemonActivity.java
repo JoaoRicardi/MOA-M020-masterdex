@@ -28,7 +28,6 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     private ConstraintLayout backgroundPokemon;
 
 
-
     private DetalhesPokemonViewModel detalhesPokemonViewModel;
 
 
@@ -65,11 +64,11 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
         Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png").into(imagemPokemon);
 
-        if (pokemon.getName().equals("squirtle")){
-            backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_agua));
-        } else {
-            backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fogo));
-        }
+//        if (pokemon.getName().equals("squirtle")){
+//            backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_agua));
+//        } else {
+//            backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fogo));
+//        }
 
         System.out.println(pokemon.getName());
         System.out.println("****************");
@@ -103,6 +102,24 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+//    public void switchBackground(Pokemon pokemon) {
+//        int valorPosicao = 0;
+//        if (pokemon.getTypes().getCamada2List().size() == 1) {
+//            valorPosicao = 0;
+//        } else {
+//            valorPosicao = 1;
+//        }
+//
+//        String tipo = pokemon.getTypes().getCamada2List().get(valorPosicao).getType().toString();
+//        switch (tipo) {
+//            case "fire":
+//                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fogo));
+//                break;
+//            case "water":
+//                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_agua));
+//        }
+//    }
 
 }
 

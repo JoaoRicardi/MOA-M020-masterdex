@@ -5,10 +5,7 @@
         import androidx.room.ColumnInfo;
         import androidx.room.Entity;
         import androidx.room.PrimaryKey;
-        import androidx.room.TypeConverter;
         import androidx.room.TypeConverters;
-
-        import com.google.gson.annotations.SerializedName;
 
         import java.io.Serializable;
 
@@ -30,13 +27,13 @@ public class Pokemon implements Serializable {
     private String name;
 
 
-    private TipoCamada1 types;
+    private ListaTipos types;
 
-    public TipoCamada1 getTypes() {
+    public ListaTipos getTypes() {
         return types;
     }
 
-    public void setTypes(TipoCamada1 types) {
+    public void setTypes(ListaTipos types) {
         this.types = types;
     }
 
