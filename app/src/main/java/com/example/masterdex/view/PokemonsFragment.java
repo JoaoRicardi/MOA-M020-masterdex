@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.masterdex.R;
+import com.example.masterdex.models.PokemonApi;
 import com.example.masterdex.viewmodel.PokemonViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -65,7 +66,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
 
-        ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
+        ArrayList<PokemonApi> pokemonArrayList = new ArrayList<>();
         textNomePokemon = view.findViewById(R.id.textNomePokemon);
         imageFotoPokemon = view.findViewById(R.id.imageFotoPokemon);
         searchView = view.findViewById(R.id.search_view);
@@ -174,7 +175,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
 //
 //    }
     @Override
-    public void onPokemonClicado(Pokemon pokemon) {
+    public void onPokemonClicado(PokemonApi pokemon) {
         Intent intent = new Intent(getContext(), DetalhesPokemonActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("POKEMON", pokemon);

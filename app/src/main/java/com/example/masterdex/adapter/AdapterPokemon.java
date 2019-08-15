@@ -1,4 +1,5 @@
 package com.example.masterdex.adapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterdex.interfaces.PokemonListener;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.R;
+import com.example.masterdex.models.PokemonApi;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,11 +24,11 @@ import io.reactivex.annotations.NonNull;
 public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHolder> implements Filterable  {
 
 
-    private List<Pokemon> pokemonsListFull;
+    private List<PokemonApi> pokemonsListFull;
     private PokemonListener pokemonListener;
 
 
-    public AdapterPokemon (PokemonListener pokemonListener, ArrayList<Pokemon> pokemonsList){ // construtor
+    public AdapterPokemon (PokemonListener pokemonListener, ArrayList<PokemonApi> pokemonsList){ // construtor
         this.pokemonsListFull = pokemonsList;
         this.pokemonListener = pokemonListener;
     }
@@ -43,23 +45,11 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
-        final Pokemon pokemon = pokemonsListFull.get(position);
-
-        String pok = pokemon.getName();
-        pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
-
-        viewHolder.textNomePokemon.setText(pok);
+        PokemonApi pokemon = pokemonsListFull.get(position);
+        viewHolder.bind(pokemon);
 
 
-        Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.getNumber()+".png")
-                .into(viewHolder.imageFotoPokemon);
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pokemonListener.onPokemonClicado(pokemon);
-            }
-        });
     }
 
     @Override
@@ -75,7 +65,7 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
     private Filter pokemonFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<Pokemon> filteredList = new ArrayList<>();
+            List<PokemonApi> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
 
@@ -84,7 +74,7 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (Pokemon pokemon : pokemonsListFull) {
+                for (PokemonApi pokemon : pokemonsListFull) {
                     if (pokemon.getName().toLowerCase().contains(filterPattern)) {
                         filteredList.add(pokemon);
                     }
@@ -116,17 +106,32 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
             textNomePokemon = itemView.findViewById(R.id.textNomePokemon);
             imageFotoPokemon = itemView.findViewById(R.id.imageFotoPokemon);
         }
+
+        public void bind(PokemonApi pokemon) {
+            String foto = pokemon.getSprites().
+            textNomePokemon.setText(pokemon.getName());
+            Picasso.get().load(pokemon.getSprites().).into(imageFotoPokemon);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pokemonListener.onPokemonClicado(pokemon);
+
+                }
+            });
+
+
+        }
     }
 
 
-    public void adicionarListaPokemon(ArrayList<Pokemon> pokemonArrayList) {
+    public void adicionarListaPokemon(ArrayList<PokemonApi> pokemonArrayList) {
 
         pokemonsListFull.addAll(pokemonArrayList);
         notifyDataSetChanged();
     }
 
 
-    public void atualizarListaPokemons(List<Pokemon> listaFiltrada) {
+    public void atualizarListaPokemons(List<PokemonApi> listaFiltrada) {
 
         pokemonsListFull = new ArrayList<>();
         pokemonsListFull.addAll(listaFiltrada);

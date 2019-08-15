@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.masterdex.models.Pokemon;
+import com.example.masterdex.models.PokemonApi;
 import com.example.masterdex.repository.PokemonRepository;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PokemonViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<Pokemon>> pokemonLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<PokemonApi>> pokemonLiveData = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
     private PokemonRepository pokemonRepository = new PokemonRepository();
 
@@ -26,7 +27,7 @@ public class PokemonViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public MutableLiveData<List<Pokemon>> getPokemonLiveData() {
+    public MutableLiveData<List<PokemonApi>> getPokemonLiveData() {
         return pokemonLiveData;
     }
     public void atualizarPokemon(int limit, int offset){

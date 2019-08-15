@@ -1,6 +1,7 @@
 package com.example.masterdex.repository;
 
 import com.example.masterdex.models.Pokemon;
+import com.example.masterdex.models.PokemonApi;
 import com.example.masterdex.models.PokemonResponse;
 import com.example.masterdex.service.RetrofitService;
 
@@ -14,7 +15,7 @@ public class PokemonRepository {
 
 
 
-    public Observable<List<Pokemon>> getPokeListApi (int limit, int offset){
+    public Observable<List<PokemonApi>> getPokeListApi (int limit, int offset){
         return retrofitService.getPokeApi()
                 .getPokemon(limit,offset)
                 .map(PokemonResponse::getResults);

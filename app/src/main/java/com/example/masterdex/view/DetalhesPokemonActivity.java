@@ -17,6 +17,7 @@ import android.widget.ToggleButton;
 
 import com.example.masterdex.R;
 import com.example.masterdex.models.Pokemon;
+import com.example.masterdex.models.PokemonApi;
 import com.example.masterdex.viewmodel.DetalhesPokemonViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -47,7 +48,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
+        PokemonApi pokemon = (PokemonApi) bundle.getSerializable("POKEMON");
 
 
         botaoVoltar.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +80,9 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()) {
-                    detalhesPokemonViewModel.getPokemonRepository().inserirPokemonFavorito(pokemon);
+                    detalhesPokemonViewModel.getPokemonRepository().inserirPokemonFavorito(converterPokemon(pokemon));
                 } else {
-                    detalhesPokemonViewModel.getPokemonRepository().deletarPokemonFavorito(pokemon);
+                    detalhesPokemonViewModel.getPokemonRepository().deletarPokemonFavorito(converterPokemon(pokemon));
                 }
             }
         });
@@ -89,9 +90,9 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()) {
-                    detalhesPokemonViewModel.getPokemonRepository().inserirPokemonCapturado(pokemon);
+                    detalhesPokemonViewModel.getPokemonRepository().inserirPokemonCapturado(converterPokemon(pokemon));
                 } else {
-                    detalhesPokemonViewModel.getPokemonRepository().deletarPokemonCapturado(pokemon);
+                    detalhesPokemonViewModel.getPokemonRepository().deletarPokemonCapturado(converterPokemon(pokemon));
                 }
             }
         });
@@ -120,6 +121,15 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 //                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_agua));
 //        }
 //    }
+
+    public Pokemon converterPokemon (PokemonApi pokemonApi) {
+
+        Pokemon pokemon = new Pokemon();
+        pokemon.setName(pokemonApi.getName());
+        pokemon.setNumber(pokemonApi.getNumber());
+        pokemon.setUrl(pokemonApi.getUrl());
+        return pokemon;
+    }
 
 }
 

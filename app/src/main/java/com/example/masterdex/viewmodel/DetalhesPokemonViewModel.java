@@ -13,6 +13,7 @@ import com.example.masterdex.database.CapturadosDb;
 import com.example.masterdex.database.FavoritosDao;
 import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.models.Pokemon;
+import com.example.masterdex.models.PokemonApi;
 import com.example.masterdex.repository.DetalhesPokemonRepository;
 
 import java.util.List;

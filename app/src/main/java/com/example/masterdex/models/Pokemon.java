@@ -27,16 +27,6 @@ public class Pokemon implements Serializable {
     private String name;
 
 
-    private ListaTipos types;
-
-    public ListaTipos getTypes() {
-        return types;
-    }
-
-    public void setTypes(ListaTipos types) {
-        this.types = types;
-    }
-
     public int getId() {
         return id;
     }
