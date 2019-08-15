@@ -68,7 +68,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
 
         ArrayList<PokemonApi> pokemonArrayList = new ArrayList<>();
         textNomePokemon = view.findViewById(R.id.textNomePokemon);
-        imageFotoPokemon = view.findViewById(R.id.imageFotoPokemon);
+        imageFotoPokemon = view.findViewById(R.id.image_pokemon_recycler_home);
         searchView = view.findViewById(R.id.search_view);
         recyclerPokemons = view.findViewById(R.id.recyclerView);
         MostrarBotoes = view.findViewById(R.id.linearLayout_id);

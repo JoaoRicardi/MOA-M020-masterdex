@@ -104,13 +104,12 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
             super(itemView);
 
             textNomePokemon = itemView.findViewById(R.id.textNomePokemon);
-            imageFotoPokemon = itemView.findViewById(R.id.imageFotoPokemon);
+            imageFotoPokemon = itemView.findViewById(R.id.image_pokemon_recycler_home);
         }
 
         public void bind(PokemonApi pokemon) {
-            String foto = pokemon.getSprites().
             textNomePokemon.setText(pokemon.getName());
-            Picasso.get().load(pokemon.getSprites().).into(imageFotoPokemon);
+         //   Picasso.get().load(pokemon.getSprites().getFrontDefault()).into(imageFotoPokemon);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
