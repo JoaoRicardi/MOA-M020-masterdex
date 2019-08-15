@@ -132,7 +132,7 @@
         app:stl_defaultTabTextMinWidth="0dp"
         app:stl_defaultTabTextSize="10sp"
         app:stl_distributeEvenly="true"
-        app:stl_dividerColor="@android:color/black"
+        app:stl_dividerColor="@android:color/white"
         app:stl_dividerThickness="1dp"
         app:stl_drawDecorationAfterTab="true"
         app:stl_indicatorAlwaysInCenter="false"
