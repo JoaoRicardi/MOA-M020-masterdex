@@ -33,6 +33,7 @@ import com.example.masterdex.models.PokemonResponse;
 import com.example.masterdex.service.pokeApi.PokeApi;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -87,7 +88,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
                     swipe.setRefreshing(false);
                 });
 
-        //  swipe.setOnRefreshListener(() -> pokemonViewModel.atualizarPokemon(LIMIT,offset));
+          //swipe.setOnRefreshListener(() -> pokemonViewModel.atualizarPokemon(LIMIT,offset));
 
 
 //        recyclerPokemons.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -185,5 +186,6 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     @Override
     public void onRefresh() {
 
+        swipe.setRefreshing(true);
     }
 }
