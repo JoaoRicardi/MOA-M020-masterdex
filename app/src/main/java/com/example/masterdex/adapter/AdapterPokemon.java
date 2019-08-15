@@ -46,7 +46,7 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
         PokemonApi pokemon = pokemonsListFull.get(position);
-        viewHolder.bind(pokemon);
+        viewHolder.bind(pokemon,position);
 
 
 
@@ -107,9 +107,10 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
             imageFotoPokemon = itemView.findViewById(R.id.image_pokemon_recycler_home);
         }
 
-        public void bind(PokemonApi pokemon) {
+        public void bind(PokemonApi pokemon,int position) {
             textNomePokemon.setText(pokemon.getName());
-         //   Picasso.get().load(pokemon.getSprites().getFrontDefault()).into(imageFotoPokemon);
+            int realPosition = position+1;
+            Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+realPosition+".png").into(imageFotoPokemon);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -122,12 +123,11 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
         }
     }
 
-
+/*
     public void adicionarListaPokemon(ArrayList<PokemonApi> pokemonArrayList) {
-
         pokemonsListFull.addAll(pokemonArrayList);
         notifyDataSetChanged();
-    }
+    }*/
 
 
     public void atualizarListaPokemons(List<PokemonApi> listaFiltrada) {
