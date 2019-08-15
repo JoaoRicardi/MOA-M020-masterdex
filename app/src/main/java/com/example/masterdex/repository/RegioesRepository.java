@@ -3,7 +3,7 @@ package com.example.masterdex.repository;
 import android.content.res.Resources;
 
 import com.example.masterdex.R;
-import com.example.masterdex.models.Regiao;
+import com.example.masterdex.modules.regioes.model.Regiao;
 
 import java.util.ArrayList;
 import java.util.List;

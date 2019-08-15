@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.masterdex.R;
 import com.example.masterdex.interfaces.RegioesListener;
-import com.example.masterdex.models.Regiao;
+import com.example.masterdex.modules.regioes.model.Regiao;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

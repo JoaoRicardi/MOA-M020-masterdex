@@ -11,14 +11,14 @@
         android:roundIcon="@drawable/masterdex_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.DetalhesPokemonActivity"></activity>
-        <activity android:name=".view.EditarPerfilActivity" />
-        <activity android:name=".view.RegioesInformacoesActivity" />
-        <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.CadastroActivity" />
-        <activity android:name=".view.EsqueciASenha" />
-        <activity android:name=".view.MainActivity" />
-        <activity android:name=".view.SplashActivity">
+        <activity android:name=".modules.detalhespokemon.view.DetalhesPokemonActivity"></activity>
+        <activity android:name=".modules.editarperfil.view.EditarPerfilActivity" />
+        <activity android:name=".modules.regioesinformacoes.view.RegioesInformacoesActivity" />
+        <activity android:name=".modules.login.view.LoginActivity" />
+        <activity android:name=".modules.cadastro.view.CadastroActivity" />
+        <activity android:name=".modules.esqueciminhasenha.view.EsqueciASenhaActivity" />
+        <activity android:name=".modules.main.view.MainActivity" />
+        <activity android:name=".modules.splash.view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

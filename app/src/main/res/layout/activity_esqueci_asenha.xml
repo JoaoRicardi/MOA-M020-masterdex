@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/color_background_drawable"
-    tools:context=".view.EsqueciASenha">
+    tools:context=".modules.esqueciminhasenha.view.EsqueciASenhaActivity">
 
     <ImageView
         android:id="@+id/logo_esqueci_senha"
