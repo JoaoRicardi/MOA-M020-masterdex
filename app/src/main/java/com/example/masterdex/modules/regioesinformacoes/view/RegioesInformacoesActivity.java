@@ -42,7 +42,6 @@ public class RegioesInformacoesActivity extends AppCompatActivity {
 
         nomeRegiaoTextView.setText(regiao.getNomeRegiao());
 
-       // descricaoRegiaoTextView.setText(regiao.getDescricaoRegiao());
         Picasso.get().load(regiao.getImagemRegiao()).into(imageView);
 
         botaoVoltar.setOnClickListener(new View.OnClickListener() {
