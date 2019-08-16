@@ -12,5 +12,7 @@ public interface PokeApi {
         Observable<PokemonResponse> getPokemon (@Query("limit") int limit,
                                                 @Query("offset") int offset);
 
+        @GET("region")
+        Observable<>
 
 }
