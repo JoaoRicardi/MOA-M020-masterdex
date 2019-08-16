@@ -135,3 +135,7 @@ public class AdapterPokemon  extends RecyclerView.Adapter<AdapterPokemon.ViewHol
         notifyDataSetChanged();
     }
 }
+
+
+
+
