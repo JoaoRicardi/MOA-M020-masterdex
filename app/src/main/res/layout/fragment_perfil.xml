@@ -53,14 +53,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/card_informacoes"
         android:orientation="vertical">
-        
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:id="@+id/appbarperfil_id"
-            android:background="@color/branco"
 
-            ></com.google.android.material.appbar.AppBarLayout>
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"

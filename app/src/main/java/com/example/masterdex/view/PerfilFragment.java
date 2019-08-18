@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 
@@ -15,12 +16,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
 
+import com.example.masterdex.CapturadosPerfilFragment;
+import com.example.masterdex.FavoritosPerfilFragment;
+import com.example.masterdex.PopuladoresPerfilFragment;
 import com.example.masterdex.R;
+import com.example.masterdex.adapter.PerfilViewPagerAdapter;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.tabs.TabLayout;
 
 
 public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
 
     Button buttonOpcoesPerfil;
+
+    private TabLayout tabLayoutPerfil;
+    private ViewPager viewPagerPerfil;
 
     public PerfilFragment() {
         // Required empty public constructor
@@ -32,6 +42,17 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+
+        tabLayoutPerfil = view.findViewById(R.id.tablayoutperfil_id);
+        viewPagerPerfil = view.findViewById(R.id.viewpagerperfil_id);
+
+        PerfilViewPagerAdapter perfilViewPagerAdapter = new PerfilViewPagerAdapter(getChildFragmentManager());
+        perfilViewPagerAdapter.AddFragment(new FavoritosPerfilFragment(),"Favoritos");
+        perfilViewPagerAdapter.AddFragment(new CapturadosPerfilFragment(),"Capturados");
+        perfilViewPagerAdapter.AddFragment(new PopuladoresPerfilFragment(),"Populares");
+
+        viewPagerPerfil.setAdapter(perfilViewPagerAdapter);
+        tabLayoutPerfil.setupWithViewPager(viewPagerPerfil);
 
         buttonOpcoesPerfil = view.findViewById(R.id.button_opcoes_perfil);
 

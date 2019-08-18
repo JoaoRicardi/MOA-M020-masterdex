@@ -9,14 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class CapturadosPerfilFragment extends Fragment {
-
+public class PopuladoresPerfilFragment extends Fragment {
     View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_capturados_perfil,container,false);
+        view = inflater.inflate(R.layout.fragment_populares_perfil,container,false);
         return view;
 
     }
