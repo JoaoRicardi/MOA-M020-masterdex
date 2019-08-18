@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
+    <ImageView
         android:id="@+id/detalhes_pokemon_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -56,17 +56,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toggle_favorito_Button"/>
 
-    <ImageView
-        android:id="@+id/detalhes_pokemon_image_view"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+    <com.skydoves.medal.MedalLayout
+        android:id="@+id/medal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:direction="right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:speed="15000"
+        app:turn="3">
 
+
+        <ImageView
+            android:id="@+id/detalhes_pokemon_image_view"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.skydoves.medal.MedalLayout>
     <TextView
         android:id="@+id/detalhes_pokemon_nome"
         android:layout_width="wrap_content"
@@ -78,7 +92,7 @@
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detalhes_pokemon_image_view" />
+        app:layout_constraintTop_toBottomOf="@+id/medal" />
 
     <ImageView
         android:id="@+id/detalhes_pokemon_tipo_image_view"
@@ -102,30 +116,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detalhes_pokemon_tipo_image_view" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+    <com.ogaclejapan.smarttablayout.SmartTabLayout
+        android:id="@+id/smart"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detalhes_pokemon_descricao_text_view"
+        app:stl_clickable="true"
+        app:stl_defaultTabBackground="?attr/selectableItemBackground"
+        app:stl_defaultTabTextAllCaps="false"
+        app:stl_defaultTabTextColor="@android:color/black"
+        app:stl_defaultTabTextHorizontalPadding="2dp"
+        app:stl_defaultTabTextMinWidth="0dp"
+        app:stl_defaultTabTextSize="10sp"
+        app:stl_distributeEvenly="true"
+        app:stl_dividerColor="@android:color/white"
+        app:stl_dividerThickness="1dp"
+        app:stl_drawDecorationAfterTab="true"
+        app:stl_indicatorAlwaysInCenter="false"
+        app:stl_indicatorColor="@color/azulBackground"
+        app:stl_indicatorCornerRadius="2dp"
+        app:stl_indicatorGravity="bottom"
+        app:stl_indicatorInFront="true"
+        app:stl_indicatorInterpolation="smart"
+        app:stl_indicatorThickness="4dp"
+        app:stl_indicatorWidth="auto"
+        app:stl_indicatorWithoutPadding="false"
+        app:stl_overlineColor="@android:color/black"
+        app:stl_overlineThickness="0dp"
+        app:stl_titleOffset="24dp"
+        app:stl_underlineColor="@color/azulBackground"
+        app:stl_underlineThickness="1dp">
         app:layout_constraintTop_toBottomOf="@+id/detalhes_pokemon_descricao_text_view">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Habilidades" />
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Stats" />
+    </com.ogaclejapan.smarttablayout.SmartTabLayout>
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Evoluções" />
-    </com.google.android.material.tabs.TabLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="405dp"
+        android:layout_height="264dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/detalhes_pokemon_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.viewpager.widget.ViewPager>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

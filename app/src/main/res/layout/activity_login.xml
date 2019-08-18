@@ -60,7 +60,7 @@
                 android:textColorHint="@android:color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/login_senha"
+                    android:id="@+id/senha_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -75,7 +75,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/login_email"
+            android:id="@+id/email_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
@@ -85,7 +85,7 @@
 
 
     <Button
-        android:id="@+id/entrar_button"
+        android:id="@+id/entrar_login_button"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -107,9 +107,9 @@
         android:text="Esqueceu sua senha?"
         android:textColor="@color/branco"
         android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/entrar_button"
+        app:layout_constraintBottom_toBottomOf="@+id/entrar_login_button"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toTopOf="@+id/entrar_button" />
+        app:layout_constraintTop_toTopOf="@+id/entrar_login_button" />
 
     <Button
         android:id="@+id/entrar_com_fb_button"
@@ -129,7 +129,7 @@
         app:layout_constraintBottom_toTopOf="@+id/botao_ir_para_cadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entrar_button"
+        app:layout_constraintTop_toBottomOf="@+id/entrar_login_button"
         app:layout_constraintVertical_bias="0.956" />
 
     <Button

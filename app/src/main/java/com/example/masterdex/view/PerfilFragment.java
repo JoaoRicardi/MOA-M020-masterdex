@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.MenuInflater;
@@ -14,13 +15,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.masterdex.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
 
     Button buttonOpcoesPerfil;
+    private CircleImageView fotoPerfil;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private FirebaseUser user;
+    private TextView nomePerfil;
+    private FirebaseAuth firebaseAuth;
 
     public PerfilFragment() {
         // Required empty public constructor
@@ -32,6 +49,28 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+
+
+
+
+        nomePerfil = view.findViewById(R.id.nome_perfil_text_view);
+        fotoPerfil = view.findViewById(R.id.foto_perfil_circle_image_view);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+
+            nomePerfil.setText(name);
+            baixarFoto();
+        }
+
+
+
 
         buttonOpcoesPerfil = view.findViewById(R.id.button_opcoes_perfil);
 
@@ -69,5 +108,20 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
             default:
                 return false;
         }
+    }
+
+    private void baixarFoto() {
+
+
+
+        StorageReference reference = storage.getReference("perfil/" + user.getUid());
+        reference.getDownloadUrl().addOnSuccessListener(uri -> Picasso.get().load(uri).into(fotoPerfil))
+                .addOnFailureListener(exception -> Toast.makeText(getActivity(),
+                        "Erro ao baixar foto",
+                        Toast.LENGTH_SHORT).show());
+
+
+
+
     }
 }
