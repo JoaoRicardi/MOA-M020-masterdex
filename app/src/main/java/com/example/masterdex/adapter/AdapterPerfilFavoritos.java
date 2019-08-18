@@ -23,10 +23,9 @@ public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilFa
     private List<Pokemon> pokemonFilteredList;
     private List<Pokemon> pokemondListFull;
 
-    public AdapterPerfilFavoritos(List<Pokemon> pokemonFilteredList, List<Pokemon> pokemondListFull) {
+    public AdapterPerfilFavoritos(List<Pokemon> pokemondListFull) {
 
         this.pokemonFilteredList = pokemonFilteredList;
-        this.pokemondListFull = pokemondListFull;
 
         this.pokemonFilteredList = new ArrayList<>(pokemondListFull);
     }
