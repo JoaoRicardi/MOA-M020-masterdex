@@ -69,6 +69,7 @@
             android:backgroundTint="@color/branco"
             android:foregroundTint="@color/branco"
             android:hint="Email"
+            android:inputType="textWebEmailAddress"
             android:shadowColor="@color/branco"
             android:textColor="@color/branco"
             android:textColorHighlight="@color/branco"
