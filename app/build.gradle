@@ -32,6 +32,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.0.0'
 
+    implementation 'com.android.support:design:28.3.1'
+
 
     //implementacao retrofit e gson converter picasso e cardview
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'

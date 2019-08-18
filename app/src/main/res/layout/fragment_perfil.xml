@@ -46,37 +46,40 @@
         android:textSize="26sp"
         />
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/card_informacoes">
+        android:background="@drawable/card_informacoes"
+        android:orientation="vertical">
+        
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/appbarperfil_id"
+            android:background="@color/branco"
 
+            ></com.google.android.material.appbar.AppBarLayout>
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            app:tabIndicatorColor="@color/roxo"
-            app:tabRippleColor="@color/lilac"
+            android:layout_height="50dp"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            android:id="@+id/tablayoutperfil_id"
+            app:tabIndicatorColor="@color/azulBackground"
+            app:tabTextColor="@color/azulBackground"
+            android:background="@color/branco"
+        ></com.google.android.material.tabs.TabLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/viewpagerperfil_id"
             >
+        </androidx.viewpager.widget.ViewPager>
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Favoritos"
-                />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Capturados" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Populares" />
-        </com.google.android.material.tabs.TabLayout>
-    </FrameLayout>
+        
+    </LinearLayout>
 
 
 
