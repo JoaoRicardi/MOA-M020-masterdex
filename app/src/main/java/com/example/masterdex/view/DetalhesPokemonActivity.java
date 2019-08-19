@@ -257,6 +257,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 break;
             case "dark":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_sombrio));
+                //botaoCapturado.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
                 break;
             case "ground":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_terra));
@@ -265,7 +266,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_venenoso));
                 break;
             case "flying":
-                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_lutador));
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_voador));
                 break;
 
         }
