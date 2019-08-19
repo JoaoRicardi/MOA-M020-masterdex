@@ -1,19 +1,22 @@
 
 
-        package com.example.masterdex.models;
+package com.example.masterdex.models;
 
-        import androidx.room.ColumnInfo;
-        import androidx.room.Entity;
-        import androidx.room.PrimaryKey;
-        import androidx.room.TypeConverter;
-        import androidx.room.TypeConverters;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import androidx.room.Transaction;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 
-        import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName;
 
-        import java.io.Serializable;
-        import java.util.Comparator;
+import java.io.Serializable;
+import java.util.Comparator;
+import java.util.List;
 
-        @Entity(tableName = "pokemons")
+@Entity(tableName = "pokemons")
 public class Pokemon implements Serializable {
 
     // aki nao tem segredo
@@ -29,16 +32,17 @@ public class Pokemon implements Serializable {
 
     @ColumnInfo(name = "name")
     private String name;
-//
-//    private TipoCamada1 types;
-//
-//    public TipoCamada1 getTypes() {
-//        return types;
-//    }
-//
-//    public void setTypes(TipoCamada1 types) {
-//        this.types = types;
-//    }
+
+    @Ignore
+    private List<Slots> types;
+
+    public List<Slots> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<Slots> types) {
+        this.types = types;
+    }
 
     public int getId() {
         return id;
@@ -76,7 +80,7 @@ public class Pokemon implements Serializable {
     public static Comparator<Pokemon> alfabeticamente = new Comparator<Pokemon>() {
         @Override
         public int compare(Pokemon one, Pokemon two) {
-            return one.getName().compareTo(two.getName()) ;
+            return one.getName().compareTo(two.getName());
         }
     };
 

@@ -7,6 +7,7 @@ import com.example.masterdex.service.RetrofitService;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 public class PokemonRepository {
 
@@ -19,5 +20,10 @@ public class PokemonRepository {
                 .getPokemon(limit,offset)
                 .map(PokemonResponse::getResults);
 
+    }
+
+    public Observable<Pokemon> getPokemonByName(String name) {
+        return retrofitService.getPokeApi()
+                .getPokemonByName(name);
     }
 }
