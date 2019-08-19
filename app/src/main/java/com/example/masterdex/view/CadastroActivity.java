@@ -101,8 +101,7 @@ public class CadastroActivity extends AppCompatActivity {
             //Se nãp huver nada no campo de senha aparecerá essa mensagem
             textEditConfirmarSenha.setError("Digite uma Senha");
         } else {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            cadastrar();
         }
 
     }
