@@ -14,6 +14,7 @@ import com.example.masterdex.database.FavoritosDao;
 import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.repository.DetalhesPokemonRepository;
+import com.example.masterdex.repository.PokemonRepository;
 
 import java.util.List;
 
@@ -25,14 +26,14 @@ import io.reactivex.schedulers.Schedulers;
 public class DetalhesPokemonViewModel extends AndroidViewModel {
 
 
-    private MutableLiveData<List<Pokemon>> pokemonLiveData = new MutableLiveData<>();
+    private MutableLiveData<Pokemon> pokemonLiveData = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public DetalhesPokemonRepository getPokemonRepository() {
-        return pokemonRepository;
+    public MutableLiveData<Pokemon> getPokemonLiveData() {
+        return pokemonLiveData;
     }
 
-    private DetalhesPokemonRepository pokemonRepository = new DetalhesPokemonRepository(getApplication());
+    private PokemonRepository pokemonRepository = new PokemonRepository();
 
 
 
@@ -41,5 +42,12 @@ public class DetalhesPokemonViewModel extends AndroidViewModel {
     }
 
 
-
+    public void getPokemonByName(String name) {
+        disposable.add(
+          pokemonRepository.getPokemonByName(name)
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribeOn(Schedulers.newThread())
+          .subscribe(pokemon -> pokemonLiveData.setValue(pokemon))
+        );
+    }
 }

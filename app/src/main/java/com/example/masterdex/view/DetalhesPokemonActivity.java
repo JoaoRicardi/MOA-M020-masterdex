@@ -1,5 +1,7 @@
 package com.example.masterdex.view;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.room.Room;
 
 import android.content.Intent;
@@ -20,6 +22,8 @@ import com.example.masterdex.database.CapturadosDb;
 import com.example.masterdex.database.FavoritosDao;
 import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.models.Pokemon;
+import com.example.masterdex.viewmodel.DetalhesPokemonViewModel;
+import com.example.masterdex.viewmodel.PokemonViewModel;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItems;
@@ -39,6 +43,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     private ToggleButton botaoCapturado;
     private FavoritosDb favoritosDb;
     private CapturadosDb capturadosDb;
+    private ConstraintLayout backgroundPokemon;
 
 
     @Override
@@ -59,15 +64,14 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         SmartTabLayout viewPagerTab = findViewById(R.id.smart);
         viewPagerTab.setViewPager(viewPager);
 
-
-
         ImageView botaoVoltar = findViewById(R.id.detalhes_pokemon_voltar);
         botaoFavorito = findViewById(R.id.toggle_favorito_Button);
         botaoCapturado = findViewById(R.id.toggle_capturado_Button);
         ImageView imagemPokemon = findViewById(R.id.detalhes_pokemon_image_view);
         TextView nomePokemon = findViewById(R.id.detalhes_pokemon_nome);
-        ImageView tipoPokemon = findViewById(R.id.detalhes_pokemon_tipo_image_view);
+        ImageView tipoPokemon = findViewById(R.id.detalhes_pokemon_tipo1_image_view);
         TextView descricaoPokemon = findViewById(R.id.detalhes_pokemon_descricao_text_view);
+        backgroundPokemon = findViewById(R.id.background_constraint_detalhe_pokemon);
 
         botaoVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +91,12 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
 // aki faço o nome do pokemon ficar com a primeira letra maiuscula.
 
+
+        DetalhesPokemonViewModel detalhesPokemonViewModel = ViewModelProviders.of(this).get(DetalhesPokemonViewModel.class);
+        detalhesPokemonViewModel.getPokemonByName(pokemon.getName());
+
+        detalhesPokemonViewModel.getPokemonLiveData()
+                .observe(this, pokemon1 -> switchBackground(pokemon1));
 
         String pok = pokemon.getName();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
@@ -121,6 +131,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void deletarPokemonFavorito(Pokemon pokemon) {
@@ -188,6 +199,87 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     private void voltarHome() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void switchBackground(Pokemon pokemon) {
+
+
+        int valorPosicao = 0;
+        if (pokemon.getTypes().size() == 1) {
+            valorPosicao = 0;
+        } else {
+            valorPosicao = 1;
+        }
+
+        String tipo = pokemon.getTypes().get(valorPosicao).getType().getName();
+        switch (tipo) {
+            case "steel":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_aco));
+                break;
+            case "water":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_agua));
+                break;
+            case "dragon":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_dragao));
+                break;
+            case "electric":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_eletrico));
+                break;
+            case "fairy":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fada));
+                break;
+            case "ghost":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fantasma));
+                break;
+            case "fire":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fogo));
+                break;
+            case "ice":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_gelo));
+                break;
+            case "grass":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_grama));
+                break;
+            case "bug":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_inseto));
+                break;
+            case "fighting":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_lutador));
+                break;
+            case "normal":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_normal));
+                break;
+            case "rock":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_pedra));
+                break;
+            case "psychic":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_psiquico));
+                break;
+            case "dark":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_sombrio));
+                //botaoCapturado.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
+                break;
+            case "ground":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_terra));
+                break;
+            case "poison":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_venenoso));
+                break;
+            case "flying":
+                backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_voador));
+                break;
+
+        }
+    }
+
+    public void mostrarTipo (Pokemon pokemon){
+        boolean qtdTipo = true;
+        if (pokemon.getTypes().size() == 1){
+            qtdTipo = true;
+        } else {
+            qtdTipo = false;
+        }
+
     }
 }
 

@@ -199,4 +199,6 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     public void onRefresh() {
 
     }
+
+
 }

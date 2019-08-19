@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.DetalhesPokemonActivity"
-    android:background="@drawable/detalhes_background_agua"
     android:id="@+id/background_constraint_detalhe_pokemon"
     >
 
@@ -95,15 +94,24 @@
         app:layout_constraintTop_toBottomOf="@+id/medal" />
 
     <ImageView
-        android:id="@+id/detalhes_pokemon_tipo_image_view"
+        android:id="@+id/detalhes_pokemon_tipo1_image_view"
         android:layout_width="70dp"
         android:layout_height="25dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="128dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detalhes_pokemon_nome" />
+
+    <ImageView
+        android:id="@+id/detalhes_pokemon_tipo2_image_view"
+        android:layout_width="70dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="128dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detalhes_pokemon_nome" />
+
+
 
     <TextView
         android:id="@+id/detalhes_pokemon_descricao_text_view"
@@ -114,7 +122,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detalhes_pokemon_tipo_image_view" />
+        app:layout_constraintTop_toBottomOf="@+id/detalhes_pokemon_tipo1_image_view" />
 
     <com.ogaclejapan.smarttablayout.SmartTabLayout
         android:id="@+id/smart"
