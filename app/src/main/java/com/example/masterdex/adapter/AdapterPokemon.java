@@ -140,12 +140,12 @@ public class AdapterPokemon extends RecyclerView.Adapter<AdapterPokemon.ViewHold
                 return object1.getName().toLowerCase().compareToIgnoreCase(object2.getName());
             }
         };
-        Collections.sort(pokemonsListFull, comparator);
+        Collections.sort(filteredList, comparator);
         notifyDataSetChanged();
 
     }
 
-    public void sortNameByNum() {
+    public void sortNameByDesc() {
         Comparator<Pokemon> comparator = new Comparator<Pokemon>() {
 
             @Override
@@ -153,10 +153,38 @@ public class AdapterPokemon extends RecyclerView.Adapter<AdapterPokemon.ViewHold
                 return object2.getName().toLowerCase().compareToIgnoreCase(object1.getName());
             }
         };
-        Collections.sort(pokemonsListFull, comparator);
+        Collections.sort(filteredList, comparator);
         notifyDataSetChanged();
 
     }
+
+    public void sortNumberByAsc() {
+        Comparator<Pokemon> comparator = new Comparator<Pokemon>() {
+
+            @Override
+            public int compare(Pokemon object1, Pokemon object2) {
+                return object1.getNumber()-(object2.getNumber());
+            }
+        };
+        Collections.sort(filteredList, comparator);
+        notifyDataSetChanged();
+
+    }
+
+    public void sortNumberByDesc() {
+        Comparator<Pokemon> comparator = new Comparator<Pokemon>() {
+
+            @Override
+            public int compare(Pokemon object1, Pokemon object2) {
+                 return object2.getNumber()-(object1.getNumber());
+            }
+        };
+        Collections.sort(filteredList, comparator);
+        notifyDataSetChanged();
+
+    }
+
+
 
 
 }

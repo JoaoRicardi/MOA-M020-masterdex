@@ -9,43 +9,25 @@ import com.example.masterdex.R;
 import com.example.masterdex.viewmodel.PokemonViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.masterdex.adapter.AdapterPokemon;
 import com.example.masterdex.interfaces.PokemonListener;
 import com.example.masterdex.models.Pokemon;
-import com.example.masterdex.models.PokemonResponse;
-import com.example.masterdex.service.pokeApi.PokeApi;
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class PokemonsFragment extends Fragment implements PokemonListener, SwipeRefreshLayout.OnRefreshListener {
@@ -62,6 +44,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     private ImageView azButton;
     private ImageView numeroButton;
     private Context Context;
+    private Boolean ascending = true;
 
     public PokemonsFragment() {
         // Required empty public constructor
@@ -86,24 +69,31 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
         azButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pokemonAdapter.sortNameByAsc();
-                receberDadosApi();
+                sortName(ascending);
+                ascending = !ascending;
 
-                pokemonAdapter.notifyDataSetChanged();
+
             }
+
+
         });
+
 
         numeroButton = view.findViewById(R.id.numero_image);
         numeroButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sortNumber(ascending);
+                ascending = !ascending;
 
 
             }
         });
 
 
-        pokemonAdapter = new AdapterPokemon(this, pokemonArrayList);
+        pokemonAdapter = new
+
+                AdapterPokemon(this, pokemonArrayList);
 
 
         GridLayoutManager LayoutManager = new GridLayoutManager(getContext(), 3);
@@ -146,6 +136,25 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
         });
 
         return view;
+    }
+
+
+    public void sortName(Boolean asc) {
+        if (asc) {
+            pokemonAdapter.sortNameByAsc();
+        } else {
+            pokemonAdapter.sortNameByDesc();
+        }
+
+    }
+
+    public void sortNumber(Boolean asc) {
+        if (asc) {
+            pokemonAdapter.sortNumberByAsc();
+        } else {
+            pokemonAdapter.sortNumberByDesc();
+        }
+
     }
 
     private void receberDadosApi() {
