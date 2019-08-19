@@ -44,14 +44,18 @@ public class FavoritosPerfilFragment extends Fragment {
         favoritosRecyclerView.setLayoutManager(layoutManager);
         favoritosRecyclerView.setAdapter(favoritosAdapter);
 
-        PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
-        pokemonViewModel.atualizarPokemon(LIMIT, offset);
-        pokemonViewModel.getPokemonLiveData()
-                .observe(this, pokemon -> favoritosAdapter.atualizarFavoritosPerfil(pokemon));
+        atualizarFavoritos();
 
 
 
         return view;
+    }
 
+    private void atualizarFavoritos() {
+
+        PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
+        pokemonViewModel.atualizarPokemon(LIMIT, offset);
+        pokemonViewModel.getPokemonLiveData()
+                .observe(this, pokemon -> favoritosAdapter.atualizarFavoritosPerfil(pokemon));
     }
 }
