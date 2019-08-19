@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.masterdex.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
@@ -26,6 +28,7 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.annotations.NonNull;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -101,27 +104,27 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
                 startActivity(intent);
                 return true;
 
-            case R.id.item_sair:
+            case R.id.item_ir_para_perfil:
                 Intent intent2 = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent2);
                 return true;
+            case R.id.item_sair:
+                signOut();
+                Intent intent1 = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent1);
             default:
                 return false;
         }
     }
 
     private void baixarFoto() {
-
-
-
         StorageReference reference = storage.getReference("perfil/" + user.getUid());
-        reference.getDownloadUrl().addOnSuccessListener(uri -> Picasso.get().load(uri).into(fotoPerfil))
-                .addOnFailureListener(exception -> Toast.makeText(getActivity(),
-                        "Erro ao baixar foto",
-                        Toast.LENGTH_SHORT).show());
+        reference.getDownloadUrl().addOnSuccessListener(uri -> Picasso.get().load(uri).into(fotoPerfil));
+    }
 
-
-
+    public void signOut(){
+        firebaseAuth.getInstance()
+                .signOut();
 
     }
 }

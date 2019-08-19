@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/item_ir_para_perfil"
+        android:title="Login"/>
+    <item
         android:id="@+id/item_editar_perfil"
         android:title="Editar perfil"/>
 
