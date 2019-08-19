@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import com.example.masterdex.R;
+import com.example.masterdex.adapter.AdapterPokemon;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.viewpager.widget.ViewPager;
@@ -17,6 +18,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.masterdex.adapter.ViewPagerAdapter;
+
+import java.util.Collection;
+import java.util.Collections;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -102,8 +106,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     public void ordemAz(View view) {
         Toast.makeText(getApplicationContext(), "Ordena  A-Z", Toast.LENGTH_SHORT).show();
+
+
 
     }
 

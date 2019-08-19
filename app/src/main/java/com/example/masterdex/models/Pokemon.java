@@ -11,8 +11,9 @@
         import com.google.gson.annotations.SerializedName;
 
         import java.io.Serializable;
+        import java.util.Comparator;
 
-@Entity(tableName = "pokemons")
+        @Entity(tableName = "pokemons")
 public class Pokemon implements Serializable {
 
     // aki nao tem segredo
@@ -72,6 +73,12 @@ public class Pokemon implements Serializable {
         this.name = name;
     }
 
+    public static Comparator<Pokemon> alfabeticamente = new Comparator<Pokemon>() {
+        @Override
+        public int compare(Pokemon one, Pokemon two) {
+            return one.getName().compareTo(two.getName()) ;
+        }
+    };
 
 }
 

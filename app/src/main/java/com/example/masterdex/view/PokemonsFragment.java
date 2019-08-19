@@ -1,6 +1,7 @@
 package com.example.masterdex.view;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -35,6 +37,9 @@ import com.example.masterdex.service.pokeApi.PokeApi;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,6 +59,9 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     private LinearLayout MostrarBotoes;
     private boolean show;
     private SearchView searchView;
+    private ImageView azButton;
+    private ImageView numeroButton;
+    private Context Context;
 
     public PokemonsFragment() {
         // Required empty public constructor
@@ -74,6 +82,27 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
         recyclerPokemons = view.findViewById(R.id.recyclerView);
         MostrarBotoes = view.findViewById(R.id.linearLayout_id);
         FloatingActionButton floatActionButton = view.findViewById(R.id.button_mostrar_botoes_poke_home_id);
+        azButton = view.findViewById(R.id.az_image);
+        azButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pokemonAdapter.sortNameByAsc();
+                receberDadosApi();
+
+                pokemonAdapter.notifyDataSetChanged();
+            }
+        });
+
+        numeroButton = view.findViewById(R.id.numero_image);
+        numeroButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
+
         pokemonAdapter = new AdapterPokemon(this, pokemonArrayList);
 
 
@@ -82,10 +111,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
         recyclerPokemons.setAdapter(pokemonAdapter);
 
 
-        PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
-        pokemonViewModel.atualizarPokemon(LIMIT, offset);
-        pokemonViewModel.getPokemonLiveData()
-                .observe(this, pokemons -> pokemonAdapter.atualizarListaPokemons(pokemons));
+        receberDadosApi();
 
         //SearchView
 
@@ -120,6 +146,13 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
         });
 
         return view;
+    }
+
+    private void receberDadosApi() {
+        PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
+        pokemonViewModel.atualizarPokemon(LIMIT, offset);
+        pokemonViewModel.getPokemonLiveData()
+                .observe(this, pokemons -> pokemonAdapter.atualizarListaPokemons(pokemons));
     }
 
     //    private void receberDados()
