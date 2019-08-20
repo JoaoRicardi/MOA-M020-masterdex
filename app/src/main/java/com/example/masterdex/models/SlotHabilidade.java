@@ -1,6 +1,8 @@
 package com.example.masterdex.models;
 
-public class SlotHabilidade {
+import java.io.Serializable;
+
+public class SlotHabilidade implements Serializable {
 
     private Habilidade move;
 

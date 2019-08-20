@@ -1,6 +1,8 @@
 package com.example.masterdex.models;
 
-public class Habilidade {
+import java.io.Serializable;
+
+public class Habilidade implements Serializable {
 
     private String name;
 

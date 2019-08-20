@@ -39,6 +39,17 @@ public class Pokemon implements Serializable {
     @Ignore
     private List<SlotHabilidade> moves;
 
+    @Ignore
+    private List<Stats> stats;
+
+    public List<Stats> getStats() {
+        return stats;
+    }
+
+    public void setStats(List<Stats> stats) {
+        this.stats = stats;
+    }
+
     public List<SlotHabilidade> getMoves() {
         return moves;
     }

@@ -25,7 +25,6 @@ import com.example.masterdex.database.FavoritosDao;
 import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.viewmodel.DetalhesPokemonViewModel;
-import com.example.masterdex.viewmodel.PokemonViewModel;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItems;
@@ -133,7 +132,9 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             }
         });
 
-        enviarPokemonParaFragments(pokemon);
+        enviarPokemonParaHabilidades(pokemon);
+        enviarPokemonParaStats(pokemon);
+
 
     }
 
@@ -285,7 +286,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
     }
 
-    public void enviarPokemonParaFragments(Pokemon pokemon){
+    public void enviarPokemonParaHabilidades(Pokemon pokemon) {
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -296,6 +297,22 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         habilidadesFragment.setArguments(bundle);
 
         transaction.replace(R.id.viewPager, habilidadesFragment);
+        transaction.commit();
+
+    }
+
+    public void enviarPokemonParaStats(Pokemon pokemon) {
+
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        StatsFragment statsFragment = new StatsFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("POKEMON", pokemon);
+        statsFragment.setArguments(bundle);
+
+        transaction.replace(R.id.viewPager, statsFragment);
         transaction.commit();
 
     }
