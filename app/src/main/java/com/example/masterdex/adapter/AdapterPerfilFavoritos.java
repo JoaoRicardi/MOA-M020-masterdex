@@ -18,7 +18,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilPopulares.ViewHolder> implements Filterable {
+public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilFavoritos.ViewHolder> implements Filterable {
+
     private List<Pokemon> pokemonFilteredList;
     private List<Pokemon> pokemondListFull;
 
