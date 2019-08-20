@@ -39,10 +39,7 @@ public class StatsFragment extends Fragment {
         Bundle bundle = getArguments();
         Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
 
-        DetalhesPokemonViewModel detalhesPokemonViewModel = ViewModelProviders.of(this).get(DetalhesPokemonViewModel.class);
-        detalhesPokemonViewModel.getPokemonByName(pokemon.getName());
-
-       // speedTextView.setText(pokemon.getStats().get(0).getValorStats());
+        speedTextView.setText(pokemon.getStats().get(0).getValorStats());
 
 
 

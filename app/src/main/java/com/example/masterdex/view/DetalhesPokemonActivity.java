@@ -136,6 +136,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         enviarPokemonParaStats(pokemon);
 
 
+
     }
 
     private void deletarPokemonFavorito(Pokemon pokemon) {
