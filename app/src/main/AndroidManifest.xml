@@ -11,7 +11,10 @@
         android:roundIcon="@drawable/masterdex_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.DetalhesPokemonActivity"></activity>
+        <activity android:name=".view.QuizActivity">
+
+        </activity>
+        <activity android:name=".view.DetalhesPokemonActivity" />
         <activity android:name=".view.EditarPerfilActivity" />
         <activity android:name=".view.RegioesInformacoesActivity" />
         <activity android:name=".view.LoginActivity" />

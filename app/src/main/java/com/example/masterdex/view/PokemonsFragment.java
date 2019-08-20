@@ -29,6 +29,8 @@ import com.example.masterdex.models.Pokemon;
 
 import java.util.ArrayList;
 
+import pl.droidsonroids.gif.GifImageButton;
+
 
 public class PokemonsFragment extends Fragment implements PokemonListener, SwipeRefreshLayout.OnRefreshListener {
 
@@ -46,6 +48,8 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     private Context Context;
     private Boolean ascending = true;
 
+    private GifImageButton gifImageButton;
+
     public PokemonsFragment() {
         // Required empty public constructor
     }
@@ -55,6 +59,15 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
+
+        gifImageButton =view.findViewById(R.id.gif);
+        gifImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),QuizActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
 
