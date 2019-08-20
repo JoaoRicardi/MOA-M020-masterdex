@@ -1,6 +1,8 @@
 package com.example.masterdex.view;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.room.Room;
 
@@ -89,7 +91,6 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
-// aki faço o nome do pokemon ficar com a primeira letra maiuscula.
 
 
         DetalhesPokemonViewModel detalhesPokemonViewModel = ViewModelProviders.of(this).get(DetalhesPokemonViewModel.class);
@@ -131,6 +132,8 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 }
             }
         });
+
+        enviarPokemonParaFragments(pokemon);
 
     }
 
@@ -272,13 +275,28 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         }
     }
 
-    public void mostrarTipo (Pokemon pokemon){
+    public void mostrarTipo(Pokemon pokemon) {
         boolean qtdTipo = true;
-        if (pokemon.getTypes().size() == 1){
+        if (pokemon.getTypes().size() == 1) {
             qtdTipo = true;
         } else {
             qtdTipo = false;
         }
+
+    }
+
+    public void enviarPokemonParaFragments(Pokemon pokemon){
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        HabilidadesFragment habilidadesFragment = new HabilidadesFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("POKEMON", pokemon);
+        habilidadesFragment.setArguments(bundle);
+
+        transaction.replace(R.id.viewPager, habilidadesFragment);
+        transaction.commit();
 
     }
 }
