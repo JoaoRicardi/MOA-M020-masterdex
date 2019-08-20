@@ -40,18 +40,18 @@ public class HabilidadesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_habilidades, container, false);
 
-        recyclerView = view.findViewById(R.id.habilidades_recycler_view);
-
-        Bundle bundle = getArguments();
-        Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
-
-        List<SlotHabilidade>  slotHabilidadeList = pokemon.getMoves();
-
-        adapterHabilidades = new AdapterHabilidades(slotHabilidadeList, pokemon);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        recyclerView.setAdapter(adapterHabilidades);
+//        recyclerView = view.findViewById(R.id.habilidades_recycler_view);
+//
+//        Bundle bundle = getArguments();
+//        Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
+//
+//        List<SlotHabilidade>  slotHabilidadeList = pokemon.getMoves();
+//
+//        adapterHabilidades = new AdapterHabilidades(slotHabilidadeList, pokemon);
+//
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//
+//        recyclerView.setAdapter(adapterHabilidades);
 
         return view;
     }
