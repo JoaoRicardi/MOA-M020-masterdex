@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,8 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.masterdex.R;
+import com.example.masterdex.adapter.PerfilViewPagerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
@@ -42,6 +45,9 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
     private TextView nomePerfil;
     private FirebaseAuth firebaseAuth;
 
+    private TabLayout tabLayoutPerfil;
+    private ViewPager viewPagerPerfil;
+
     public PerfilFragment() {
         // Required empty public constructor
     }
@@ -52,6 +58,18 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+
+        tabLayoutPerfil = view.findViewById(R.id.tablayout_perfil_id);
+        viewPagerPerfil = view.findViewById(R.id.viewpager_perfil_id);
+
+        PerfilViewPagerAdapter perfilViewPagerAdapter = new PerfilViewPagerAdapter(getChildFragmentManager());
+        perfilViewPagerAdapter.AddFragment(new CapturadosPerfilFragment(),"Capturados");
+        perfilViewPagerAdapter.AddFragment(new FavoritosPerfilFragment(),"Favoritos");
+        perfilViewPagerAdapter.AddFragment(new PopuladoresPerfilFragment(),"Populares");
+
+        viewPagerPerfil.setAdapter(perfilViewPagerAdapter);
+        tabLayoutPerfil.setupWithViewPager(viewPagerPerfil);
+
 
 
 

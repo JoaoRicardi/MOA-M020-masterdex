@@ -67,6 +67,7 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager_perfil_id"
+            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
