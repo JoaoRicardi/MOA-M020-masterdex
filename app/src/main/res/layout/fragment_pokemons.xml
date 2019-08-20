@@ -9,18 +9,18 @@
 
     <pl.droidsonroids.gif.GifImageButton
         android:id="@+id/gif"
-        android:layout_width="50dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="216dp"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/gifquiz"
+        android:background="@drawable/poke"
         android:scaleType="fitXY"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.708"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/gifquiz" />
+        tools:src="@drawable/poke" />
 
 
     <ImageView
