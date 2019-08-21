@@ -36,6 +36,36 @@ public class Pokemon implements Serializable {
     @Ignore
     private List<Slots> types;
 
+    @Ignore
+    private List<SlotHabilidade> moves;
+
+    @Ignore
+    private List<Stats> stats;
+
+    public List<Stats> getStats() {
+        return stats;
+    }
+
+    public void setStats(List<Stats> stats) {
+        this.stats = stats;
+    }
+
+    public List<SlotHabilidade> getMoves() {
+        return moves;
+    }
+
+    public void setMoves(List<SlotHabilidade> moves) {
+        this.moves = moves;
+    }
+
+    public static Comparator<Pokemon> getAlfabeticamente() {
+        return alfabeticamente;
+    }
+
+    public static void setAlfabeticamente(Comparator<Pokemon> alfabeticamente) {
+        Pokemon.alfabeticamente = alfabeticamente;
+    }
+
     public List<Slots> getTypes() {
         return types;
     }

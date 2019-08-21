@@ -1,6 +1,8 @@
 package com.example.masterdex.models;
 
-public class Slots {
+import java.io.Serializable;
+
+public class Slots implements Serializable {
 
     private TipoPokemon type;
 
