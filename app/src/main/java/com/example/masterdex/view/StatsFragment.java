@@ -21,10 +21,15 @@ import com.example.masterdex.viewmodel.DetalhesPokemonViewModel;
 public class StatsFragment extends Fragment {
 
     private TextView speedTextView;
+    private Pokemon pokemon;
 
 
-    public StatsFragment() {
-        // Required empty public constructor
+//    public StatsFragment(Pokemon pokemon) {
+//        this.pokemon = pokemon;
+//    }
+
+    public StatsFragment (){
+
     }
 
 
@@ -39,7 +44,8 @@ public class StatsFragment extends Fragment {
         Bundle bundle = getArguments();
         Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
 
-        speedTextView.setText(pokemon.getStats().get(0).getValorStats());
+        speedTextView.setText(""+pokemon.getStats().get(0).getValorStats());
+        speedTextView.setText("999");
 
 
 

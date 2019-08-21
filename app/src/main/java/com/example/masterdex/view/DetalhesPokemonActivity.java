@@ -1,8 +1,6 @@
 package com.example.masterdex.view;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.room.Room;
 
@@ -12,6 +10,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -52,19 +51,6 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_pokemon);
 
-
-        ViewPagerItemAdapter adapter = new ViewPagerItemAdapter(ViewPagerItems.with(this)
-                .add("HABILIDADES", R.layout.fragment_habilidades)
-                .add("STATS", R.layout.fragment_stats)
-                .add("EVOLUÇÕES", R.layout.fragment_evolucoes)
-                .create());
-
-        ViewPager viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(adapter);
-
-        SmartTabLayout viewPagerTab = findViewById(R.id.smart);
-        viewPagerTab.setViewPager(viewPager);
-
         ImageView botaoVoltar = findViewById(R.id.detalhes_pokemon_voltar);
         botaoFavorito = findViewById(R.id.toggle_favorito_Button);
         botaoCapturado = findViewById(R.id.toggle_capturado_Button);
@@ -96,7 +82,10 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         detalhesPokemonViewModel.getPokemonByName(pokemon.getName());
 
         detalhesPokemonViewModel.getPokemonLiveData()
-                .observe(this, pokemon1 -> switchBackground(pokemon1));
+                .observe(this, pokemonApi -> {
+                    switchBackground(pokemonApi);
+                    setupViewPager(pokemonApi);
+                });
 
         String pok = pokemon.getName();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
@@ -132,11 +121,31 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             }
         });
 
-        enviarPokemonParaHabilidades(pokemon);
-        enviarPokemonParaStats(pokemon);
+    }
 
+    private void setupViewPager(Pokemon pokemonApi) {
+        ViewPagerItemAdapter adapter = new ViewPagerItemAdapter(ViewPagerItems.with(this)
+                .add("HABILIDADES", R.layout.fragment_habilidades)
+                .add("STATS", R.layout.fragment_stats)
+                .add("EVOLUÇÕES", R.layout.fragment_evolucoes)
+                .create());
 
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        viewPager.setAdapter(adapter);
 
+        SmartTabLayout viewPagerTab = findViewById(R.id.smart);
+        viewPagerTab.setViewPager(viewPager);
+
+        setupHabilidadesTab(pokemonApi, adapter.getPage(0));
+        setupStatsTab(pokemonApi, adapter.getPage(1));
+    }
+
+    private void setupHabilidadesTab(Pokemon pokemonApi, View view) {
+    }
+
+    private void setupStatsTab(Pokemon pokemonApi, View view) {
+        TextView speedTextView = view.findViewById(R.id.stats_text_view_valor_speed);
+        speedTextView.setText(""+pokemonApi.getStats().get(0).getValorStats());
     }
 
     private void deletarPokemonFavorito(Pokemon pokemon) {
@@ -208,7 +217,8 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
     public void switchBackground(Pokemon pokemon) {
 
-
+        Log.d("Status", " " + pokemon.getStats().get(0).getValorStats());
+        Log.d("Tipo", pokemon.getTypes().get(0).getType().getName());
         int valorPosicao = 0;
         if (pokemon.getTypes().size() == 1) {
             valorPosicao = 0;
@@ -287,34 +297,25 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
     }
 
-    public void enviarPokemonParaHabilidades(Pokemon pokemon) {
+    public HabilidadesFragment enviarPokemonParaHabilidades(Pokemon pokemon) {
 
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
         HabilidadesFragment habilidadesFragment = new HabilidadesFragment();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("POKEMON", pokemon);
         habilidadesFragment.setArguments(bundle);
 
-        transaction.replace(R.id.viewPager, habilidadesFragment);
-        transaction.commit();
-
+        return habilidadesFragment;
     }
 
-    public void enviarPokemonParaStats(Pokemon pokemon) {
-
-
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
+    public StatsFragment enviarPokemonParaStats(Pokemon pokemon) {
         StatsFragment statsFragment = new StatsFragment();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("POKEMON", pokemon);
         statsFragment.setArguments(bundle);
 
-        transaction.replace(R.id.viewPager, statsFragment);
-        transaction.commit();
+        return statsFragment;
 
     }
 }
