@@ -25,7 +25,6 @@ import com.example.masterdex.database.CapturadosDao;
 import com.example.masterdex.database.CapturadosDb;
 import com.example.masterdex.database.FavoritosDao;
 import com.example.masterdex.database.FavoritosDb;
-import com.example.masterdex.models.Habilidade;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.models.SlotHabilidade;
 import com.example.masterdex.viewmodel.DetalhesPokemonViewModel;
@@ -35,7 +34,6 @@ import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItems;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Completable;
@@ -53,6 +51,9 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     private FavoritosDb favoritosDb;
     private CapturadosDb capturadosDb;
     private ConstraintLayout backgroundPokemon;
+    private ImageView tipoUnicoImageView;
+    private ImageView tipoPrimarioImageView;
+    private ImageView tipoSecundarioImageView;
 
 
     @Override
@@ -68,6 +69,9 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         ImageView tipoPokemon = findViewById(R.id.detalhes_pokemon_tipo1_image_view);
         TextView descricaoPokemon = findViewById(R.id.detalhes_pokemon_descricao_text_view);
         backgroundPokemon = findViewById(R.id.background_constraint_detalhe_pokemon);
+        tipoUnicoImageView = findViewById(R.id.detalhes_pokemon_tipo_unico_image_view);
+        tipoPrimarioImageView = findViewById(R.id.detalhes_pokemon_tipo1_image_view);
+        tipoSecundarioImageView = findViewById(R.id.detalhes_pokemon_tipo2_image_view);
 
 
         botaoVoltar.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +99,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 .observe(this, pokemonApi -> {
                     switchBackground(pokemonApi);
                     setupViewPager(pokemonApi);
+                    switchImageTypePokemon(pokemonApi);
                 });
 
         String pok = pokemon.getName();
@@ -133,6 +138,206 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
     }
 
+    private void switchImageTypePokemon(Pokemon pokemon) {
+
+        if (pokemon.getTypes().size() == 1){
+            setarTipoUnico(pokemon);
+        } else {
+            setarTipoHibrido(pokemon);
+        }
+
+
+
+    }
+
+    private void setarTipoHibrido(Pokemon pokemon) {
+
+        String tipoPrimario = pokemon.getTypes().get(1).getType().getName();
+        String tipoSecundario = pokemon.getTypes().get(0).getType().getName();
+
+        switch (tipoPrimario) {
+            case "steel":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_steel));
+                break;
+            case "water":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_water));
+                break;
+            case "dragon":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_dragon));
+                break;
+            case "electric":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_elctr));
+                break;
+            case "fairy":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_fairy));
+                break;
+            case "ghost":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_ghost));
+                break;
+            case "fire":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_fire));
+                break;
+            case "ice":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_ice));
+                break;
+            case "grass":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_grass));
+                break;
+            case "bug":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_bug));
+                break;
+            case "fighting":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_fight));
+                break;
+            case "normal":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_normal));
+                break;
+            case "rock":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_rock));
+                break;
+            case "psychic":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_psychic));
+                break;
+            case "dark":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_dark));
+                break;
+            case "ground":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_ground));
+                break;
+            case "poison":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_poison));
+                break;
+            case "flying":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_flying));
+                break;
+
+        }
+
+        switch (tipoSecundario) {
+            case "steel":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_steel));
+                break;
+            case "water":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_water));
+                break;
+            case "dragon":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_dragon));
+                break;
+            case "electric":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_elctr));
+                break;
+            case "fairy":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_fairy));
+                break;
+            case "ghost":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_ghost));
+                break;
+            case "fire":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_fire));
+                break;
+            case "ice":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_ice));
+                break;
+            case "grass":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_grass));
+                break;
+            case "bug":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_bug));
+                break;
+            case "fighting":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_fight));
+                break;
+            case "normal":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_normal));
+                break;
+            case "rock":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_rock));
+                break;
+            case "psychic":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_psychic));
+                break;
+            case "dark":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_dark));
+                break;
+            case "ground":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_ground));
+                break;
+            case "poison":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_poison));
+                break;
+            case "flying":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_flying));
+                break;
+
+        }
+
+    }
+
+    private void setarTipoUnico(Pokemon pokemon) {
+
+        String tipo = pokemon.getTypes().get(0).getType().getName();
+        switch (tipo) {
+            case "steel":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_steel));
+                break;
+            case "water":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_water));
+                break;
+            case "dragon":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_dragon));
+                break;
+            case "electric":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_elctr));
+                break;
+            case "fairy":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_fairy));
+                break;
+            case "ghost":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_ghost));
+                break;
+            case "fire":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_fire));
+                break;
+            case "ice":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_ice));
+                break;
+            case "grass":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_grass));
+                break;
+            case "bug":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_bug));
+                break;
+            case "fighting":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_fight));
+                break;
+            case "normal":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_normal));
+                break;
+            case "rock":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_rock));
+                break;
+            case "psychic":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_psychic));
+                break;
+            case "dark":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_dark));
+                break;
+            case "ground":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_ground));
+                break;
+            case "poison":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_poison));
+                break;
+            case "flying":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_flying));
+                break;
+
+        }
+
+
+
+    }
+
     private void setupViewPager(Pokemon pokemonApi) {
         ViewPagerItemAdapter adapter = new ViewPagerItemAdapter(ViewPagerItems.with(this)
                 .add("HABILIDADES", R.layout.fragment_habilidades)
@@ -155,7 +360,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
         List<SlotHabilidade> habilidadeList = pokemonApi.getMoves();
 
-        RecyclerView habilidadesRecycler = findViewById(R.id.habilidades_recycler_view);
+        RecyclerView habilidadesRecycler = view.findViewById(R.id.habilidades_recycler_view);
         AdapterHabilidades adapterHabilidades = new AdapterHabilidades(habilidadeList, pokemonApi);
 
         habilidadesRecycler.setAdapter(adapterHabilidades);
