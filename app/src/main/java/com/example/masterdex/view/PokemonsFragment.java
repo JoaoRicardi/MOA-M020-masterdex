@@ -135,6 +135,8 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
             }
         });
 
+
+
         return view;
     }
 

@@ -42,6 +42,18 @@ public class Pokemon implements Serializable {
     @Ignore
     private List<Stats> stats;
 
+    @Ignore
+    @SerializedName("flavor_text_entries")
+    private List<SlotFlavorText> flavorTextEntries;
+
+    public List<SlotFlavorText> getFlavorTextEntries() {
+        return flavorTextEntries;
+    }
+
+    public void setFlavorTextEntries(List<SlotFlavorText> flavorTextEntries) {
+        this.flavorTextEntries = flavorTextEntries;
+    }
+
     public List<Stats> getStats() {
         return stats;
     }

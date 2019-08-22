@@ -1,5 +1,6 @@
 package com.example.masterdex.view;
 
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -353,7 +354,13 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
         setupHabilidadesTab(pokemonApi, adapter.getPage(0));
         setupStatsTab(pokemonApi, adapter.getPage(1));
+        setupSobreTab(pokemonApi, adapter.getPage(2));
 
+    }
+
+    private void setupSobreTab(Pokemon pokemonApi, View view) {
+        TextView flavorTextTextView = findViewById(R.id.flavor_text_text_view);
+        //flavorTextTextView.setText("" + pokemonApi.getFlavorTextEntries().get(9).getFlavorText());
     }
 
     private void setupHabilidadesTab(Pokemon pokemonApi, View view) {
@@ -365,6 +372,10 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
         habilidadesRecycler.setAdapter(adapterHabilidades);
         habilidadesRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+//        if (pokemonApi.getTypes().get(0).getType().getName().equals("fire")){
+//            habilidadeNome.setTextColor(getResources().getColor(R.color.fogo));
+//        }
     }
 
     private void setupStatsTab(Pokemon pokemonApi, View view) {
