@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.masterdex.R;
@@ -24,14 +25,26 @@ import com.example.masterdex.database.FavoritosDao;
 import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.viewmodel.DetalhesPokemonViewModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItems;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -39,18 +52,28 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
     public static final String FAVORITOS_DB = "favoritos_Db";
     public static final String CAPTURADOS_DB = "capturados_Db";
+    private static final String TAG = "DetalhesPokemonActivity";
 
     private ToggleButton botaoFavorito;
     private ToggleButton botaoCapturado;
     private FavoritosDb favoritosDb;
     private CapturadosDb capturadosDb;
     private ConstraintLayout backgroundPokemon;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_pokemon);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String name = user.getDisplayName();
+            Toast.makeText(this, "\"Bem vindo \" + name", Toast.LENGTH_LONG).show();
+        }
 
         ImageView botaoVoltar = findViewById(R.id.detalhes_pokemon_voltar);
         botaoFavorito = findViewById(R.id.toggle_favorito_Button);
@@ -97,8 +120,8 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         //como o proprio nome ja diz kkk
 
 
-        System.out.println(pokemon.getName());
-        System.out.println("****************");
+
+
         consultaPokemonFavoritado(pokemon);
         consultaPokemonCapturado(pokemon);
 
@@ -107,6 +130,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()) {
                     inserirPokemonFavorito(pokemon);
+                    inserirPokemonFavoritoFirebase(pokemon);
                 } else {
                     deletarPokemonFavorito(pokemon);
                 }
@@ -117,8 +141,11 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()) {
                     inserirPokemonCapturado(pokemon);
+
+
                 } else {
                     deletarPokemonCapturado(pokemon);
+
                 }
             }
         });
@@ -174,6 +201,34 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
 
     }
+
+    private void inserirPokemonFavoritoFirebase(Pokemon pokemon) {
+
+        Map<String, Object> pokemonsDb = new HashMap<>();
+        pokemonsDb.put("nome", pokemon.getName());
+        pokemonsDb.put("urlImagem", pokemon.getUrl());
+
+        db.collection("users")
+                .document(Objects.requireNonNull(user.getDisplayName()))
+                .collection("Favoritos")
+                .add(pokemonsDb)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
+
+
+
 
     private void deletarPokemonFavorito(Pokemon pokemon) {
         Completable.fromAction(() -> favoritosDb.favoritosDao().deleteByName(pokemon.getName()))
