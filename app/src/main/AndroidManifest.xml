@@ -16,7 +16,7 @@
         </activity>
         <activity android:name=".view.DetalhesPokemonActivity" />
         <activity android:name=".view.EditarPerfilActivity" />
-        <activity android:name=".view.RegioesInformacoesActivity" />
+        <activity android:name=".modules.regiaoinformacao.view.RegioesInformacoesActivity" />
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.CadastroActivity" />
         <activity android:name=".view.EsqueciASenha" />

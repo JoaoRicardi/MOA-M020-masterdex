@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/color_background_drawable"
-    tools:context=".view.RegioesInformacoesActivity">
+    tools:context=".modules.regiaoinformacao.view.RegioesInformacoesActivity">
 
     <ImageView
         android:id="@+id/regioes_info_back_button"
@@ -62,37 +62,29 @@
         app:layout_constraintTop_toTopOf="@+id/frameLayout" />
 
 
-    <ScrollView
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/regiao_view_pager_id"
+        android:layout_width="392dp"
+        android:layout_height="234dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/regioes_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+        android:background="@color/branco"
+        app:layout_constraintBottom_toTopOf="@+id/regiao_view_pager_id"
         app:layout_constraintEnd_toEndOf="@+id/frameLayout"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/frameLayout"
-        app:layout_constraintTop_toBottomOf="@+id/foto_informacoes_image_view"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foto_informacoes_image_view">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    </com.google.android.material.tabs.TabLayout>
 
-            <TextView
-                android:id="@+id/texto_informacoes_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="75dp"
-                android:padding="8dp"
-                android:text="TextView"
-                android:textColor="@color/Preto" />
-        </LinearLayout>
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

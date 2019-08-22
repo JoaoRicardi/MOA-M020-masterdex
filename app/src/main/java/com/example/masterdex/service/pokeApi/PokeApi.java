@@ -2,6 +2,8 @@ package com.example.masterdex.service.pokeApi;
 
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.models.PokemonResponse;
+import com.example.masterdex.models.Regiao;
+import com.example.masterdex.models.RegiaoResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -16,4 +18,8 @@ public interface PokeApi {
 
         @GET("pokemon/{pokemonNome}")
         Observable<Pokemon> getPokemonByName (@Path("pokemonNome") String pokemonNome);
+
+        @GET("region")
+        Observable<RegiaoResponse> getPokemonByRegion (@Query("limit") int limitRegiao,
+                                                       @Query("sort")  String sort);
 }

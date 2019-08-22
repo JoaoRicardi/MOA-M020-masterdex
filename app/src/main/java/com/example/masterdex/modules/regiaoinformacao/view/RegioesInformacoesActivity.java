@@ -1,15 +1,19 @@
-package com.example.masterdex.view;
+package com.example.masterdex.modules.regiaoinformacao.view;
 
 import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.masterdex.R;
+import com.example.masterdex.adapter.RegioesViewPagerAdapter;
 import com.example.masterdex.models.Regiao;
+import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
 public class RegioesInformacoesActivity extends AppCompatActivity {
@@ -37,7 +41,6 @@ public class RegioesInformacoesActivity extends AppCompatActivity {
 
         nomeRegiaoTextView.setText(regiao.getNomeRegiao());
 
-        descricaoRegiaoTextView.setText(regiao.getDescricaoRegiao());
         Picasso.get().load(regiao.getImagemRegiao()).into(imageView);
 
         botaoVoltar.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +49,12 @@ public class RegioesInformacoesActivity extends AppCompatActivity {
             voltarParaRegiao();
             }
         });
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.regiao_view_pager_id);
+        RegioesViewPagerAdapter myPagerAdapter = new RegioesViewPagerAdapter(getSupportFragmentManager(), regiao);
+        viewPager.setAdapter(myPagerAdapter);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.regioes_tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
 
 
     }

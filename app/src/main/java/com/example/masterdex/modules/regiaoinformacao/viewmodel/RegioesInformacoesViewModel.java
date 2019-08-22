@@ -1,4 +1,4 @@
-package com.example.masterdex.viewmodel;
+package com.example.masterdex.modules.regiaoinformacao.viewmodel;
 
 import android.app.Application;
 

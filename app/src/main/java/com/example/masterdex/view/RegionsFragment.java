@@ -16,6 +16,7 @@ import com.example.masterdex.adapter.RegioesAdapter;
 
 import com.example.masterdex.interfaces.RegioesListener;
 import com.example.masterdex.models.Regiao;
+import com.example.masterdex.modules.regiaoinformacao.view.RegioesInformacoesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
