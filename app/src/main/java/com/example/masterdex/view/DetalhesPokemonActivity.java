@@ -2,6 +2,8 @@ package com.example.masterdex.view;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Intent;
@@ -18,17 +20,23 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.masterdex.R;
+import com.example.masterdex.adapter.AdapterHabilidades;
 import com.example.masterdex.database.CapturadosDao;
 import com.example.masterdex.database.CapturadosDb;
 import com.example.masterdex.database.FavoritosDao;
 import com.example.masterdex.database.FavoritosDb;
+import com.example.masterdex.models.Habilidade;
 import com.example.masterdex.models.Pokemon;
+import com.example.masterdex.models.SlotHabilidade;
 import com.example.masterdex.viewmodel.DetalhesPokemonViewModel;
 import com.google.android.material.card.MaterialCardView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItems;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -129,7 +137,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         ViewPagerItemAdapter adapter = new ViewPagerItemAdapter(ViewPagerItems.with(this)
                 .add("HABILIDADES", R.layout.fragment_habilidades)
                 .add("STATS", R.layout.fragment_stats)
-                .add("EVOLUÇÕES", R.layout.fragment_evolucoes)
+                .add("SOBRE", R.layout.fragment_evolucoes)
                 .create());
 
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -140,9 +148,18 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
         setupHabilidadesTab(pokemonApi, adapter.getPage(0));
         setupStatsTab(pokemonApi, adapter.getPage(1));
+
     }
 
     private void setupHabilidadesTab(Pokemon pokemonApi, View view) {
+
+        List<SlotHabilidade> habilidadeList = pokemonApi.getMoves();
+
+        RecyclerView habilidadesRecycler = findViewById(R.id.habilidades_recycler_view);
+        AdapterHabilidades adapterHabilidades = new AdapterHabilidades(habilidadeList, pokemonApi);
+
+        habilidadesRecycler.setAdapter(adapterHabilidades);
+        habilidadesRecycler.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void setupStatsTab(Pokemon pokemonApi, View view) {
