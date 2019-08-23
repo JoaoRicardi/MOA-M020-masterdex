@@ -7,6 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".view.PokemonsFragment">
 
+    <pl.droidsonroids.gif.GifImageButton
+        android:id="@+id/gif"
+        android:layout_width="231dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/poke"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.851"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/poke" />
+
+
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="wrap_content"

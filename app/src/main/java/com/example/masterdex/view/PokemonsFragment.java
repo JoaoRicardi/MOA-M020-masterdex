@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.masterdex.R;
+import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.viewmodel.PokemonViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -26,8 +27,14 @@ import android.widget.SearchView;
 import com.example.masterdex.adapter.AdapterPokemon;
 import com.example.masterdex.interfaces.PokemonListener;
 import com.example.masterdex.models.Pokemon;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
+
+import pl.droidsonroids.gif.GifImageButton;
 
 
 public class PokemonsFragment extends Fragment implements PokemonListener, SwipeRefreshLayout.OnRefreshListener {
@@ -45,6 +52,12 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     private ImageView numeroButton;
     private Context Context;
     private Boolean ascending = true;
+    private FirebaseStorage storage;
+    private FirebaseFirestore db;
+    private FirebaseUser user;
+    private FavoritosDb favoritosDb;
+
+    private GifImageButton gifImageButton;
 
     public PokemonsFragment() {
         // Required empty public constructor
@@ -55,6 +68,20 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String name = user.getDisplayName();
+        }
+
+        gifImageButton =view.findViewById(R.id.gif);
+        gifImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),QuizActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
 
