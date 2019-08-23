@@ -19,7 +19,8 @@ public interface PokeApi {
         @GET("pokemon/{pokemonNome}")
         Observable<Pokemon> getPokemonByName (@Path("pokemonNome") String pokemonNome);
 
-        @GET("region")
-        Observable<RegiaoResponse> getPokemonByRegion (@Query("limit") int limitRegiao,
+        @GET("pokedex/{regiaoNome}")
+        Observable<RegiaoResponse> getPokemonByRegion (@Path("regiaoNome") String regiaoNome,
+                                                       @Query("limit") int limitRegiao,
                                                        @Query("sort")  String sort);
 }

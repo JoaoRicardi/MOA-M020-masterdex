@@ -1,22 +1,28 @@
 package com.example.masterdex.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class RegiaoPokemon {
 
-    private String entry_number;
-    private String nome;
+    @SerializedName("entry_number")
+    private int entryNumber;
 
-    public String getNome() {
-        return nome;
+    @SerializedName("pokemon_species")
+    private Pokemon pokemon;
+
+    public int getEntryNumber() {
+        return entryNumber;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public String getEntry_number() {
-        return entry_number;
+    public void setEntryNumber(int entryNumber) {
+        this.entryNumber = entryNumber;
     }
 
-    public void setEntry_number(String entry_number) {
-        this.entry_number = entry_number;
+    public Pokemon getPokemon() {
+        return pokemon;
+    }
+
+    public void setPokemon(Pokemon pokemon) {
+        this.pokemon = pokemon;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.masterdex.adapter;
 
+import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -24,10 +26,17 @@ public class RegioesViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        // logica bundle
+        RegioesPokemonFragment pokeFrag = new RegioesPokemonFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("REGIAO", regiao.getNomeRegiao());
+
+        pokeFrag.setArguments(bundle);
+
         switch (position){
             case 0: return new DetalhesRegioesFragment(regiao);
             case 1: return new CidadesRegioesFragment();
-            case 2: return new RegioesPokemonFragment();
+            case 2: return pokeFrag;
         }
 
         return null;

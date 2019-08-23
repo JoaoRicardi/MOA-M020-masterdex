@@ -6,7 +6,7 @@
     tools:context=".modules.regiaoinformacao.view.RegioesPokemonFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/games_reycler_view_id"
+        android:id="@+id/regioes_pokemon_reycler_view_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"

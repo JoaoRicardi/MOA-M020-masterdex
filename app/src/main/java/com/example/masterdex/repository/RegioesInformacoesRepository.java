@@ -13,11 +13,9 @@ public class RegioesInformacoesRepository {
 
     private RetrofitService retrofitService = new RetrofitService();
 
-    private static final String SORT = "id:asc";
-
-    public Observable<List<RegiaoPokemon>> getPokemonRegionList(int limit){
+    public Observable<List<RegiaoPokemon>> getPokemonRegionList(String nomeRegiao, int limit, String sort){
         return retrofitService.getPokeApi()
-                .getPokemonByRegion(10,  SORT)
-                .map(regiaoResponse -> regiaoResponse.getRegionPokemonResults());
+                .getPokemonByRegion(nomeRegiao, limit, sort)
+                .map(regiaoResponse -> regiaoResponse.getPokemonEntries());
     }
 }

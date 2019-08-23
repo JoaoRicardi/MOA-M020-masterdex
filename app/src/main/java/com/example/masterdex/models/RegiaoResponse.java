@@ -1,16 +1,19 @@
 package com.example.masterdex.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class RegiaoResponse {
 
-    private List<RegiaoPokemon> regionPokemonResults;
+    @SerializedName("pokemon_entries")
+    private List<RegiaoPokemon> pokemonEntries;
 
-    public List<RegiaoPokemon> getRegionPokemonResults() {
-        return regionPokemonResults;
+    public List<RegiaoPokemon> getPokemonEntries() {
+        return pokemonEntries;
     }
 
-    public void setRegionPokemonResults(List<RegiaoPokemon> regionPokemonResults) {
-        this.regionPokemonResults = regionPokemonResults;
+    public void setPokemonEntries(List<RegiaoPokemon> pokemonEntries) {
+        this.pokemonEntries = pokemonEntries;
     }
 }
