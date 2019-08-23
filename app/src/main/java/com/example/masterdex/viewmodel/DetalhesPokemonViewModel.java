@@ -27,7 +27,12 @@ public class DetalhesPokemonViewModel extends AndroidViewModel {
 
 
     private MutableLiveData<Pokemon> pokemonLiveData = new MutableLiveData<>();
+    private MutableLiveData<Pokemon> pokemonDetailLiveData = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
+
+    public MutableLiveData<Pokemon> getPokemonDetailLiveData() {
+        return pokemonDetailLiveData;
+    }
 
     public MutableLiveData<Pokemon> getPokemonLiveData() {
         return pokemonLiveData;
@@ -56,7 +61,8 @@ public class DetalhesPokemonViewModel extends AndroidViewModel {
                 pokemonRepository.getPokemonSpecieByName(name)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.newThread())
-                        .subscribe(pokemon -> pokemonLiveData.setValue(pokemon))
+                        .subscribe(pokemon -> pokemonLiveData.setValue(pokemon),
+                                throwable -> throwable.printStackTrace())
         );
     }
 

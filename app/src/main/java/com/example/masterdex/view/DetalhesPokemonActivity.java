@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     private ImageView tipoUnicoImageView;
     private ImageView tipoPrimarioImageView;
     private ImageView tipoSecundarioImageView;
+    private ViewPagerItemAdapter adapter;
 
 
     @Override
@@ -102,6 +104,11 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                     setupViewPager(pokemonApi);
                     switchImageTypePokemon(pokemonApi);
                 });
+
+        DetalhesPokemonViewModel detalhesPokemonViewModelFlavorText = ViewModelProviders.of(this).get(DetalhesPokemonViewModel.class);
+        detalhesPokemonViewModel.getPokemonSpecieByName(pokemon.getName());
+        detalhesPokemonViewModelFlavorText.getPokemonDetailLiveData()
+                .observe(this, pokemonSpecie -> setupSobreTab(pokemonSpecie) );
 
         String pok = pokemon.getName();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
@@ -340,7 +347,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(Pokemon pokemonApi) {
-        ViewPagerItemAdapter adapter = new ViewPagerItemAdapter(ViewPagerItems.with(this)
+        adapter = new ViewPagerItemAdapter(ViewPagerItems.with(this)
                 .add("HABILIDADES", R.layout.fragment_habilidades)
                 .add("STATS", R.layout.fragment_stats)
                 .add("SOBRE", R.layout.fragment_evolucoes)
@@ -354,13 +361,26 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
         setupHabilidadesTab(pokemonApi, adapter.getPage(0));
         setupStatsTab(pokemonApi, adapter.getPage(1));
-        setupSobreTab(pokemonApi, adapter.getPage(2));
+
+//        DetalhesPokemonViewModel detalhesPokemonViewModelFlavorText = ViewModelProviders.of(this).get(DetalhesPokemonViewModel.class);
+//       detalhesPokemonViewModelFlavorText.getPokemonSpecieByName(pokemonApi.getName());
+//        detalhesPokemonViewModelFlavorText.getPokemonDetailLiveData()
+//                .observe(this, pokemonSpecie -> setupSobreTab(pokemonApi, adapter.getPage(2)));
 
     }
 
-    private void setupSobreTab(Pokemon pokemonApi, View view) {
+    private void setupSobreTab(Pokemon pokemonApi) {
+
+        View page = adapter.getPage(2);
+            TextView flavorTextTextView =  page.findViewById(R.id.flavor_text_text_view);
+            if(flavorTextTextView != null){
+                flavorTextTextView.setText("" + pokemonApi.getFlavorTextEntries().get(9).getFlavorText());
+            }
+
+    }
+    private void setupSobreTabLiveData(Pokemon pokemonApi) {
         TextView flavorTextTextView = findViewById(R.id.flavor_text_text_view);
-        //flavorTextTextView.setText("" + pokemonApi.getFlavorTextEntries().get(9).getFlavorText());
+        flavorTextTextView.setText("" + pokemonApi.getFlavorTextEntries().get(9).getFlavorText());
     }
 
     private void setupHabilidadesTab(Pokemon pokemonApi, View view) {
