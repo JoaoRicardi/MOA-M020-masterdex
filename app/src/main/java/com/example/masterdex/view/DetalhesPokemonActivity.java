@@ -105,10 +105,10 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                     switchImageTypePokemon(pokemonApi);
                 });
 
-        DetalhesPokemonViewModel detalhesPokemonViewModelFlavorText = ViewModelProviders.of(this).get(DetalhesPokemonViewModel.class);
-        detalhesPokemonViewModel.getPokemonSpecieByName(pokemon.getName());
-        detalhesPokemonViewModelFlavorText.getPokemonDetailLiveData()
-                .observe(this, pokemonSpecie -> setupSobreTab(pokemonSpecie) );
+//        DetalhesPokemonViewModel detalhesPokemonViewModelFlavorText = ViewModelProviders.of(this).get(DetalhesPokemonViewModel.class);
+//        detalhesPokemonViewModel.getPokemonSpecieByName(pokemon.getName());
+//        detalhesPokemonViewModelFlavorText.getPokemonDetailLiveData()
+//                .observe(this, pokemonSpecie -> setupSobreTab(pokemonSpecie) );
 
         String pok = pokemon.getName();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
