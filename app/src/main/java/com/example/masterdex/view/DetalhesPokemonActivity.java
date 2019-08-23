@@ -1,7 +1,10 @@
 package com.example.masterdex.view;
 
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Intent;
@@ -15,36 +18,27 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.masterdex.R;
+import com.example.masterdex.adapter.AdapterHabilidades;
 import com.example.masterdex.database.CapturadosDao;
 import com.example.masterdex.database.CapturadosDb;
 import com.example.masterdex.database.FavoritosDao;
 import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.models.Pokemon;
+import com.example.masterdex.models.SlotHabilidade;
 import com.example.masterdex.viewmodel.DetalhesPokemonViewModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItems;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -52,28 +46,21 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
     public static final String FAVORITOS_DB = "favoritos_Db";
     public static final String CAPTURADOS_DB = "capturados_Db";
-    private static final String TAG = "DetalhesPokemonActivity";
 
     private ToggleButton botaoFavorito;
     private ToggleButton botaoCapturado;
     private FavoritosDb favoritosDb;
     private CapturadosDb capturadosDb;
     private ConstraintLayout backgroundPokemon;
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseUser user;
+    private ImageView tipoUnicoImageView;
+    private ImageView tipoPrimarioImageView;
+    private ImageView tipoSecundarioImageView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_pokemon);
-
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            String name = user.getDisplayName();
-            Toast.makeText(this, "\"Bem vindo \" + name", Toast.LENGTH_LONG).show();
-        }
 
         ImageView botaoVoltar = findViewById(R.id.detalhes_pokemon_voltar);
         botaoFavorito = findViewById(R.id.toggle_favorito_Button);
@@ -83,6 +70,9 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         ImageView tipoPokemon = findViewById(R.id.detalhes_pokemon_tipo1_image_view);
         TextView descricaoPokemon = findViewById(R.id.detalhes_pokemon_descricao_text_view);
         backgroundPokemon = findViewById(R.id.background_constraint_detalhe_pokemon);
+        tipoUnicoImageView = findViewById(R.id.detalhes_pokemon_tipo_unico_image_view);
+        tipoPrimarioImageView = findViewById(R.id.detalhes_pokemon_tipo1_image_view);
+        tipoSecundarioImageView = findViewById(R.id.detalhes_pokemon_tipo2_image_view);
 
 
         botaoVoltar.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +100,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 .observe(this, pokemonApi -> {
                     switchBackground(pokemonApi);
                     setupViewPager(pokemonApi);
+                    switchImageTypePokemon(pokemonApi);
                 });
 
         String pok = pokemon.getName();
@@ -120,8 +111,8 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         //como o proprio nome ja diz kkk
 
 
-
-
+        System.out.println(pokemon.getName());
+        System.out.println("****************");
         consultaPokemonFavoritado(pokemon);
         consultaPokemonCapturado(pokemon);
 
@@ -130,7 +121,6 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()) {
                     inserirPokemonFavorito(pokemon);
-                    inserirPokemonFavoritoFirebase(pokemon);
                 } else {
                     deletarPokemonFavorito(pokemon);
                 }
@@ -141,14 +131,211 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()) {
                     inserirPokemonCapturado(pokemon);
-
-
                 } else {
                     deletarPokemonCapturado(pokemon);
-
                 }
             }
         });
+
+    }
+
+    private void switchImageTypePokemon(Pokemon pokemon) {
+
+        if (pokemon.getTypes().size() == 1){
+            setarTipoUnico(pokemon);
+        } else {
+            setarTipoHibrido(pokemon);
+        }
+
+
+
+    }
+
+    private void setarTipoHibrido(Pokemon pokemon) {
+
+        String tipoPrimario = pokemon.getTypes().get(1).getType().getName();
+        String tipoSecundario = pokemon.getTypes().get(0).getType().getName();
+
+        switch (tipoPrimario) {
+            case "steel":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_steel));
+                break;
+            case "water":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_water));
+                break;
+            case "dragon":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_dragon));
+                break;
+            case "electric":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_elctr));
+                break;
+            case "fairy":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_fairy));
+                break;
+            case "ghost":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_ghost));
+                break;
+            case "fire":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_fire));
+                break;
+            case "ice":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_ice));
+                break;
+            case "grass":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_grass));
+                break;
+            case "bug":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_bug));
+                break;
+            case "fighting":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_fight));
+                break;
+            case "normal":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_normal));
+                break;
+            case "rock":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_rock));
+                break;
+            case "psychic":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_psychic));
+                break;
+            case "dark":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_dark));
+                break;
+            case "ground":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_ground));
+                break;
+            case "poison":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_poison));
+                break;
+            case "flying":
+                tipoPrimarioImageView.setBackground(getDrawable(R.drawable.ic_type_flying));
+                break;
+
+        }
+
+        switch (tipoSecundario) {
+            case "steel":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_steel));
+                break;
+            case "water":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_water));
+                break;
+            case "dragon":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_dragon));
+                break;
+            case "electric":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_elctr));
+                break;
+            case "fairy":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_fairy));
+                break;
+            case "ghost":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_ghost));
+                break;
+            case "fire":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_fire));
+                break;
+            case "ice":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_ice));
+                break;
+            case "grass":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_grass));
+                break;
+            case "bug":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_bug));
+                break;
+            case "fighting":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_fight));
+                break;
+            case "normal":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_normal));
+                break;
+            case "rock":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_rock));
+                break;
+            case "psychic":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_psychic));
+                break;
+            case "dark":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_dark));
+                break;
+            case "ground":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_ground));
+                break;
+            case "poison":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_poison));
+                break;
+            case "flying":
+                tipoSecundarioImageView.setBackground(getDrawable(R.drawable.ic_type_flying));
+                break;
+
+        }
+
+    }
+
+    private void setarTipoUnico(Pokemon pokemon) {
+
+        String tipo = pokemon.getTypes().get(0).getType().getName();
+        switch (tipo) {
+            case "steel":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_steel));
+                break;
+            case "water":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_water));
+                break;
+            case "dragon":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_dragon));
+                break;
+            case "electric":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_elctr));
+                break;
+            case "fairy":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_fairy));
+                break;
+            case "ghost":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_ghost));
+                break;
+            case "fire":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_fire));
+                break;
+            case "ice":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_ice));
+                break;
+            case "grass":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_grass));
+                break;
+            case "bug":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_bug));
+                break;
+            case "fighting":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_fight));
+                break;
+            case "normal":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_normal));
+                break;
+            case "rock":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_rock));
+                break;
+            case "psychic":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_psychic));
+                break;
+            case "dark":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_dark));
+                break;
+            case "ground":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_ground));
+                break;
+            case "poison":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_poison));
+                break;
+            case "flying":
+                tipoUnicoImageView.setBackground(getDrawable(R.drawable.ic_type_flying));
+                break;
+
+        }
+
+
 
     }
 
@@ -156,7 +343,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         ViewPagerItemAdapter adapter = new ViewPagerItemAdapter(ViewPagerItems.with(this)
                 .add("HABILIDADES", R.layout.fragment_habilidades)
                 .add("STATS", R.layout.fragment_stats)
-                .add("EVOLUÇÕES", R.layout.fragment_evolucoes)
+                .add("SOBRE", R.layout.fragment_evolucoes)
                 .create());
 
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -167,9 +354,28 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
         setupHabilidadesTab(pokemonApi, adapter.getPage(0));
         setupStatsTab(pokemonApi, adapter.getPage(1));
+        setupSobreTab(pokemonApi, adapter.getPage(2));
+
+    }
+
+    private void setupSobreTab(Pokemon pokemonApi, View view) {
+        TextView flavorTextTextView = findViewById(R.id.flavor_text_text_view);
+        //flavorTextTextView.setText("" + pokemonApi.getFlavorTextEntries().get(9).getFlavorText());
     }
 
     private void setupHabilidadesTab(Pokemon pokemonApi, View view) {
+
+        List<SlotHabilidade> habilidadeList = pokemonApi.getMoves();
+
+        RecyclerView habilidadesRecycler = view.findViewById(R.id.habilidades_recycler_view);
+        AdapterHabilidades adapterHabilidades = new AdapterHabilidades(habilidadeList, pokemonApi);
+
+        habilidadesRecycler.setAdapter(adapterHabilidades);
+        habilidadesRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+//        if (pokemonApi.getTypes().get(0).getType().getName().equals("fire")){
+//            habilidadeNome.setTextColor(getResources().getColor(R.color.fogo));
+//        }
     }
 
     private void setupStatsTab(Pokemon pokemonApi, View view) {
@@ -201,34 +407,6 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
 
     }
-
-    private void inserirPokemonFavoritoFirebase(Pokemon pokemon) {
-
-        Map<String, Object> pokemonsDb = new HashMap<>();
-        pokemonsDb.put("nome", pokemon.getName());
-        pokemonsDb.put("urlImagem", pokemon.getUrl());
-
-        db.collection("users")
-                .document(Objects.requireNonNull(user.getDisplayName()))
-                .collection("Favoritos")
-                .add(pokemonsDb)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
-    }
-
-
-
-
 
     private void deletarPokemonFavorito(Pokemon pokemon) {
         Completable.fromAction(() -> favoritosDb.favoritosDao().deleteByName(pokemon.getName()))

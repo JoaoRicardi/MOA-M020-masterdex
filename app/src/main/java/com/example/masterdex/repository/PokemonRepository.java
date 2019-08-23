@@ -26,4 +26,10 @@ public class PokemonRepository {
         return retrofitService.getPokeApi()
                 .getPokemonByName(name);
     }
+
+    public Observable<Pokemon> getPokemonSpecieByName(String name) {
+        return retrofitService.getPokeApi()
+                .getPokemonSpecieByName(name);
+    }
+
 }
