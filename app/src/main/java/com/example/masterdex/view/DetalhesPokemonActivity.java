@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +17,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -55,6 +60,8 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     private ImageView tipoUnicoImageView;
     private ImageView tipoPrimarioImageView;
     private ImageView tipoSecundarioImageView;
+    private Switch switchShine;
+    private Switch switchBack;
 
 
     @Override
@@ -74,6 +81,57 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         tipoPrimarioImageView = findViewById(R.id.detalhes_pokemon_tipo1_image_view);
         tipoSecundarioImageView = findViewById(R.id.detalhes_pokemon_tipo2_image_view);
 
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
+
+        DetalhesPokemonViewModel detalhesPokemonViewModel = ViewModelProviders.of(this).get(DetalhesPokemonViewModel.class);
+        detalhesPokemonViewModel.getPokemonByName(pokemon.getName());
+
+        switchShine = findViewById(R.id.switch_shine_id);
+
+        switchShine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (switchShine.isChecked() && switchBack.isChecked()){
+
+                    Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/" + pokemon.getNumber() + ".png").into(imagemPokemon);
+
+                }
+                else if (switchShine.isChecked()){
+
+                    Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" + pokemon.getNumber() + ".png").into(imagemPokemon);
+
+                }else if (switchBack.isChecked()){
+                    Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/" + pokemon.getNumber() + ".png").into(imagemPokemon);
+
+                }
+                else Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png").into(imagemPokemon);
+            }
+        });
+
+        switchBack = findViewById(R.id.switch_back_id);
+
+        switchBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (switchBack.isChecked() && switchShine.isChecked()){
+
+                    Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/" + pokemon.getNumber() + ".png").into(imagemPokemon);
+
+                }else if (switchBack.isChecked()) {
+                    Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/" + pokemon.getNumber() + ".png").into(imagemPokemon);
+
+                }else if (switchShine.isChecked()){
+                    Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" + pokemon.getNumber() + ".png").into(imagemPokemon);
+                }
+                else
+                    Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png").into(imagemPokemon);
+            }
+        });
+
+
+
 
         botaoVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,14 +145,6 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
         capturadosDb = Room.databaseBuilder(this,
                 CapturadosDb.class, CAPTURADOS_DB).build();
-
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
-
-
-        DetalhesPokemonViewModel detalhesPokemonViewModel = ViewModelProviders.of(this).get(DetalhesPokemonViewModel.class);
-        detalhesPokemonViewModel.getPokemonByName(pokemon.getName());
 
         detalhesPokemonViewModel.getPokemonLiveData()
                 .observe(this, pokemonApi -> {
@@ -477,6 +527,25 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
     public void switchBackground(Pokemon pokemon) {
 
+        String acoColor = "#838282";
+        String aguaColor = "#719AEE";
+        String dragaoColor = "#441ECC";
+        String eletricoColor = "#FCDA2D";
+        String fadaColor = "#EBA2E2";
+        String fantasmaColor = "#270163";
+        String fogoColor = "#E97643";
+        String geloColor = "#77D2F5";
+        String gramaColor = "#73CF77";
+        String insetoColor = "#647736";
+        String lutadorColor = "#911616";
+        String normalColor = "#D6A795";
+        String pedraColor = "#614425";
+        String psiquicoColor = "#BB44E4";
+        String sombrioColor = "#1A1A2B";
+        String terraColor = "#8D684A";
+        String venenosoColor = "#631FB3";
+        String voadorColor = "#5B6DEC";
+
         Log.d("Status", " " + pokemon.getStats().get(0).getValorStats());
         Log.d("Tipo", pokemon.getTypes().get(0).getType().getName());
         int valorPosicao = 0;
@@ -490,58 +559,75 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         switch (tipo) {
             case "steel":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_aco));
+                changeStatusBarColor(acoColor);
                 break;
             case "water":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_agua));
+                changeStatusBarColor(aguaColor);
                 break;
             case "dragon":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_dragao));
+                changeStatusBarColor(dragaoColor);
                 break;
             case "electric":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_eletrico));
+                changeStatusBarColor(eletricoColor);
                 break;
             case "fairy":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fada));
+                changeStatusBarColor(fadaColor);
                 break;
             case "ghost":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fantasma));
+                changeStatusBarColor(fantasmaColor);
                 break;
             case "fire":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fogo));
+                changeStatusBarColor(fogoColor);
                 break;
             case "ice":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_gelo));
+                changeStatusBarColor(geloColor);
                 break;
             case "grass":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_grama));
+                changeStatusBarColor(gramaColor);
                 break;
             case "bug":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_inseto));
+                changeStatusBarColor(insetoColor);
                 break;
             case "fighting":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_lutador));
+                changeStatusBarColor(lutadorColor);
                 break;
             case "normal":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_normal));
+                changeStatusBarColor(normalColor);
                 break;
             case "rock":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_pedra));
+                changeStatusBarColor(pedraColor);
                 break;
             case "psychic":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_psiquico));
+                changeStatusBarColor(psiquicoColor);
                 break;
             case "dark":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_sombrio));
-                //botaoCapturado.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
+                changeStatusBarColor(sombrioColor);
                 break;
             case "ground":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_terra));
+                changeStatusBarColor(terraColor);
                 break;
             case "poison":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_venenoso));
+                changeStatusBarColor(venenosoColor);
                 break;
             case "flying":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_voador));
+                changeStatusBarColor(voadorColor);
                 break;
 
         }
@@ -851,7 +937,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 hpBackground.setBackground(getDrawable(R.color.sombrio));
 
                 totalStatsCard.setCardBackgroundColor(getResources().getColor(R.color.sombrio));
-                //botaoCapturado.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
+
                 break;
             case "ground":
                 speedCard.setStrokeColor(getColor(R.color.terra));
@@ -907,6 +993,17 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 totalStatsCard.setCardBackgroundColor(getResources().getColor(R.color.voador));
 
                 break;
+
+        }
+    }
+
+    private void changeStatusBarColor(String color){
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.parseColor(color));
+
 
         }
     }

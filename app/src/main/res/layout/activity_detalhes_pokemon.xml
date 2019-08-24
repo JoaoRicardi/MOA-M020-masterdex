@@ -141,10 +141,11 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detalhes_pokemon_descricao_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/detalhes_pokemon_tipo2_image_view"
         app:stl_clickable="true"
         app:stl_defaultTabBackground="?attr/selectableItemBackground"
         app:stl_defaultTabTextAllCaps="false"
@@ -192,5 +193,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </androidx.viewpager.widget.ViewPager>
+
+    <Switch
+        android:id="@+id/switch_shine_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Shiny"
+        android:textColor="@color/branco"
+        app:layout_constraintBottom_toTopOf="@+id/detalhes_pokemon_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detalhes_pokemon_voltar" />
+
+    <Switch
+        android:id="@+id/switch_back_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Back"
+        android:textColor="@color/branco"
+        app:layout_constraintBottom_toTopOf="@+id/detalhes_pokemon_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggle_capturado_Button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
