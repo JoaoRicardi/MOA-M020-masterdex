@@ -43,20 +43,20 @@ public class RegioesPokemonFragment extends Fragment {
         regiaoPokemonRecyclerView.setAdapter(pokemonRegiaoAdapter);
         regiaoPokemonRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        Bundle bundle = getArguments();
+//        Bundle bundle = getArguments();
 
-        RegioesPokemonViewModel regioesPokemonViewModel = ViewModelProviders.of(this).get(RegioesPokemonViewModel.class);
+ //       RegioesPokemonViewModel regioesPokemonViewModel = ViewModelProviders.of(this).get(RegioesPokemonViewModel.class);
 
-        String nomeRegiao = bundle.getString("REGIAO");
+//        String nomeRegiao = bundle.getString("REGIAO");
 
-        regioesPokemonViewModel.atualizarPokemon(nomeRegiao.toLowerCase(),LIMIT, SORT);
+ //       regioesPokemonViewModel.atualizarPokemon(nomeRegiao.toLowerCase(),LIMIT, SORT);
 
-        regioesPokemonViewModel.getRegiaoPokemonLiveData()
-                .observe(this, regiaoPokemonsList -> {
+//        regioesPokemonViewModel.getRegiaoPokemonLiveData()
+ //               .observe(this, regiaoPokemonsList -> {
 
 
 
-                });
+ //               });
 
         return view;
     }
