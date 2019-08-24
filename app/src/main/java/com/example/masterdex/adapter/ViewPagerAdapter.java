@@ -40,6 +40,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
         fragmentList.add(fragment);
         FragmentListTitles.add(Tittle);
+        notifyDataSetChanged();
 
     }
 }

@@ -36,6 +36,7 @@ import com.ogaclejapan.smarttablayout.utils.ViewPagerItems;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -90,11 +91,12 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        assert bundle != null;
         Pokemon pokemon = (Pokemon) bundle.getSerializable("POKEMON");
 
 
         DetalhesPokemonViewModel detalhesPokemonViewModel = ViewModelProviders.of(this).get(DetalhesPokemonViewModel.class);
-        detalhesPokemonViewModel.getPokemonByName(pokemon.getName());
+        detalhesPokemonViewModel.getPokemonByName(Objects.requireNonNull(pokemon).getName());
 
         detalhesPokemonViewModel.getPokemonLiveData()
                 .observe(this, pokemonApi -> {

@@ -27,6 +27,7 @@ public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPo
         this.pokemonFilteredList = pokemonFilteredList;
 
         this.pokemonFilteredList = new ArrayList<>(pokemondListFull);
+        notifyDataSetChanged();
     }
 
 

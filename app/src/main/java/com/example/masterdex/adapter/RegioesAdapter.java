@@ -24,6 +24,7 @@ public class RegioesAdapter extends RecyclerView.Adapter<RegioesAdapter.ViewHold
     public RegioesAdapter(List<Regiao> listaRegioes, RegioesListener regioesListener) {
         this.listaRegioes = listaRegioes;
         this.regioesListener = regioesListener;
+        notifyDataSetChanged();
     }
 
     @NonNull

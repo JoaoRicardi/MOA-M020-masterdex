@@ -36,5 +36,6 @@ public class PerfilViewPagerAdapter extends FragmentPagerAdapter {
     public void AddFragment(Fragment fragment, String tittle){
         fragmentList.add(fragment);
         titleList.add(tittle);
+        notifyDataSetChanged();
     }
 }
