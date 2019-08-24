@@ -37,9 +37,10 @@ public class AdapterPokemon extends RecyclerView.Adapter<AdapterPokemon.ViewHold
         this.filteredList = new ArrayList<>(pokemonsListFull);
     }
 
+    @androidx.annotation.NonNull
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@androidx.annotation.NonNull @NonNull ViewGroup viewGroup, int i) {
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_celula, viewGroup, false);// fazendo a conversao de um xlm para uma view
 
@@ -47,7 +48,7 @@ public class AdapterPokemon extends RecyclerView.Adapter<AdapterPokemon.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@androidx.annotation.NonNull @NonNull ViewHolder viewHolder, int position) {
 
         final Pokemon pokemon = filteredList.get(position);
 

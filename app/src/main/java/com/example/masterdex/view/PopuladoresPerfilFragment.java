@@ -35,28 +35,22 @@ public class PopuladoresPerfilFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_populares_perfil,container,false);
 
-        ArrayList<Pokemon> pokemonPopularesList = new ArrayList<>();
+
 
         popularesRecyclerView = view.findViewById(R.id.populares_perfil_recyclerview_id);
 
-        popularesAdapter = new AdapterPerfilPopulares(pokemonPopularesList);
+
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),3);
         popularesRecyclerView.setLayoutManager(layoutManager);
         popularesRecyclerView.setAdapter(popularesAdapter);
 
-        atualizarPopulares();
+
 
 
 
         return view;
     }
 
-    private void atualizarPopulares() {
 
-        PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
-        pokemonViewModel.atualizarPokemon(LIMIT, offset);
-        pokemonViewModel.getPokemonLiveData()
-                .observe(this, pokemon -> popularesAdapter.atualizarPopularesPerfil(pokemon));
-    }
 }

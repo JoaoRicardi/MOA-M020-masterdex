@@ -12,18 +12,18 @@ import com.example.masterdex.models.Pokemon;
 @Database(entities = Pokemon.class, version = 1)
 public abstract class FavoritosDb extends RoomDatabase {
 
-    private static FavoritosDb database;
+    private static FavoritosDb favoritosDb;
 
 
     public abstract FavoritosDao favoritosDao();
 
     public static FavoritosDb getInstance(Context context) {
-        if (database == null) {
-            database = Room.databaseBuilder(context.getApplicationContext(), FavoritosDb.class, "Favoritos_Db")
+        if (favoritosDb == null) {
+            favoritosDb = Room.databaseBuilder(context.getApplicationContext(), FavoritosDb.class, "Favoritos_Db")
                     .fallbackToDestructiveMigration()
                     .build();
         }
-        return database;
+        return favoritosDb;
     }
 
 

@@ -3,12 +3,11 @@ package com.example.masterdex.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.masterdex.R;
@@ -18,16 +17,16 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilFavoritos.ViewHolder> implements Filterable {
+public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilFavoritos.ViewHolder> {
 
-    private List<Pokemon> pokemonFilteredList;
-    private List<Pokemon> pokemondListFull;
 
-    public AdapterPerfilFavoritos(List<Pokemon> pokemondListFull) {
+    private List<Pokemon> faboritos;
 
-        this.pokemonFilteredList = pokemonFilteredList;
 
-        this.pokemonFilteredList = new ArrayList<>(pokemondListFull);
+    public AdapterPerfilFavoritos(List<Pokemon> favoritos, FragmentActivity activity) {
+
+        this.faboritos = new ArrayList<>(favoritos);
+        notifyDataSetChanged();
     }
 
 
@@ -35,14 +34,16 @@ public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilFa
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_celula,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_celula_favoritos, viewGroup, false);
+
+
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
-        final Pokemon pokemon = pokemonFilteredList.get(position);
+        final Pokemon pokemon = faboritos.get(position);
 
         String pok = pokemon.getName();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
@@ -50,72 +51,30 @@ public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilFa
         viewHolder.textNomePokemon.setText(pok);
 
 
-        Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.getNumber()+".png")
+        Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png")
                 .into(viewHolder.imageFotoPokemon);
+
     }
 
     @Override
     public int getItemCount() {
-        return pokemonFilteredList.size();
+        return faboritos.size();
     }
 
-    @Override
-    public Filter getFilter() {
-        return pokemonFilter;
-    }
-
-    private Filter pokemonFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Pokemon> filteredList = new ArrayList<>();
-
-            if (constraint == null || constraint.length() == 0) {
-
-                filteredList.addAll(pokemondListFull);
-
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-
-                for (Pokemon pokemon : pokemondListFull) {
-                    if (pokemon.getName().toLowerCase().contains(filterPattern)) {
-                        filteredList.add(pokemon);
-                    }
-                }
-            }
-
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            pokemonFilteredList.clear();
-            pokemonFilteredList.addAll((List) results.values);
-            notifyDataSetChanged();
-
-        }
-    };
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textNomePokemon;
         private ImageView imageFotoPokemon;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textNomePokemon = itemView.findViewById(R.id.textNomePokemon);
-            imageFotoPokemon = itemView.findViewById(R.id.imageFotoPokemon);
+            textNomePokemon = itemView.findViewById(R.id.nomePokemonFav);
+            imageFotoPokemon = itemView.findViewById(R.id.fotoPokemonFav);
 
         }
     }
 
-    public void atualizarFavoritosPerfil(List<Pokemon> favoritosListPokemon){
-        pokemondListFull = favoritosListPokemon;
-        pokemonFilteredList.addAll(pokemondListFull);
-        notifyDataSetChanged();
-    }
+
 }

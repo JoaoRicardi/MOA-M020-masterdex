@@ -50,4 +50,15 @@ public class DetalhesPokemonViewModel extends AndroidViewModel {
           .subscribe(pokemon -> pokemonLiveData.setValue(pokemon))
         );
     }
+
+    public void getPokemonSpecieByName(String name) {
+        disposable.add(
+                pokemonRepository.getPokemonSpecieByName(name)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe(pokemon -> pokemonLiveData.setValue(pokemon))
+        );
+    }
+
+
 }

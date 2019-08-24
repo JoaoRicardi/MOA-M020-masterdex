@@ -63,10 +63,12 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
         viewPagerPerfil = view.findViewById(R.id.viewpager_perfil_id);
 
         PerfilViewPagerAdapter perfilViewPagerAdapter = new PerfilViewPagerAdapter(getChildFragmentManager());
-        perfilViewPagerAdapter.AddFragment(new CapturadosPerfilFragment(),"Capturados");
-        perfilViewPagerAdapter.AddFragment(new FavoritosPerfilFragment(),"Favoritos");
-        perfilViewPagerAdapter.AddFragment(new PopuladoresPerfilFragment(),"Populares");
 
+        perfilViewPagerAdapter.AddFragment(new FavoritosPerfilFragment(),"Favoritos");
+
+        perfilViewPagerAdapter.AddFragment(new CapturadosPerfilFragment(),"Capturados");
+
+        perfilViewPagerAdapter.AddFragment(new PopuladoresPerfilFragment(),"Populares");
         viewPagerPerfil.setAdapter(perfilViewPagerAdapter);
         tabLayoutPerfil.setupWithViewPager(viewPagerPerfil);
 
