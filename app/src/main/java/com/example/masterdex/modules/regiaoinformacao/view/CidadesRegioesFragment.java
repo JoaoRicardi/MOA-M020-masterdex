@@ -56,6 +56,7 @@ public class CidadesRegioesFragment extends Fragment {
         recyclerView.setAdapter(localidadesAdapter);
 
         recyclerView.setLayoutManager(layoutManager);
+
         return view;
     }
 

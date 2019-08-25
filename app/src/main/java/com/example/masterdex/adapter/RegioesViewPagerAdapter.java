@@ -35,7 +35,7 @@ public class RegioesViewPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position){
             case 0: return new DetalhesRegioesFragment(regiao);
-            case 1: return new CidadesRegioesFragment();
+            case 1: return new CidadesRegioesFragment(regiao);
             case 2: return new RegioesPokemonFragment();
         }
 

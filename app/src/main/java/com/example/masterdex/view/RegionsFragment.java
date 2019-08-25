@@ -145,9 +145,9 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         Johto.getCidadeList().add(cidade5_johto);
         Johto.getCidadeList().add(cidade6_johto);
         Johto.getCidadeList().add(cidade7_johto);
-        Johto.getCidadeList().add(cidade10_johto);
         Johto.getCidadeList().add(cidade8_johto);
         Johto.getCidadeList().add(cidade9_johto);
+        Johto.getCidadeList().add(cidade10_johto);
 
         listaRegioes.add(Johto);
 
@@ -156,9 +156,67 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         Hoenn.setDescricaoRegiao(getString(R.string.regiao_info_hoenn));
 
         Cidade cidade1_hoenn = new Cidade();
-        cidade1_hoenn.setNome("New Bark Town");
+        cidade1_hoenn.setNome("Littleroot Town");
+
+        Cidade cidade2_hoenn = new Cidade();
+        cidade2_hoenn.setNome("Petalburg City");
+
+        Cidade cidade3_hoenn = new Cidade();
+        cidade3_hoenn.setNome("Rustboro City");
+
+        Cidade cidade4_hoenn = new Cidade();
+        cidade4_hoenn.setNome("Dewford Town");
+
+        Cidade cidade5_hoenn = new Cidade();
+        cidade5_hoenn.setNome("Slateport City;");
+
+        Cidade cidade6_hoenn = new Cidade();
+        cidade6_hoenn.setNome("Mauville City");
+
+        Cidade cidade7_hoenn = new Cidade();
+        cidade7_hoenn.setNome("Vendanturf Town");
+
+        Cidade cidade8_hoenn = new Cidade();
+        cidade8_hoenn.setNome("Lavaridge Town");
+
+        Cidade cidade9_hoenn = new Cidade();
+        cidade9_hoenn.setNome("Fortree City");
+
+        Cidade cidade10_hoenn = new Cidade();
+        cidade10_hoenn.setNome("Lilycove City");
+
+        Cidade cidade11_hoenn = new Cidade();
+        cidade11_hoenn.setNome("Mossdeep City");
+
+        Cidade cidade12_hoenn = new Cidade();
+        cidade12_hoenn.setNome("Sootopolis City");
+
+        Cidade cidade13_hoenn = new Cidade();
+        cidade13_hoenn.setNome("Pacifidlog Town");
+
+        Cidade cidade14_hoenn = new Cidade();
+        cidade14_hoenn.setNome("Ever Grande City");
+
+        Cidade cidade15_hoenn = new Cidade();
+        cidade15_hoenn.setNome("Oldale Town");
+
+
 
         Hoenn.getCidadeList().add(cidade1_hoenn);
+        Hoenn.getCidadeList().add(cidade2_hoenn);
+        Hoenn.getCidadeList().add(cidade3_hoenn);
+        Hoenn.getCidadeList().add(cidade4_hoenn);
+        Hoenn.getCidadeList().add(cidade5_hoenn);
+        Hoenn.getCidadeList().add(cidade6_hoenn);
+        Hoenn.getCidadeList().add(cidade7_hoenn);
+        Hoenn.getCidadeList().add(cidade8_hoenn);
+        Hoenn.getCidadeList().add(cidade9_hoenn);
+        Hoenn.getCidadeList().add(cidade10_hoenn);
+        Hoenn.getCidadeList().add(cidade11_hoenn);
+        Hoenn.getCidadeList().add(cidade12_hoenn);
+        Hoenn.getCidadeList().add(cidade13_hoenn);
+        Hoenn.getCidadeList().add(cidade14_hoenn);
+        Hoenn.getCidadeList().add(cidade15_hoenn);
         listaRegioes.add(Hoenn);
 
         Regiao Sinnoh = new Regiao("Sinnoh");
@@ -166,9 +224,41 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         Sinnoh.setDescricaoRegiao(getString(R.string.regiao_info_sinnoh));
 
         Cidade cidade1_sinnoh = new Cidade();
-        cidade1_sinnoh.setNome("New Bark Town");
+        cidade1_sinnoh.setNome("Oreburgh City");
+
+        Cidade cidade2_sinnoh = new Cidade();
+        cidade2_sinnoh.setNome("Eterna City");
+
+        Cidade cidade3_sinnoh = new Cidade();
+        cidade3_sinnoh.setNome("Canalave City");
+
+        Cidade cidade4_sinnoh = new Cidade();
+        cidade4_sinnoh.setNome("Jubilife City");
+
+        Cidade cidade5_sinnoh = new Cidade();
+        cidade5_sinnoh.setNome("Hearthome City");
+
+        Cidade cidade6_sinnoh = new Cidade();
+        cidade6_sinnoh.setNome("Veilstone City");
+
+        Cidade cidade7_sinnoh = new Cidade();
+        cidade7_sinnoh.setNome("Pastoria City");
+
+        Cidade cidade8_sinnoh = new Cidade();
+        cidade8_sinnoh.setNome("Sunyshore City");
+
+        Cidade cidade9_sinnoh = new Cidade();
+        cidade9_sinnoh.setNome("Snowpoint City");
 
         Sinnoh.getCidadeList().add(cidade1_sinnoh);
+        Sinnoh.getCidadeList().add(cidade2_sinnoh);
+        Sinnoh.getCidadeList().add(cidade3_sinnoh);
+        Sinnoh.getCidadeList().add(cidade4_sinnoh);
+        Sinnoh.getCidadeList().add(cidade5_sinnoh);
+        Sinnoh.getCidadeList().add(cidade6_sinnoh);
+        Sinnoh.getCidadeList().add(cidade7_sinnoh);
+        Sinnoh.getCidadeList().add(cidade8_sinnoh);
+        Sinnoh.getCidadeList().add(cidade9_sinnoh);
         listaRegioes.add(Sinnoh);
 
         Regiao Unova = new Regiao("Unova");
@@ -176,9 +266,53 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         Unova.setDescricaoRegiao(getString(R.string.regiao_info_unova));
 
         Cidade cidade1_unova = new Cidade();
-        cidade1_unova.setNome("New Bark Town");
+        cidade1_unova.setNome("Striaton City");
+
+        Cidade cidade2_unova = new Cidade();
+        cidade2_unova.setNome("Nacrene City");
+
+        Cidade cidade3_unova = new Cidade();
+        cidade3_unova.setNome("Castelia City");
+
+        Cidade cidade4_unova = new Cidade();
+        cidade4_unova.setNome("Nimbasa City");
+
+        Cidade cidade5_unova = new Cidade();
+        cidade5_unova.setNome("Driftveil City");
+
+        Cidade cidade6_unova = new Cidade();
+        cidade6_unova.setNome("Mistralton City");
+
+        Cidade cidade7_unova = new Cidade();
+        cidade7_unova.setNome("Icirrus City");
+
+        Cidade cidade8_unova = new Cidade();
+        cidade8_unova.setNome("Mistralton City");
+
+        Cidade cidade9_unova = new Cidade();
+        cidade9_unova.setNome("Opelucid City");
+
+        Cidade cidade10_unova = new Cidade();
+        cidade10_unova.setNome("Aspertia City");
+
+        Cidade cidade11_unova = new Cidade();
+        cidade11_unova.setNome("Virbank City");
+
+        Cidade cidade12_unova = new Cidade();
+        cidade12_unova.setNome("Humilau City");
 
         Unova.getCidadeList().add(cidade1_unova);
+        Unova.getCidadeList().add(cidade2_unova);
+        Unova.getCidadeList().add(cidade3_unova);
+        Unova.getCidadeList().add(cidade4_unova);
+        Unova.getCidadeList().add(cidade5_unova);
+        Unova.getCidadeList().add(cidade6_unova);
+        Unova.getCidadeList().add(cidade7_unova);
+        Unova.getCidadeList().add(cidade8_unova);
+        Unova.getCidadeList().add(cidade9_unova);
+        Unova.getCidadeList().add(cidade10_unova);
+        Unova.getCidadeList().add(cidade11_unova);
+        Unova.getCidadeList().add(cidade12_unova);
         listaRegioes.add(Unova);
 
         Regiao Kalos = new Regiao("Kalos");
@@ -186,9 +320,41 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         Kalos.setDescricaoRegiao(getString(R.string.regiao_info_kalos));
 
         Cidade cidade1_kalos = new Cidade();
-        cidade1_kalos.setNome("New Bark Town");
+        cidade1_kalos.setNome("Santalune City");
+
+        Cidade cidade2_kalos = new Cidade();
+        cidade2_kalos.setNome("Lumiose City ");
+
+        Cidade cidade3_kalos = new Cidade();
+        cidade3_kalos.setNome("Cyllage City");
+
+        Cidade cidade4_kalos = new Cidade();
+        cidade4_kalos.setNome("Shalour City");
+
+        Cidade cidade5_kalos = new Cidade();
+        cidade5_kalos.setNome("Coumarine Cirty");
+
+        Cidade cidade6_kalos = new Cidade();
+        cidade6_kalos.setNome("Laverre City");
+
+        Cidade cidade7_kalos = new Cidade();
+        cidade7_kalos.setNome("Anistar City");
+
+        Cidade cidade8_kalos = new Cidade();
+        cidade8_kalos.setNome("Snowbelle City");
+
+        Cidade cidade9_kalos = new Cidade();
+        cidade9_kalos.setNome("Kiloude City");
 
         Kalos.getCidadeList().add(cidade1_kalos);
+        Kalos.getCidadeList().add(cidade2_kalos);
+        Kalos.getCidadeList().add(cidade3_kalos);
+        Kalos.getCidadeList().add(cidade4_kalos);
+        Kalos.getCidadeList().add(cidade5_kalos);
+        Kalos.getCidadeList().add(cidade6_kalos);
+        Kalos.getCidadeList().add(cidade7_kalos);
+        Kalos.getCidadeList().add(cidade8_kalos);
+        Kalos.getCidadeList().add(cidade9_kalos);
         listaRegioes.add(Kalos);
 
         Regiao SeviiSlands = new Regiao("Sevii Slands");
@@ -236,9 +402,21 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         Fiore.setDescricaoRegiao(getString(R.string.regiao_info_fiore));
 
         Cidade cidade1_fiore = new Cidade();
-        cidade1_fiore.setNome("New Bark Town");
+        cidade1_fiore.setNome("Fall City");
+
+        Cidade cidade2_fiore = new Cidade();
+        cidade2_fiore.setNome("Ringtown City");
+
+        Cidade cidade3_fiore = new Cidade();
+        cidade3_fiore.setNome("Summerland City");
+
+        Cidade cidade4_fiore = new Cidade();
+        cidade4_fiore.setNome("Wintown");
 
         Fiore.getCidadeList().add(cidade1_fiore);
+        Fiore.getCidadeList().add(cidade2_fiore);
+        Fiore.getCidadeList().add(cidade3_fiore);
+        Fiore.getCidadeList().add(cidade4_fiore);
         listaRegioes.add(Fiore);
 
         Regiao Alola = new Regiao("Alola");
@@ -246,9 +424,25 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         Alola.setDescricaoRegiao(getString(R.string.regiao_info_alola));
 
         Cidade cidade1_alola = new Cidade();
-        cidade1_alola.setNome("New Bark Town");
+        cidade1_alola.setNome("Melemele Island");
+
+        Cidade cidade2_alola = new Cidade();
+        cidade2_alola.setNome("Akala Island");
+
+        Cidade cidade3_alola = new Cidade();
+        cidade3_alola.setNome("Ula’Ula Island");
+
+        Cidade cidade4_alola = new Cidade();
+        cidade4_alola.setNome("Poni Island");
+
+        Cidade cidade5_alola = new Cidade();
+        cidade5_alola.setNome("Aether Paradise");
 
         Alola.getCidadeList().add(cidade1_alola);
+        Alola.getCidadeList().add(cidade2_alola);
+        Alola.getCidadeList().add(cidade3_alola);
+        Alola.getCidadeList().add(cidade4_alola);
+        Alola.getCidadeList().add(cidade5_alola);
         listaRegioes.add(Alola);
 
         return listaRegioes;

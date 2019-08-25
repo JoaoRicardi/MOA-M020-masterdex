@@ -40,7 +40,7 @@ public class RegioesAdapter extends RecyclerView.Adapter<RegioesAdapter.ViewHold
         final Regiao regiao = listaRegioes.get(i);
                 viewHolder.setupRegiao(regiao);
 
-                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+               viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         regioesListener.onRegiaoClicada(regiao);
