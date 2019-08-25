@@ -367,14 +367,46 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         SeviiSlands.getCidadeList().add(cidade1_seviiSlands);
         listaRegioes.add(SeviiSlands);
 
-        Regiao OrangeIslands = new Regiao("Orange Islands");
+        Regiao OrangeIslands = new Regiao("Orange Archipelago");
         OrangeIslands.setImagemRegiao("https://vignette.wikia.nocookie.net/pokemon/images/9/9d/Orange_Islands.jpg/revision/latest?cb=20110306222058");
         OrangeIslands.setDescricaoRegiao(getString(R.string.regiao_info_orange_islands));
 
         Cidade cidade1_orangeSlands = new Cidade();
-        cidade1_orangeSlands.setNome("New Bark Town");
+        cidade1_orangeSlands.setNome("Tangelo Island");
+
+        Cidade cidade2_orangeSlands = new Cidade();
+        cidade2_orangeSlands.setNome("Mikan Island");
+
+        Cidade cidade3_orangeSlands = new Cidade();
+        cidade3_orangeSlands.setNome("Kinnow Island");
+
+        Cidade cidade4_orangeSlands = new Cidade();
+        cidade4_orangeSlands.setNome("Navel Island");
+
+        Cidade cidade5_orangeSlands = new Cidade();
+        cidade5_orangeSlands.setNome("Moro Island");
+
+        Cidade cidade6_orangeSlands = new Cidade();
+        cidade6_orangeSlands.setNome("Mandarin Island South");
+
+        Cidade cidade7_orangeSlands = new Cidade();
+        cidade7_orangeSlands.setNome("Trovita Island");
+
+        Cidade cidade8_orangeSlands = new Cidade();
+        cidade8_orangeSlands.setNome("Kumquat Island");
+
+        Cidade cidade9_orangeSlands = new Cidade();
+        cidade9_orangeSlands.setNome("Pummelo Island");
 
         OrangeIslands.getCidadeList().add(cidade1_orangeSlands);
+        OrangeIslands.getCidadeList().add(cidade2_orangeSlands);
+        OrangeIslands.getCidadeList().add(cidade3_orangeSlands);
+        OrangeIslands.getCidadeList().add(cidade4_orangeSlands);
+        OrangeIslands.getCidadeList().add(cidade5_orangeSlands);
+        OrangeIslands.getCidadeList().add(cidade6_orangeSlands);
+        OrangeIslands.getCidadeList().add(cidade7_orangeSlands);
+        OrangeIslands.getCidadeList().add(cidade8_orangeSlands);
+        OrangeIslands.getCidadeList().add(cidade9_orangeSlands);
         listaRegioes.add(OrangeIslands);
 
         Regiao Almia = new Regiao("Almia");
