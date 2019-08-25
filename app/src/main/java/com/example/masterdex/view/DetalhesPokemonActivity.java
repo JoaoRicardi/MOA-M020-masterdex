@@ -219,13 +219,14 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     private void favoritarFirebase(Pokemon pokemon) {
         Map<String, Object> favoritosDb = new HashMap<>();
         favoritosDb.put("nome", pokemon.getName());
+        favoritosDb.put("numero", pokemon.getNumber());
 
 
 
 
         // Add a new document with a generated ID
         db.collection("votações")
-                .document(user.getUid())
+                .document("pokemons")
                 .collection("populares")
                 .add(favoritosDb)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

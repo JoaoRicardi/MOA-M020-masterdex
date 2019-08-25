@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.masterdex.R;
+import com.example.masterdex.adapter.AdapterPerfilCapturados;
 import com.example.masterdex.adapter.AdapterPerfilPopulares;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.viewmodel.PokemonViewModel;
@@ -60,12 +61,11 @@ public class PopuladoresPerfilFragment extends Fragment {
         }
 
 
-
-        recyclerView.setAdapter(adapterPerfilPopulares);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         recyclerView = view.findViewById(R.id.populares_perfil_recyclerview_id);
 
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapterPerfilPopulares);
 
 
    //   GridLayoutManager layoutManager = new GridLayoutManager(getContext(),3);
@@ -85,7 +85,7 @@ public class PopuladoresPerfilFragment extends Fragment {
 
     private void buscarDadosFirebase() {
         db.collection("votações")
-                .document(user.getUid())
+                .document("pokemons")
                 .collection("populares")
                 .orderBy("nome", Query.Direction.DESCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -100,15 +100,20 @@ public class PopuladoresPerfilFragment extends Fragment {
                         List<Pokemon> pokemonList = new ArrayList<>();
                         for (QueryDocumentSnapshot doc : value) {
                             Pokemon pokemon = new Pokemon();
-                            pokemon.setName(Objects.requireNonNull(doc.getData().get("nome")).toString());
+                            System.out.println("veio do fire: "+doc.get("nome"));
+
+                            pokemon.setName((String) doc.getData().get("nome"));
+
 
 
                             pokemonList.add(pokemon);
+
                         }
 
-                        adapterPerfilPopulares = new AdapterPerfilPopulares(pokemonList,getActivity());
-                        adapterPerfilPopulares.atualizarPopularesPerfil(pokemonList);
-                        adapterPerfilPopulares.notifyDataSetChanged();
+                        System.out.println("tamanho da lista: "+pokemonList.size());
+
+                        adapterPerfilPopulares = new AdapterPerfilPopulares(pokemonList);
+
                     }
                 });
     }

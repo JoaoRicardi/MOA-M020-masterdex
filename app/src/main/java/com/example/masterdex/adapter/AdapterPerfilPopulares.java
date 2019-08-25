@@ -20,12 +20,11 @@ import java.util.List;
 public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPopulares.ViewHolder> {
 
     private List<Pokemon> populares;
-    private Context context;
 
-    public AdapterPerfilPopulares(List<Pokemon> popularesList, Context c ) {
+    public AdapterPerfilPopulares(List<Pokemon> populares ) {
 
-        this.context = c;
-        this.populares = new ArrayList<>(popularesList);
+
+        this.populares = new ArrayList<>(populares);
         notifyDataSetChanged();
     }
 
@@ -49,8 +48,8 @@ public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPo
         viewHolder.textNomePokemon.setText(pok);
 
 
-        Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.getNumber()+".png")
-                .into(viewHolder.imageFotoPokemon);
+        //Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.getNumber()+".png")
+                //.into(viewHolder.imageFotoPokemon);
     }
 
     @Override
@@ -64,14 +63,14 @@ public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textNomePokemon;
-        private ImageView imageFotoPokemon;
+      //  private ImageView imageFotoPokemon;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textNomePokemon = itemView.findViewById(R.id.textNomePokemon);
-            imageFotoPokemon = itemView.findViewById(R.id.imageFotoPokemon);
+            //imageFotoPokemon = itemView.findViewById(R.id.imageFotoPokemon);
 
         }
     }
