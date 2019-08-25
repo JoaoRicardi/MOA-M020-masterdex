@@ -382,9 +382,30 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         Almia.setDescricaoRegiao(getString(R.string.regiao_info_almia));
 
         Cidade cidade1_almia = new Cidade();
-        cidade1_almia.setNome("New Bark Town");
+        cidade1_almia.setNome("Chicole Village");
+
+        Cidade cidade2_almia = new Cidade();
+        cidade2_almia.setNome("Vientown");
+
+        Cidade cidade3_almia = new Cidade();
+        cidade3_almia.setNome("Pueltown");
+
+        Cidade cidade4_almia = new Cidade();
+        cidade4_almia.setNome("Shiver Camp");
+
+        Cidade cidade5_almia = new Cidade();
+        cidade5_almia.setNome("Haruba Village");
+
+        Cidade cidade6_almia = new Cidade();
+        cidade6_almia.setNome("Boyleland");
+
 
         Almia.getCidadeList().add(cidade1_almia);
+        Almia.getCidadeList().add(cidade2_almia);
+        Almia.getCidadeList().add(cidade3_almia);
+        Almia.getCidadeList().add(cidade4_almia);
+        Almia.getCidadeList().add(cidade5_almia);
+        Almia.getCidadeList().add(cidade6_almia);
         listaRegioes.add(Almia);
 
         Regiao Oblivia = new Regiao("Oblivia");
@@ -392,9 +413,33 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         Oblivia.setDescricaoRegiao(getString(R.string.regiao_info_oblivia));
 
         Cidade cidade1_oblivia = new Cidade();
-        cidade1_oblivia.setNome("New Bark Town");
+        cidade1_oblivia.setNome("Dolce Island");
+
+        Cidade cidade2_oblivia = new Cidade();
+        cidade2_oblivia.setNome("Renbow Island");
+
+        Cidade cidade3_oblivia = new Cidade();
+        cidade3_oblivia.setNome("Mitonga Island");
+
+        Cidade cidade4_oblivia = new Cidade();
+        cidade4_oblivia.setNome("Faldera Island");
+
+        Cidade cidade5_oblivia = new Cidade();
+        cidade5_oblivia.setNome("Sophian Island");
+
+        Cidade cidade6_oblivia = new Cidade();
+        cidade6_oblivia.setNome("Layuda Island");
+
+        Cidade cidade7_oblivia = new Cidade();
+        cidade7_oblivia.setNome("Tilikule Island");
 
         Oblivia.getCidadeList().add(cidade1_oblivia);
+        Oblivia.getCidadeList().add(cidade2_oblivia);
+        Oblivia.getCidadeList().add(cidade3_oblivia);
+        Oblivia.getCidadeList().add(cidade4_oblivia);
+        Oblivia.getCidadeList().add(cidade5_oblivia);
+        Oblivia.getCidadeList().add(cidade6_oblivia);
+        Oblivia.getCidadeList().add(cidade7_oblivia);
         listaRegioes.add(Oblivia);
 
         Regiao Fiore = new Regiao("Fiore");
