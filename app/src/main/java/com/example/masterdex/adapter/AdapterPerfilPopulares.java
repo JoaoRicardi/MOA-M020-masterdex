@@ -1,10 +1,9 @@
 package com.example.masterdex.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,15 +17,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPopulares.ViewHolder> implements Filterable {
-    private List<Pokemon> pokemonFilteredList;
-    private List<Pokemon> pokemondListFull;
+public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPopulares.ViewHolder> {
 
-    public AdapterPerfilPopulares(List<Pokemon> pokemondListFull) {
+    private List<Pokemon> populares;
+    private Context context;
 
-        this.pokemonFilteredList = pokemonFilteredList;
+    public AdapterPerfilPopulares(List<Pokemon> popularesList, Context c ) {
 
-        this.pokemonFilteredList = new ArrayList<>(pokemondListFull);
+        this.context = c;
+        this.populares = new ArrayList<>(popularesList);
         notifyDataSetChanged();
     }
 
@@ -42,7 +41,7 @@ public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
-        final Pokemon pokemon = pokemonFilteredList.get(position);
+        final Pokemon pokemon = populares.get(position);
 
         String pok = pokemon.getName();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
@@ -56,47 +55,11 @@ public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPo
 
     @Override
     public int getItemCount() {
-        return pokemonFilteredList.size();
+        return populares.size();
     }
 
-    @Override
-    public Filter getFilter() {
-        return pokemonFilter;
-    }
 
-    private Filter pokemonFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Pokemon> filteredList = new ArrayList<>();
 
-            if (constraint == null || constraint.length() == 0) {
-
-                filteredList.addAll(pokemondListFull);
-
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-
-                for (Pokemon pokemon : pokemondListFull) {
-                    if (pokemon.getName().toLowerCase().contains(filterPattern)) {
-                        filteredList.add(pokemon);
-                    }
-                }
-            }
-
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            pokemonFilteredList.clear();
-            pokemonFilteredList.addAll((List) results.values);
-            notifyDataSetChanged();
-
-        }
-    };
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -114,8 +77,8 @@ public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPo
     }
 
     public void atualizarPopularesPerfil(List<Pokemon> favoritosListPokemon){
-        pokemondListFull = favoritosListPokemon;
-        pokemonFilteredList.addAll(pokemondListFull);
+        populares = favoritosListPokemon;
+
         notifyDataSetChanged();
     }
 }

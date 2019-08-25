@@ -33,16 +33,26 @@ import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.models.Pokemon;
 import com.example.masterdex.models.SlotHabilidade;
 import com.example.masterdex.viewmodel.DetalhesPokemonViewModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.ViewPagerItems;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -50,6 +60,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
     public static final String FAVORITOS_DB = "favoritos_Db";
     public static final String CAPTURADOS_DB = "capturados_Db";
+    private static final String TAG = "DetalhesPokemonActivity";
 
     private ToggleButton botaoFavorito;
     private ToggleButton botaoCapturado;
@@ -63,6 +74,10 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     private Switch switchBack;
     private boolean favoritado = false;
     private boolean capturado = false;
+
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user;
 
 
     @Override
@@ -81,6 +96,14 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         tipoUnicoImageView = findViewById(R.id.detalhes_pokemon_tipo_unico_image_view);
         tipoPrimarioImageView = findViewById(R.id.detalhes_pokemon_tipo1_image_view);
         tipoSecundarioImageView = findViewById(R.id.detalhes_pokemon_tipo2_image_view);
+
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String name = user.getDisplayName();
+
+        }
+
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -166,6 +189,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
                 if (!favoritado) {
                     inserirPokemonFavorito(pokemon);
+                    favoritarFirebase(pokemon);
                     favoritado = true;
                 }
                 if (!botaoFavorito.isChecked()) {
@@ -190,6 +214,35 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private void favoritarFirebase(Pokemon pokemon) {
+        Map<String, Object> favoritosDb = new HashMap<>();
+        favoritosDb.put("nome", pokemon.getName());
+
+
+
+
+        // Add a new document with a generated ID
+        db.collection("votações")
+                .document(user.getUid())
+                .collection("populares")
+                .add(favoritosDb)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getPath());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+
+    }
+
 
     private void switchImageTypePokemon(Pokemon pokemon) {
 

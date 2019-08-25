@@ -16,6 +16,10 @@ import com.example.masterdex.models.Regiao;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class RegioesInformacoesActivity extends AppCompatActivity {
 
     private ImageView imageView;
@@ -37,9 +41,9 @@ public class RegioesInformacoesActivity extends AppCompatActivity {
 
         Bundle bundle = intent.getExtras();
 
-        Regiao regiao = (Regiao) bundle.getSerializable("REGIAO");
+        Regiao regiao = (Regiao) Objects.requireNonNull(bundle).getSerializable("REGIAO");
 
-        nomeRegiaoTextView.setText(regiao.getNomeRegiao());
+        nomeRegiaoTextView.setText(Objects.requireNonNull(regiao).getNomeRegiao());
 
         Picasso.get().load(regiao.getImagemRegiao()).into(imageView);
 
@@ -50,10 +54,10 @@ public class RegioesInformacoesActivity extends AppCompatActivity {
             }
         });
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.regiao_view_pager_id);
+        ViewPager viewPager = findViewById(R.id.regiao_view_pager_id);
         RegioesViewPagerAdapter myPagerAdapter = new RegioesViewPagerAdapter(getSupportFragmentManager(), regiao);
         viewPager.setAdapter(myPagerAdapter);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.regioes_tab_layout);
+        TabLayout tabLayout = findViewById(R.id.regioes_tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
 
@@ -66,5 +70,4 @@ public class RegioesInformacoesActivity extends AppCompatActivity {
             getFragmentManager().popBackStack();
         }
     }
-
 }

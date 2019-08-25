@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegionsFragment extends Fragment implements RegioesListener{
+public class RegionsFragment extends Fragment implements RegioesListener {
 
     private RecyclerView recyclerView;
 
@@ -120,6 +120,8 @@ public class RegionsFragment extends Fragment implements RegioesListener{
 
     @Override
     public void onRegiaoClicada(Regiao regiao) {
+
+
         Intent intent = new Intent(getContext(), RegioesInformacoesActivity.class);
 
         Bundle bundle = new Bundle();
@@ -129,4 +131,5 @@ public class RegionsFragment extends Fragment implements RegioesListener{
 
         startActivity(intent);
     }
+
 }
