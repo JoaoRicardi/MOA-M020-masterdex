@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                logar();
+                entrarNaConta();
 
             }
         });
@@ -98,8 +98,8 @@ public class LoginActivity extends AppCompatActivity {
             //Se nãp huver nada no campo de senha aparecerá essa mensagem
             senhaDigitada.setError("Digite uma senha");
         } else {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            logar();
+
         }
 
     }
