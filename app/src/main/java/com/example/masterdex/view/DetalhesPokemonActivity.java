@@ -1,6 +1,5 @@
 package com.example.masterdex.view;
 
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -62,6 +61,8 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     private ImageView tipoSecundarioImageView;
     private Switch switchShine;
     private Switch switchBack;
+    private boolean favoritado = false;
+    private boolean capturado = false;
 
 
     @Override
@@ -93,20 +94,19 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         switchShine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (switchShine.isChecked() && switchBack.isChecked()){
+                if (switchShine.isChecked() && switchBack.isChecked()) {
 
                     Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/" + pokemon.getNumber() + ".png").into(imagemPokemon);
 
-                }
-                else if (switchShine.isChecked()){
+                } else if (switchShine.isChecked()) {
 
                     Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" + pokemon.getNumber() + ".png").into(imagemPokemon);
 
-                }else if (switchBack.isChecked()){
+                } else if (switchBack.isChecked()) {
                     Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/" + pokemon.getNumber() + ".png").into(imagemPokemon);
 
-                }
-                else Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png").into(imagemPokemon);
+                } else
+                    Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png").into(imagemPokemon);
             }
         });
 
@@ -115,22 +115,19 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         switchBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (switchBack.isChecked() && switchShine.isChecked()){
+                if (switchBack.isChecked() && switchShine.isChecked()) {
 
                     Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/" + pokemon.getNumber() + ".png").into(imagemPokemon);
 
-                }else if (switchBack.isChecked()) {
+                } else if (switchBack.isChecked()) {
                     Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/" + pokemon.getNumber() + ".png").into(imagemPokemon);
 
-                }else if (switchShine.isChecked()){
+                } else if (switchShine.isChecked()) {
                     Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" + pokemon.getNumber() + ".png").into(imagemPokemon);
-                }
-                else
+                } else
                     Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png").into(imagemPokemon);
             }
         });
-
-
 
 
         botaoVoltar.setOnClickListener(new View.OnClickListener() {
@@ -160,45 +157,47 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png").into(imagemPokemon);
         //como o proprio nome ja diz kkk
 
-
-        System.out.println(pokemon.getName());
-        System.out.println("****************");
         consultaPokemonFavoritado(pokemon);
         consultaPokemonCapturado(pokemon);
 
-        botaoFavorito.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        botaoFavorito.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()) {
+            public void onClick(View v) {
+
+                if (!favoritado) {
                     inserirPokemonFavorito(pokemon);
-                } else {
-                    deletarPokemonFavorito(pokemon);
+                    favoritado = true;
                 }
-            }
-        });
-        botaoCapturado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    inserirPokemonCapturado(pokemon);
-                } else {
-                    deletarPokemonCapturado(pokemon);
+                if (!botaoFavorito.isChecked()) {
+                    deletarPokemonFavorito(pokemon);
+                    favoritado = false;
                 }
             }
         });
 
+        botaoCapturado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!capturado) {
+                    inserirPokemonCapturado(pokemon);
+                    capturado = true;
+                }
+                if (!botaoCapturado.isChecked()) {
+                    deletarPokemonCapturado(pokemon);
+                    capturado = false;
+                }
+            }
+        });
     }
 
     private void switchImageTypePokemon(Pokemon pokemon) {
 
-        if (pokemon.getTypes().size() == 1){
+        if (pokemon.getTypes().size() == 1) {
             setarTipoUnico(pokemon);
         } else {
             setarTipoHibrido(pokemon);
         }
-
-
-
     }
 
     private void setarTipoHibrido(Pokemon pokemon) {
@@ -386,7 +385,6 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         }
 
 
-
     }
 
     private void setupViewPager(Pokemon pokemonApi) {
@@ -463,6 +461,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
+        System.out.println("pokemon: " + pokemon.getName() + " foi apagado no banco");
     }
 
     private void inserirPokemonFavorito(Pokemon pokemon) {
@@ -470,13 +469,40 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
+        System.out.println("pokemon: " + pokemon.getName() + " foi adicionado no banco");
     }
+
+    private void consultaPokemonFavoritado(Pokemon pokemon) {
+        FavoritosDao favoritosDao = favoritosDb.favoritosDao();
+        favoritosDao.getName(pokemon.getName())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(pokemonEncontrado -> {
+
+                    if (pokemonEncontrado.getName().equals(pokemon.getName())) {
+                        System.out.println("favoritado no banco $$$");
+                        botaoFavorito.setChecked(true);
+                        favoritado = true;
+
+
+                    } else {
+                        System.out.println("favoritado nao encontrado no banco $$$");
+
+                        favoritado = false;
+
+                    }
+                });
+
+
+    }
+
 
     private void deletarPokemonCapturado(Pokemon pokemon) {
         Completable.fromAction(() -> capturadosDb.capturadosDao().deleteByName(pokemon.getName()))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
+
     }
 
     private void inserirPokemonCapturado(Pokemon pokemon) {
@@ -494,31 +520,18 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
                 .subscribe(pokemonEncontrado -> {
                     System.out.println(pokemonEncontrado.getName());
                     if (pokemonEncontrado.getName().equals(pokemon.getName())) {
-                        System.out.println("pokemon foi encontrado no banco $$$");
+                        System.out.println("capturado no banco $$$");
                         botaoCapturado.setChecked(true);
+                        capturado = true;
                     } else {
-                        System.out.println("pokemon nao encontrado no banco $$$");
-                        botaoCapturado.setChecked(false);
+                        System.out.println("capturado nao encontrado no banco $$$");
+
+                        capturado = false;
                     }
                 });
+
     }
 
-    private void consultaPokemonFavoritado(Pokemon pokemon) {
-        FavoritosDao favoritosDao = favoritosDb.favoritosDao();
-        favoritosDao.getName(pokemon.getName())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
-                .subscribe(pokemonEncontrado -> {
-                    System.out.println(pokemonEncontrado.getName());
-                    if (pokemonEncontrado.getName().equals(pokemon.getName())) {
-                        System.out.println("pokemon foi encontrado no banco $$$");
-                        botaoFavorito.setChecked(true);
-                    } else {
-                        System.out.println("pokemon nao encontrado no banco $$$");
-                        botaoFavorito.setChecked(false);
-                    }
-                });
-    }
 
     private void voltarHome() {
         Intent intent = new Intent(this, MainActivity.class);
@@ -635,11 +648,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
     public void mostrarTipo(Pokemon pokemon) {
         boolean qtdTipo = true;
-        if (pokemon.getTypes().size() == 1) {
-            qtdTipo = true;
-        } else {
-            qtdTipo = false;
-        }
+        qtdTipo = pokemon.getTypes().size() == 1;
 
     }
 
@@ -997,7 +1006,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         }
     }
 
-    private void changeStatusBarColor(String color){
+    private void changeStatusBarColor(String color) {
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
