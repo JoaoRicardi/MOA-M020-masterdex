@@ -12,9 +12,13 @@ import android.widget.TextView;
 
 import com.example.masterdex.R;
 import com.example.masterdex.adapter.RegioesViewPagerAdapter;
+import com.example.masterdex.models.Cidade;
 import com.example.masterdex.models.Regiao;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegioesInformacoesActivity extends AppCompatActivity {
 
@@ -66,5 +70,4 @@ public class RegioesInformacoesActivity extends AppCompatActivity {
             getFragmentManager().popBackStack();
         }
     }
-
 }
