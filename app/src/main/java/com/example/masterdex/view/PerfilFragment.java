@@ -68,7 +68,7 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
 
         perfilViewPagerAdapter.AddFragment(new CapturadosPerfilFragment(),"Capturados");
 
-        perfilViewPagerAdapter.AddFragment(new PopuladoresPerfilFragment(),"Populares");
+        //perfilViewPagerAdapter.AddFragment(new PopuladoresPerfilFragment(),"Populares");
 
         tabLayoutPerfil.setSelected(true);
 

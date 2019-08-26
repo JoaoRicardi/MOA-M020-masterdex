@@ -443,9 +443,10 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
     private void setupViewPager(Pokemon pokemonApi) {
         ViewPagerItemAdapter adapter = new ViewPagerItemAdapter(ViewPagerItems.with(this)
-                .add("HABILIDADES", R.layout.fragment_habilidades)
+
                 .add("STATS", R.layout.fragment_stats)
-                .add("SOBRE", R.layout.fragment_evolucoes)
+                .add("HABILIDADES", R.layout.fragment_habilidades)
+               // .add("SOBRE", R.layout.fragment_evolucoes)
                 .create());
 
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -454,9 +455,9 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         SmartTabLayout viewPagerTab = findViewById(R.id.smart);
         viewPagerTab.setViewPager(viewPager);
 
-        setupHabilidadesTab(pokemonApi, adapter.getPage(0));
-        setupStatsTab(pokemonApi, adapter.getPage(1));
-        setupSobreTab(pokemonApi, adapter.getPage(2));
+        setupStatsTab(pokemonApi, adapter.getPage(0));
+        setupHabilidadesTab(pokemonApi, adapter.getPage(1));
+       // setupSobreTab(pokemonApi, adapter.getPage(2));
 
     }
 
