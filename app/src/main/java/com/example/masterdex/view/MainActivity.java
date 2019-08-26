@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager_id);
         bottomNavigationItemView = findViewById(R.id.bottom_navigation);
 
+
+
         setupViewPager(viewPager);
 
         bottomNavigationItemView.setOnNavigationItemSelectedListener(
