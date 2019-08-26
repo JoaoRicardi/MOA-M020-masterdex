@@ -57,8 +57,8 @@ public class RegioesInformacoesActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.regiao_view_pager_id);
         RegioesViewPagerAdapter myPagerAdapter = new RegioesViewPagerAdapter(getSupportFragmentManager(), regiao);
         viewPager.setAdapter(myPagerAdapter);
-        TabLayout tabLayout = findViewById(R.id.regioes_tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
+       // TabLayout tabLayout = findViewById(R.id.regioes_tab_layout);
+       // tabLayout.setupWithViewPager(viewPager);
 
 
     }

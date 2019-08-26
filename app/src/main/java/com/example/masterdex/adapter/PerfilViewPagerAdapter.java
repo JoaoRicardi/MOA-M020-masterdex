@@ -32,6 +32,7 @@ public class PerfilViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return titleList.get(position);
+
     }
 
     public void AddFragment(Fragment fragment, String tittle){
