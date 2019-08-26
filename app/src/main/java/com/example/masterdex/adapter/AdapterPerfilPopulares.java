@@ -33,7 +33,7 @@ public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_celula,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.celula_favoritos_votacao,viewGroup,false);
         return new ViewHolder(view);
     }
 
@@ -44,6 +44,9 @@ public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPo
 
         String pok = pokemon.getName();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
+
+
+
 
         viewHolder.textNomePokemon.setText(pok);
 
@@ -69,7 +72,7 @@ public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textNomePokemon = itemView.findViewById(R.id.textNomePokemon);
+            textNomePokemon = itemView.findViewById(R.id.nome_pokemon_votado);
             //imageFotoPokemon = itemView.findViewById(R.id.imageFotoPokemon);
 
         }

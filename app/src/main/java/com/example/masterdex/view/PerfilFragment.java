@@ -80,6 +80,7 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
 
 
 
+
         nomePerfil = view.findViewById(R.id.nome_perfil_text_view);
         fotoPerfil = view.findViewById(R.id.foto_perfil_circle_image_view);
 

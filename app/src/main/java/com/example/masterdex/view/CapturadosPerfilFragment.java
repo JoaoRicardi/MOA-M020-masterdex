@@ -68,13 +68,14 @@ public class CapturadosPerfilFragment extends Fragment {
         if (user != null) {
             String name = user.getDisplayName();
         }
+        buscarTudoNoRoom();
         capRv = view.findViewById(R.id.capturados_perfil_recyclerview_id);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
         capRv.setLayoutManager(layoutManager);
         capRv.setAdapter(capturados);
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
-        buscarTudoNoRoom();
+
         return view;
 
     }
@@ -85,6 +86,14 @@ public class CapturadosPerfilFragment extends Fragment {
         buscarTudoNoRoom();
         super.onStart();
     }
+
+    @Override
+    public void onResume() {
+        buscarTudoNoRoom();
+        super.onResume();
+    }
+
+
 
     private void buscarTudoNoRoom() {
         CapturadosDao capturadosDao = capturadosDb.capturadosDao();

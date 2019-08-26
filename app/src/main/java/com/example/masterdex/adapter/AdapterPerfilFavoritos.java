@@ -15,17 +15,18 @@ import com.example.masterdex.models.Pokemon;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilFavoritos.ViewHolder> {
 
 
-    private List<Pokemon> faboritos;
+    private List<Pokemon> favoritos;
 
 
     public AdapterPerfilFavoritos(List<Pokemon> favoritos, FragmentActivity activity) {
 
-        this.faboritos = new ArrayList<>(favoritos);
+        this.favoritos = new ArrayList<>(favoritos);
         notifyDataSetChanged();
     }
 
@@ -43,14 +44,13 @@ public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilFa
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
-        final Pokemon pokemon = faboritos.get(position);
+
+
+        final Pokemon pokemon = favoritos.get(position);
 
         String pok = pokemon.getName();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
-
         viewHolder.textNomePokemon.setText(pok);
-
-
         Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.getNumber() + ".png")
                 .into(viewHolder.imageFotoPokemon);
 
@@ -58,7 +58,7 @@ public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilFa
 
     @Override
     public int getItemCount() {
-        return faboritos.size();
+        return favoritos.size();
     }
 
 
