@@ -8,22 +8,22 @@
     android:id="@+id/background_constraint_detalhe_pokemon"
     >
 
-    <ImageButton
+    <ImageView
         android:id="@+id/detalhes_pokemon_voltar"
         android:layout_width="30dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/button_voltar"
+        android:layout_height="26dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/button_voltar"
+        app:layout_constraintBottom_toBottomOf="@+id/toggle_favorito_Button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/toggle_favorito_Button" />
 
     <ToggleButton
         android:id="@+id/toggle_favorito_Button"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/toggle_star_selector"
         android:textOff=" "
         android:textOn=" "

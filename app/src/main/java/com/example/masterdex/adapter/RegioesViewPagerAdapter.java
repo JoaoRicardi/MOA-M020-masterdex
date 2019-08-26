@@ -48,7 +48,7 @@ public class RegioesViewPagerAdapter extends FragmentStatePagerAdapter {
     }
     public CharSequence getPageTitle(int position) {
         switch (position){
-            case 0: return "Detalhes";
+            case 0: return "Sobre";
             case 1: return "Localidades";
             //case 2: return "Pokemon";
             default: return null;
