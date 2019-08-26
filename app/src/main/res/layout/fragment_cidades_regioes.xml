@@ -3,13 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modules.regiaoinformacao.view.CidadesRegioesFragment">
+    tools:context=".modules.regiaoinformacao.view.CidadesRegioesFragment"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="8dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/regioes_locais_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Eduardo, Faça essa Porra" />
+        android:layout_margin="8dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>
