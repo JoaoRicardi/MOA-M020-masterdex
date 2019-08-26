@@ -25,7 +25,7 @@ public class LocalidadesAdapter extends RecyclerView.Adapter<LocalidadesAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.regioes_celula, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.locais_celula, viewGroup, false);
 
 
         return new ViewHolder(view);
