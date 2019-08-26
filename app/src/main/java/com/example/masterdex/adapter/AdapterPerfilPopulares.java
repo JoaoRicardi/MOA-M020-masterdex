@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.masterdex.R;
 import com.example.masterdex.models.Pokemon;
+import com.example.masterdex.models.PokemonRanking;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -19,9 +20,9 @@ import java.util.List;
 
 public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPopulares.ViewHolder> {
 
-    private List<Pokemon> populares;
+    private List<PokemonRanking> populares;
 
-    public AdapterPerfilPopulares(List<Pokemon> populares ) {
+    public AdapterPerfilPopulares(List<PokemonRanking> populares ) {
 
 
         this.populares = new ArrayList<>(populares);
@@ -40,15 +41,15 @@ public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
-        final Pokemon pokemon = populares.get(position);
+        final PokemonRanking pokemon = populares.get(position);
 
-        String pok = pokemon.getName();
+        String pok = pokemon.getNome();
         pok = pok.substring(0, 1).toUpperCase().concat(pok.substring(1));
 
 
 
 
-        viewHolder.textNomePokemon.setText(pok);
+        viewHolder.textNomePokemon.setText(pok + ": "+pokemon.getQtdVotos()+ " votos");
 
 
         //Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.getNumber()+".png")
@@ -78,8 +79,9 @@ public class AdapterPerfilPopulares extends RecyclerView.Adapter<AdapterPerfilPo
         }
     }
 
-    public void atualizarPopularesPerfil(List<Pokemon> favoritosListPokemon){
+    public void atualizarPopularesPerfil(List<PokemonRanking> favoritosListPokemon){
         populares = favoritosListPokemon;
+
 
         notifyDataSetChanged();
     }

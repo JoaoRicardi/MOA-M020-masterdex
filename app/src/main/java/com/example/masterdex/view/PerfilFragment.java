@@ -70,7 +70,7 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
 
 
 
-        //perfilViewPagerAdapter.AddFragment(new PopuladoresPerfilFragment(),"Populares");
+        perfilViewPagerAdapter.AddFragment(new PopuladoresPerfilFragment(),"Populares");
 
 
 

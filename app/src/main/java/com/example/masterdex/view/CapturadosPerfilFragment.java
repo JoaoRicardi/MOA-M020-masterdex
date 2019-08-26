@@ -81,11 +81,6 @@ public class CapturadosPerfilFragment extends Fragment {
     }
 
 
-    @Override
-    public void onStart() {
-        buscarTudoNoRoom();
-        super.onStart();
-    }
 
     @Override
     public void onResume() {

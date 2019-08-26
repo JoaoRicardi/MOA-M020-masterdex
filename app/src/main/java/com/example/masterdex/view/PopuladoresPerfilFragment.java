@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.masterdex.R;
 import com.example.masterdex.adapter.AdapterPerfilPopulares;
 import com.example.masterdex.models.Pokemon;
+import com.example.masterdex.models.PokemonRanking;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
@@ -24,7 +25,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import io.reactivex.annotations.NonNull;
@@ -90,25 +94,31 @@ public class PopuladoresPerfilFragment extends Fragment {
                             Log.w(TAG, "Listen failed.", e);
                             return;
                         }
-                        List<Pokemon> pokemonList=new ArrayList<>();
+
+                        Map<String,Integer> pokemonMap = new HashMap<>();
                         for (QueryDocumentSnapshot doc : (value)) {
+                            String nome = (String) doc.getData().get("nome");
 
-                            Pokemon pokemon = new Pokemon();
-                            pokemon.setName((String) doc.getData().get("nome"));
-                            System.out.println(pokemon.getName());
-                            pokemonList.add(pokemon);
-
-
-
-
-
-
+                            if (pokemonMap.containsKey(nome)){
+                                int qtd = pokemonMap.get(nome);
+                                pokemonMap.put(nome, qtd +1);
+                            }else {
+                                pokemonMap.put(nome,1);
+                            }
 
                         }
 
+                        List<PokemonRanking> pokemonRankings = new ArrayList<>();
+                        for (String nome : pokemonMap.keySet()) {
+                            PokemonRanking pokemonRanking =new PokemonRanking();
+                            pokemonRanking.setNome(nome);
+                            pokemonRanking.setQtdVotos(pokemonMap.get(nome));
+                            pokemonRankings.add(pokemonRanking);
+                        }
 
+                        Collections.sort(pokemonRankings, (p1, p2) ->  Integer.compare(p2.getQtdVotos(), p1.getQtdVotos()) );
 
-                        adapterPerfilPopulares = new AdapterPerfilPopulares(pokemonList);
+                        adapterPerfilPopulares = new AdapterPerfilPopulares(pokemonRankings);
 
 
                     }

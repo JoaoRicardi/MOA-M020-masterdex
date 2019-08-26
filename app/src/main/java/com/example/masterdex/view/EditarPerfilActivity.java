@@ -75,7 +75,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
 
         fotoPerfil.setOnClickListener(v -> {
-            Toast.makeText(EditarPerfilActivity.this, "Bora tirar uma Foto", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(EditarPerfilActivity.this, "Bora tirar uma Foto", Toast.LENGTH_SHORT).show();
             abrirCamera();
         });
 
