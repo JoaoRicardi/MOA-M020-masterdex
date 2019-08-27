@@ -3,6 +3,16 @@ package com.example.masterdex.view;
 import android.content.Intent;
 
 import com.example.masterdex.R;
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -11,14 +21,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,9 +44,10 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText senhaDigitada;
     TextView esqueciSenha;
     Button irParaCadastro;
+    private LoginButton loginComFacebook;
     private FirebaseAuth firebaseAuth;
     private static final String TAG = "LoginActivity";
-
+    private CallbackManager callbackManager;
 
 
     @Override
@@ -38,17 +56,35 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-
         firebaseAuth = FirebaseAuth.getInstance();
-
-
-
-
         emailDigitado = findViewById(R.id.email_login);
         senhaDigitada = findViewById(R.id.senha_login);
         entrar = findViewById(R.id.entrar_login_button);
         esqueciSenha = findViewById(R.id.login_esqueci_senha);
         irParaCadastro = findViewById(R.id.botao_ir_para_cadastro);
+        loginComFacebook = findViewById(R.id.entrar_com_fb_button);
+
+
+        callbackManager = CallbackManager.Factory.create();
+        loginComFacebook.setReadPermissions(Arrays.asList("email", "perfilPublico"));
+
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                irParaMain();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+
 
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +108,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     private void irParaTelaDeCadastro() {
         Intent intent = new Intent(this, CadastroActivity.class);

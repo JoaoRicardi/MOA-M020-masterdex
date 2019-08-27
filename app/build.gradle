@@ -82,6 +82,9 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
     implementation 'com.google.firebase:firebase-firestore:20.2.0'
 
+    //Login Facebook
+    implementation 'com.facebook.android:facebook-login:[5,6)'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

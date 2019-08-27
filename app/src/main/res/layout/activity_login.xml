@@ -112,7 +112,7 @@
         app:layout_constraintStart_toStartOf="@+id/textInputLayout"
         app:layout_constraintTop_toTopOf="@+id/entrar_login_button" />
 
-    <Button
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/entrar_com_fb_button"
         android:layout_width="match_parent"
         android:layout_height="46dp"
