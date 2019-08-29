@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
         setupViewPager(viewPager);
 
+
+
         bottomNavigationItemView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override

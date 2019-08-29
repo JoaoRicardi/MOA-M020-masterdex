@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.example.masterdex.R;
 import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.viewmodel.PokemonViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.fragment.app.Fragment;
@@ -57,6 +58,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     private FirebaseUser user;
     private FavoritosDb favoritosDb;
 
+
     private GifImageButton gifImageButton;
 
     public PokemonsFragment() {
@@ -68,6 +70,8 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pokemons, container, false);
+
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -116,6 +120,10 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
 
             }
         });
+
+
+
+
 
 
         pokemonAdapter = new
