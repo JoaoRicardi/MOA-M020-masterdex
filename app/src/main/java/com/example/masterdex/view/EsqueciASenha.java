@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import java.util.Objects;
 
+import es.dmoral.toasty.Toasty;
+
 public class EsqueciASenha extends AppCompatActivity {
 
     private TextInputEditText emailDigitado;
@@ -56,11 +58,11 @@ public class EsqueciASenha extends AppCompatActivity {
                 .toString().toLowerCase())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(EsqueciASenha.this,
+                        Toasty.normal(EsqueciASenha.this,
                                 "Acesse seu email, e siga os passos para mudar a Senha.",
-                                Toast.LENGTH_SHORT).show();
+                                Toasty.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(EsqueciASenha.this,
+                        Toasty.error(EsqueciASenha.this,
                                 Objects.requireNonNull(task.getException()).getMessage(),
                                 Toast.LENGTH_SHORT).show();
                     }

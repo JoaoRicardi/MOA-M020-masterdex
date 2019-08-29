@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import java.util.Objects;
 
+import es.dmoral.toasty.Toasty;
 import io.reactivex.annotations.NonNull;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -45,7 +46,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         cadastrar = findViewById(R.id.cadastrar_button);
 
-        cadastrar.setOnClickListener(view -> cadastrar());
+        cadastrar.setOnClickListener(view -> cadastroRealizado());
 
 
         initComponents();
@@ -102,11 +103,12 @@ public class CadastroActivity extends AppCompatActivity {
             textEditConfirmarSenha.setError("Digite uma Senha");
         } else {
             cadastrar();
+
         }
 
     }
 
-    public void cadastroRealizado(View view) {
+    public void cadastroSnackBar(View view) {
 
         Snackbar.make(view, "Cadastro realizado com sucesso", Snackbar.LENGTH_LONG)
                 .setAction("OK", new View.OnClickListener() {
@@ -129,9 +131,9 @@ public class CadastroActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success");
 
-                        Toast.makeText(CadastroActivity.this,
+                        Toasty.success(CadastroActivity.this,
                                 "Cadastro realizado com sucesso",
-                                Toast.LENGTH_SHORT).show();
+                                Toasty.LENGTH_SHORT).show();
                         FirebaseUser user = firebaseAuth.getCurrentUser();
                         voltarParaLogin();
                         atualizarPerfil();
@@ -142,9 +144,9 @@ public class CadastroActivity extends AppCompatActivity {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(CadastroActivity.this,
+                        Toasty.error(CadastroActivity.this,
                                 "Por favor revise seus dados ,talvez o usuario ja existe no sistema",
-                                Toast.LENGTH_SHORT).show();
+                                Toasty.LENGTH_SHORT).show();
 
                     }
 
@@ -165,8 +167,8 @@ public class CadastroActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "Seu cadastro foi atualizado.");
-                            Toast.makeText(CadastroActivity.this, "Seu cadastro foi atualizado.",
-                                    Toast.LENGTH_LONG).show();
+                            Toasty.success(CadastroActivity.this, "Seu cadastro foi atualizado.",
+                                    Toasty.LENGTH_LONG).show();
                         }
                     }
                 });

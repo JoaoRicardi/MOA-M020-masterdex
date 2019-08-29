@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
@@ -68,14 +69,13 @@ public class CapturadosPerfilFragment extends Fragment {
         if (user != null) {
             String name = user.getDisplayName();
         }
-        buscarTudoNoRoom();
+
         capRv = view.findViewById(R.id.capturados_perfil_recyclerview_id);
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
-        capRv.setLayoutManager(layoutManager);
-        capRv.setAdapter(capturados);
+
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        buscarTudoNoRoom();
         return view;
 
     }
@@ -98,6 +98,10 @@ public class CapturadosPerfilFragment extends Fragment {
                 .subscribe(pokemon -> {
 
                     capturados = new AdapterPerfilCapturados(pokemon, getActivity());
+                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+                    capRv.setLayoutManager(layoutManager);
+                    capRv.setAdapter(capturados);
+
 
                 });
 

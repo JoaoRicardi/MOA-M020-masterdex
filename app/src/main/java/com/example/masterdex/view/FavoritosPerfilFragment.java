@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import java.util.Objects;
+
+import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.Nullable;
@@ -44,6 +46,8 @@ public class FavoritosPerfilFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favoritos_perfil, container, false);
 
+
+
         favoritosDb = Room.databaseBuilder(Objects.requireNonNull(getContext()),
                 FavoritosDb.class, FAVORITOS_DB).build();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -51,11 +55,11 @@ public class FavoritosPerfilFragment extends Fragment {
             String name = user.getDisplayName();
         }
         favRv = view.findViewById(R.id.favoritos_perfil_recyclerview_id);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
-        favRv.setLayoutManager(layoutManager);
-        favRv.setAdapter(favoritos);
+
+
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
+
         buscarTudoNoRoom();
         return view;
     }
@@ -75,6 +79,10 @@ public class FavoritosPerfilFragment extends Fragment {
                 .subscribe(pokemonEncontrado -> {
 
                     favoritos = new AdapterPerfilFavoritos(pokemonEncontrado,getActivity());
+                    GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
+                    favRv.setLayoutManager(layoutManager);
+                    favRv.setAdapter(favoritos);
+
 
                 });
 

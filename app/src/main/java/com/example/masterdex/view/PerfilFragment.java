@@ -31,6 +31,7 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.annotations.NonNull;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -38,7 +39,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
 
-    Button buttonOpcoesPerfil;
+    private Button buttonOpcoesPerfil;
     private CircleImageView fotoPerfil;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseUser user;
@@ -57,21 +58,14 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
 
         tabLayoutPerfil = view.findViewById(R.id.tablayout_perfil_id);
         viewPagerPerfil = view.findViewById(R.id.viewpager_perfil_id);
 
-        PerfilViewPagerAdapter perfilViewPagerAdapter = new PerfilViewPagerAdapter(getChildFragmentManager());
-
-        perfilViewPagerAdapter.AddFragment(new FavoritosPerfilFragment(),"Favoritos");
-
-        perfilViewPagerAdapter.AddFragment(new CapturadosPerfilFragment(),"Capturados");
-
-
-
-        perfilViewPagerAdapter.AddFragment(new PopuladoresPerfilFragment(),"Populares");
-
+        PerfilViewPagerAdapter perfilViewPagerAdapter = getPerfilViewPagerAdapter();
 
 
         tabLayoutPerfil.setSelected(true);
@@ -81,10 +75,6 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
         tabLayoutPerfil.setupWithViewPager(viewPagerPerfil);
 
 
-
-
-
-
         nomePerfil = view.findViewById(R.id.nome_perfil_text_view);
         fotoPerfil = view.findViewById(R.id.foto_perfil_circle_image_view);
 
@@ -92,16 +82,7 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
         user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-
-            nomePerfil.setText(name);
-            baixarFoto();
-        }
-
-
+        getUser();
 
 
         buttonOpcoesPerfil = view.findViewById(R.id.button_opcoes_perfil);
@@ -122,6 +103,29 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
         });
 
         return view;
+    }
+
+    private void getUser() {
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+
+            nomePerfil.setText(name);
+            baixarFoto();
+        }
+    }
+
+    private PerfilViewPagerAdapter getPerfilViewPagerAdapter() {
+        PerfilViewPagerAdapter perfilViewPagerAdapter = new PerfilViewPagerAdapter(getChildFragmentManager());
+
+        perfilViewPagerAdapter.AddFragment(new FavoritosPerfilFragment(), "Favoritos");
+
+        perfilViewPagerAdapter.AddFragment(new CapturadosPerfilFragment(), "Capturados");
+
+
+        perfilViewPagerAdapter.AddFragment(new PopuladoresPerfilFragment(), "Populares");
+        return perfilViewPagerAdapter;
     }
 
     @Override
@@ -151,7 +155,7 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
         reference.getDownloadUrl().addOnSuccessListener(uri -> Picasso.get().load(uri).into(fotoPerfil));
     }
 
-    public void signOut(){
+    public void signOut() {
         firebaseAuth.getInstance()
                 .signOut();
 

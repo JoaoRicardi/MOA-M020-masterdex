@@ -65,9 +65,7 @@ public class PopuladoresPerfilFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.populares_perfil_recyclerview_id);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapterPerfilPopulares);
+
 
 
         //   GridLayoutManager layoutManager = new GridLayoutManager(getContext(),3);
@@ -119,6 +117,9 @@ public class PopuladoresPerfilFragment extends Fragment {
                         Collections.sort(pokemonRankings, (p1, p2) ->  Integer.compare(p2.getQtdVotos(), p1.getQtdVotos()) );
 
                         adapterPerfilPopulares = new AdapterPerfilPopulares(pokemonRankings);
+                        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setAdapter(adapterPerfilPopulares);
 
 
                     }
