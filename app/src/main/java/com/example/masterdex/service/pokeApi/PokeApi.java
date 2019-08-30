@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface PokeApi {
 
-    @GET("pokemon?offset=0&limit=964")
+    @GET("pokemon?offset=0&limit=897")
     Observable<PokemonResponse> getPokemon(@Query("limit") int limit,
                                            @Query("offset") int offset);
 
