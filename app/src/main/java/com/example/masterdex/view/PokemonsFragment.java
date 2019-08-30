@@ -7,8 +7,9 @@ import android.os.Bundle;
 
 import com.example.masterdex.R;
 import com.example.masterdex.database.FavoritosDb;
+import com.example.masterdex.models.GridAutofitLayoutManager;
+import com.example.masterdex.models.GridSpacesItemDecoration;
 import com.example.masterdex.viewmodel.PokemonViewModel;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
+import okhttp3.internal.Util;
 import pl.droidsonroids.gif.GifImageButton;
 
 
