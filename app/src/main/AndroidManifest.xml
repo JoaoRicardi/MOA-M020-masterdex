@@ -14,14 +14,22 @@
         <activity android:name=".view.QuizActivity">
 
         </activity>
-        <activity android:name=".view.DetalhesPokemonActivity" />
-        <activity android:name=".view.EditarPerfilActivity" />
-        <activity android:name=".modules.regiaoinformacao.view.RegioesInformacoesActivity" />
-        <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.CadastroActivity" />
-        <activity android:name=".view.EsqueciASenha" />
-        <activity android:name=".view.MainActivity" />
-        <activity android:name=".view.SplashActivity">
+        <activity android:name=".view.DetalhesPokemonActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.EditarPerfilActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".modules.regiaoinformacao.view.RegioesInformacoesActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.CadastroActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.EsqueciASenha"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
