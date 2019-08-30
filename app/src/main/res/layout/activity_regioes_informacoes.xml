@@ -63,7 +63,7 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/regiao_view_pager_id"
-        android:layout_width="392dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
