@@ -131,6 +131,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
                 AdapterPokemon(this, pokemonArrayList);
 
 
+
         GridLayoutManager LayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerPokemons.setLayoutManager(LayoutManager);
         recyclerPokemons.setAdapter(pokemonAdapter);

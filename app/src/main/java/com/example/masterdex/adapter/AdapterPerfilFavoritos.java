@@ -35,7 +35,7 @@ public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilFa
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_celula_favoritos, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_celula, viewGroup, false);
 
 
         return new ViewHolder(view);
@@ -70,8 +70,8 @@ public class AdapterPerfilFavoritos extends RecyclerView.Adapter<AdapterPerfilFa
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textNomePokemon = itemView.findViewById(R.id.nomePokemonFav);
-            imageFotoPokemon = itemView.findViewById(R.id.fotoPokemonFav);
+            textNomePokemon = itemView.findViewById(R.id.textNomePokemon);
+            imageFotoPokemon = itemView.findViewById(R.id.imageFotoPokemon);
 
         }
     }

@@ -49,7 +49,7 @@ public class RegioesRepository {
             Kalos.setDescricaoRegiao(Resources.getSystem().getString(R.string.regiao_info_kalos));
             listaRegioes.add(Kalos);
 
-            Regiao SeviiSlands = new Regiao("Sevii Slands");
+            Regiao SeviiSlands = new Regiao("Sevii Islands");
             SeviiSlands.setImagemRegiao("https://cdn.bulbagarden.net/upload/thumb/3/32/Sevii_Islands.png/250px-Sevii_Islands.png");
             SeviiSlands.setDescricaoRegiao(Resources.getSystem().getString(R.string.regiao_info_sevii_islands));
             listaRegioes.add(SeviiSlands);
