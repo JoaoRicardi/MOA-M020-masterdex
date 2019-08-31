@@ -66,25 +66,67 @@ public class LoginActivity extends AppCompatActivity {
 
 
         callbackManager = CallbackManager.Factory.create();
-        loginComFacebook.setReadPermissions(Arrays.asList("email", "perfilPublico"));
+        loginComFacebook.setReadPermissions(Arrays.asList("email", "public_profile"));
 
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+           /* AccessToken accessToken = AccessToken.getCurrentAccessToken();
+            if (accessToken != null) {
+                informacoesUsuarioFace(accessToken);
+            }*/
+
+       /* loginComFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                AccessToken accessToken = loginResult.getAccessToken();
+                informacoesUsuarioFace(accessToken);
                 irParaMain();
+                Toast.makeText(getApplicationContext(), "Chamou register Callback", Toast.LENGTH_LONG).show();
             }
-
             @Override
             public void onCancel() {
-
             }
-
             @Override
             public void onError(FacebookException error) {
+            }
+        });*/
 
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+
+        //loginComFacebook.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick(View view) {
+                //AccessToken accessToken = AccessToken.getCurrentAccessToken();
+               // if (accessToken != null){
+                 //   LoginManager.getInstance().logOut();
+                //}else {
+                //}
+
+        //    }
+      //  });
+
+        loginComFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginComFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        AccessToken accessToken = loginResult.getAccessToken();
+                        informacoesUsuarioFace(accessToken);
+                        irParaMain();
+                        Toast.makeText(getApplicationContext(), "Chamou register Callback", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+
+                    }
+                });
             }
         });
-
 
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,10 +152,33 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void informacoesUsuarioFace(AccessToken accessToken){
+
+        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                try {
+                    String name = object.getString("name");
+                    String image = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id, name, picture.width(200)");
+        request.setParameters(parameters);
+
+        request.executeAsync();
+
     }
 
 
