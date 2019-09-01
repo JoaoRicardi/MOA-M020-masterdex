@@ -19,7 +19,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -76,6 +75,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
     private Switch switchBack;
     private boolean favoritado = false;
     private boolean capturado = false;
+    private SmartTabLayout smartTabLayout;
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -98,6 +98,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         tipoUnicoImageView = findViewById(R.id.detalhes_pokemon_tipo_unico_image_view);
         tipoPrimarioImageView = findViewById(R.id.detalhes_pokemon_tipo1_image_view);
         tipoSecundarioImageView = findViewById(R.id.detalhes_pokemon_tipo2_image_view);
+        smartTabLayout = findViewById(R.id.detalhes_pokemon_smarttab);
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -469,7 +470,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
 
-        SmartTabLayout viewPagerTab = findViewById(R.id.smart);
+        SmartTabLayout viewPagerTab = findViewById(R.id.detalhes_pokemon_smarttab);
         viewPagerTab.setViewPager(viewPager);
 
         setupStatsTab(pokemonApi, adapter.getPage(0));
@@ -645,74 +646,92 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             case "steel":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_aco));
                 changeStatusBarColor(acoColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.aco));
                 break;
             case "water":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_agua));
                 changeStatusBarColor(aguaColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.agua));
                 break;
             case "dragon":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_dragao));
                 changeStatusBarColor(dragaoColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.dragao));
                 break;
             case "electric":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_eletrico));
                 changeStatusBarColor(eletricoColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.eletrico));
                 break;
             case "fairy":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fada));
                 changeStatusBarColor(fadaColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.fada));
                 break;
             case "ghost":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fantasma));
                 changeStatusBarColor(fantasmaColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.fantasma));
                 break;
             case "fire":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_fogo));
                 changeStatusBarColor(fogoColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.fogo));
                 break;
             case "ice":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_gelo));
                 changeStatusBarColor(geloColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.gelo));
                 break;
             case "grass":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_grama));
                 changeStatusBarColor(gramaColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.grama));
                 break;
             case "bug":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_inseto));
                 changeStatusBarColor(insetoColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.inseto));
                 break;
             case "fighting":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_lutador));
                 changeStatusBarColor(lutadorColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.lutador));
                 break;
             case "normal":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_normal));
                 changeStatusBarColor(normalColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.normal));
                 break;
             case "rock":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_pedra));
                 changeStatusBarColor(pedraColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.pedra));
                 break;
             case "psychic":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_psiquico));
                 changeStatusBarColor(psiquicoColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.psiquico));
                 break;
             case "dark":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_sombrio));
                 changeStatusBarColor(sombrioColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.sombrio));
                 break;
             case "ground":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_terra));
                 changeStatusBarColor(terraColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.terra));
                 break;
             case "poison":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_venenoso));
                 changeStatusBarColor(venenosoColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.venenoso));
                 break;
             case "flying":
                 backgroundPokemon.setBackground(getDrawable(R.drawable.detalhes_background_voador));
                 changeStatusBarColor(voadorColor);
+                smartTabLayout.setSelectedIndicatorColors(getColor(R.color.voador));
                 break;
 
         }

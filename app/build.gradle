@@ -84,8 +84,8 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
     implementation 'com.google.firebase:firebase-firestore:20.2.0'
     implementation 'com.github.GrenderG:Toasty:1.4.2'
-    compile "androidx.core:core-ktx:+"
-    compile "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
+    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.github.f0ris.sweetalert:library:1.5.6'
 

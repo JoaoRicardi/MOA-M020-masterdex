@@ -357,7 +357,7 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         Kalos.getCidadeList().add(cidade9_kalos);
         listaRegioes.add(Kalos);
 
-        Regiao SeviiSlands = new Regiao("Sevii Slands");
+        Regiao SeviiSlands = new Regiao("Sevii Islands");
         SeviiSlands.setImagemRegiao("https://cdn.bulbagarden.net/upload/thumb/3/32/Sevii_Islands.png/250px-Sevii_Islands.png");
         SeviiSlands.setDescricaoRegiao(getString(R.string.regiao_info_sevii_islands));
 
@@ -399,7 +399,7 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         SeviiSlands.getCidadeList().add(cidade9_seviiSlands);
         listaRegioes.add(SeviiSlands);
 
-        Regiao OrangeIslands = new Regiao("Orange Archipelago");
+        Regiao OrangeIslands = new Regiao("Orange Islands");
         OrangeIslands.setImagemRegiao("https://vignette.wikia.nocookie.net/pokemon/images/9/9d/Orange_Islands.jpg/revision/latest?cb=20110306222058");
         OrangeIslands.setDescricaoRegiao(getString(R.string.regiao_info_orange_islands));
 

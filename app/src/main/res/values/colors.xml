@@ -8,17 +8,19 @@
     <color name="roxo">#480458</color>
     <color name="azulFace" >#2175F3</color>
     <color name="azulBackground">#100B5A</color>
+    <color name="azulBackgroundLight">#2C2780</color>
+
     <color name = "Preto">#FF000000</color>
     <color name = "cinza">#979797</color>
     <color name="lilac">#463FA2</color>
 
     //type colors
-    <color name="aco">#5A5858</color>
+    <color name="aco">#747272</color>
     <color name="agua">#5D86EE</color>
-    <color name="dragao">#330BC5</color>
+    <color name="dragao">#4613F3</color>
     <color name="eletrico">#FAD61E</color>
     <color name="fada">#E66FD5</color>
-    <color name="fantasma">#12023A</color>
+    <color name="fantasma">#5B35C4</color>
     <color name="fogo">#FF5200</color>
     <color name="gelo">#3FC4FF</color>
     <color name="grama">#4CAF50</color>
@@ -27,10 +29,12 @@
     <color name="normal">#B4857B</color>
     <color name="pedra">#683309</color>
     <color name="psiquico">#8B01BB</color>
-    <color name="sombrio">#11111D</color>
+    <color name="sombrio">#494950</color>
     <color name="terra">#774A28</color>
-    <color name="venenoso">#510CA0</color>
+    <color name="venenoso">#6913C7</color>
     <color name="voador">#445BF1</color>
+
+    <color name="fogoTransparent">#5CFF5200</color>
 
 
 

@@ -63,14 +63,18 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/regiao_view_pager_id"
-        android:layout_width="392dp"
-        android:layout_height="234dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regioes_tab_layout"
+        app:layout_constraintVertical_bias="0.714" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/regioes_tab_layout"
@@ -79,9 +83,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@color/branco"
-        app:layout_constraintBottom_toTopOf="@+id/regiao_view_pager_id"
         app:layout_constraintEnd_toEndOf="@+id/frameLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foto_informacoes_image_view">
