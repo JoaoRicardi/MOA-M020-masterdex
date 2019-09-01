@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/item_ir_para_perfil"
-        android:title="Login"/>
+        android:title="Login/Cadastro"/>
     <item
         android:id="@+id/item_editar_perfil"
         android:title="Editar perfil"/>

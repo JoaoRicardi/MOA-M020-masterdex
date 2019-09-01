@@ -14,6 +14,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -50,6 +51,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -103,6 +105,21 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
             String name = user.getDisplayName();
 
         }
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(R.color.azulBackground);
+        pDialog.setTitleText("Carregando ...");
+
+        pDialog.setCancelable(true);
+
+        pDialog.show();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pDialog.dismiss();
+            }
+        },1500);
 
 
         Intent intent = getIntent();

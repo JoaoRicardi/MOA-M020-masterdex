@@ -3,7 +3,11 @@ package com.example.masterdex.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
+
 
 import com.example.masterdex.R;
 import com.example.masterdex.database.FavoritosDb;
@@ -17,6 +21,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 
 import android.view.View;
@@ -33,8 +38,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
+
 import java.util.ArrayList;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import pl.droidsonroids.gif.GifImageButton;
 
 
@@ -73,6 +80,8 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
 
 
 
+
+
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String name = user.getDisplayName();
@@ -104,6 +113,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
                 ascending = !ascending;
 
 
+
             }
 
 
@@ -131,9 +141,8 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
                 AdapterPokemon(this, pokemonArrayList);
 
 
-        GridLayoutManager LayoutManager = new GridLayoutManager(getContext(), 3);
-        recyclerPokemons.setLayoutManager(LayoutManager);
-        recyclerPokemons.setAdapter(pokemonAdapter);
+
+
 
 
         receberDadosApi();
@@ -176,6 +185,8 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     }
 
 
+
+
     public void sortName(Boolean asc) {
         if (asc) {
             pokemonAdapter.sortNameByAsc();
@@ -195,10 +206,22 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
     }
 
     private void receberDadosApi() {
+
+
+
+        GridLayoutManager LayoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerPokemons.setLayoutManager(LayoutManager);
+        recyclerPokemons.setAdapter(pokemonAdapter);
+
+
+
         PokemonViewModel pokemonViewModel = ViewModelProviders.of(this).get(PokemonViewModel.class);
         pokemonViewModel.atualizarPokemon(LIMIT, offset);
         pokemonViewModel.getPokemonLiveData()
                 .observe(this, pokemons -> pokemonAdapter.atualizarListaPokemons(pokemons));
+
+
+
     }
 
     //    private void receberDados()
@@ -234,6 +257,7 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
 
     @Override
     public void onRefresh() {
+        receberDadosApi();
 
     }
 

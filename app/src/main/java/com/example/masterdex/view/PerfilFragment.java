@@ -96,6 +96,7 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
                 menuInflater.inflate(R.menu.popup_menu, popupMenu.getMenu());
                 popupMenu.show();
 
+
                 popupMenu.setOnMenuItemClickListener(PerfilFragment.this);
 
 
@@ -114,6 +115,8 @@ public class PerfilFragment extends Fragment implements PopupMenu.OnMenuItemClic
             nomePerfil.setText(name);
             baixarFoto();
         }
+
+
     }
 
     private PerfilViewPagerAdapter getPerfilViewPagerAdapter() {

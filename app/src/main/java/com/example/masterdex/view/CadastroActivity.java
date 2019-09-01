@@ -1,12 +1,10 @@
 package com.example.masterdex.view;
 
-import android.content.Context;
 import android.content.Intent;
 
 import com.example.masterdex.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,14 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.Objects;
 
-import es.dmoral.toasty.Toasty;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.reactivex.annotations.NonNull;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -34,7 +30,6 @@ public class CadastroActivity extends AppCompatActivity {
     private TextInputEditText textEditSenha;
     private TextInputEditText textEditConfirmarSenha;
     private ImageView botaoVoltarParaLogin;
-    private Button cadastrar;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
 
@@ -44,7 +39,7 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
 
-        cadastrar = findViewById(R.id.cadastrar_button);
+        Button cadastrar = findViewById(R.id.cadastrar_button);
 
         cadastrar.setOnClickListener(view -> cadastroRealizado());
 
@@ -108,18 +103,6 @@ public class CadastroActivity extends AppCompatActivity {
 
     }
 
-    public void cadastroSnackBar(View view) {
-
-        Snackbar.make(view, "Cadastro realizado com sucesso", Snackbar.LENGTH_LONG)
-                .setAction("OK", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        voltarParaLogin();
-
-                    }
-                }).setActionTextColor(getResources().getColor(R.color.branco)).show();
-    }
 
     private void cadastrar() {
         String email = textEditEmail.getEditableText().toString();
@@ -131,22 +114,35 @@ public class CadastroActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success");
 
-                        Toasty.success(CadastroActivity.this,
-                                "Cadastro realizado com sucesso",
-                                Toasty.LENGTH_SHORT).show();
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        voltarParaLogin();
-                        atualizarPerfil();
+                        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Cadastro")
 
+                                .setContentText("Cadastro realizado com sucesso!")
 
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        voltarParaLogin();
+                                    }
+                                })
+                                .show();
+
+                        //
+
+                        //atualizarPerfil();
 
 
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                        Toasty.error(CadastroActivity.this,
-                                "Por favor revise seus dados ,talvez o usuario ja existe no sistema",
-                                Toasty.LENGTH_SHORT).show();
+
+                        new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Oops...")
+                                .setContentText("Por favor revise seus dados, talvez o usuario ja exista no sistema")
+                                .show();
+                        //    Toasty.error(CadastroActivity.this,
+                        //            "Por favor revise seus dados ,talvez o usuario ja existe no sistema",
+                        //            Toasty.LENGTH_SHORT).show();
 
                     }
 
@@ -167,8 +163,10 @@ public class CadastroActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "Seu cadastro foi atualizado.");
-                            Toasty.success(CadastroActivity.this, "Seu cadastro foi atualizado.",
-                                    Toasty.LENGTH_LONG).show();
+                            new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Cadastro")
+                                    .setContentText("Cadastro atualizado com sucesso!")
+                                    .show();
                         }
                     }
                 });

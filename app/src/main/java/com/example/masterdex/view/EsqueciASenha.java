@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.util.Objects;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 
 public class EsqueciASenha extends AppCompatActivity {
@@ -58,13 +59,18 @@ public class EsqueciASenha extends AppCompatActivity {
                 .toString().toLowerCase())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toasty.normal(EsqueciASenha.this,
-                                "Acesse seu email, e siga os passos para mudar a Senha.",
-                                Toasty.LENGTH_SHORT).show();
+                        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Instruções enviadas")
+                                .setContentText("Acesse seu email e siga os passos para mudar a senha.")
+                                .show();
+
                     } else {
-                        Toasty.error(EsqueciASenha.this,
-                                Objects.requireNonNull(task.getException()).getMessage(),
-                                Toast.LENGTH_SHORT).show();
+
+                        new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Oops...")
+                                .setContentText("Por favor, verifique se o email foi digitado corretamente")
+                                .show();
+
                     }
                 });
     }

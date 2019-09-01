@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import es.dmoral.toasty.Toasty;
+
 public class LoginActivity extends AppCompatActivity {
 
     Button entrar;
@@ -110,6 +112,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void irParaMain() {
+        Toasty.success(getApplicationContext(),"Logado com sucesso");
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -124,13 +128,15 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
+
+
                             FirebaseUser user = firebaseAuth.getCurrentUser();
                             irParaMain();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+
+                            Toasty.error(getApplicationContext(), "Verifique email ou senha.",
                                     Toast.LENGTH_SHORT).show();
                         }
 

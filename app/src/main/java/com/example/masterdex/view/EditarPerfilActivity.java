@@ -14,6 +14,7 @@ import com.google.firebase.storage.UploadTask;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.annotations.NonNull;
 
@@ -75,7 +77,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
 
         fotoPerfil.setOnClickListener(v -> {
-            //Toast.makeText(EditarPerfilActivity.this, "Bora tirar uma Foto", Toast.LENGTH_SHORT).show();
+
             abrirCamera();
         });
 
@@ -126,6 +128,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+
                             finish();
                         }
                     }
