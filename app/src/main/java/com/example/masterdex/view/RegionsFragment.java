@@ -220,7 +220,7 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         listaRegioes.add(Hoenn);
 
         Regiao Sinnoh = new Regiao("Sinnoh");
-        Sinnoh.setImagemRegiao("http://1.bp.blogspot.com/_H_L3jjiClbI/SbSCBuv46QI/AAAAAAAAANc/Ikj8Xdlb4Ug/s400/mapa-sinnoh.jpg");
+        Sinnoh.setImagemRegiao("https://cdn.bulbagarden.net/upload/thumb/7/7d/Sinnoh_Anime.png/290px-Sinnoh_Anime.png");
         Sinnoh.setDescricaoRegiao(getString(R.string.regiao_info_sinnoh));
 
         Cidade cidade1_sinnoh = new Cidade();
@@ -473,7 +473,7 @@ public class RegionsFragment extends Fragment implements RegioesListener{
         listaRegioes.add(Almia);
 
         Regiao Oblivia = new Regiao("Oblivia");
-        Oblivia.setImagemRegiao("http://1.bp.blogspot.com/_-oa4g27SpCo/S5rr5MqbLoI/AAAAAAAACI4/N7OwpmV9KyI/s320/2.jpg");
+        Oblivia.setImagemRegiao("https://pm1.narvii.com/5738/66b907acf59c86fa5c6bccc47a90656c3e5f3bc3_hq.jpg");
         Oblivia.setDescricaoRegiao(getString(R.string.regiao_info_oblivia));
 
         Cidade cidade1_oblivia = new Cidade();

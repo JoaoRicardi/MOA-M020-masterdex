@@ -69,11 +69,17 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView7"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/swipe_refresh"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        app:flexWrap="wrap"
+        app:justifyContent="flex_start"
+        app:showDivider="beginning|end|middle"
         android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,12 +88,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:paddingTop="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +99,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </com.google.android.flexbox.FlexboxLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_mostrar_botoes_poke_home_id"

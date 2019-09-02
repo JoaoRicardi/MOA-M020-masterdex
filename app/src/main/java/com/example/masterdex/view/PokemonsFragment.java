@@ -12,6 +12,9 @@ import android.os.Bundle;
 import com.example.masterdex.R;
 import com.example.masterdex.database.FavoritosDb;
 import com.example.masterdex.viewmodel.PokemonViewModel;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -99,8 +102,8 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
         ArrayList<Pokemon> pokemonArrayList = new ArrayList<>();
 
         searchView = view.findViewById(R.id.search_view);
-        swipe = view.findViewById(R.id.swipe_refresh);
-        swipe.setOnRefreshListener(() -> swipe.setRefreshing(false));
+        //swipe = view.findViewById(R.id.swipe_refresh);
+        //swipe.setOnRefreshListener(() -> swipe.setRefreshing(false));
 
         recyclerPokemons = view.findViewById(R.id.recyclerView);
         MostrarBotoes = view.findViewById(R.id.linearLayout_id);
@@ -209,8 +212,9 @@ public class PokemonsFragment extends Fragment implements PokemonListener, Swipe
 
 
 
-        GridLayoutManager LayoutManager = new GridLayoutManager(getContext(), 3);
-        recyclerPokemons.setLayoutManager(LayoutManager);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getContext());
+
+        recyclerPokemons.setLayoutManager(layoutManager);
         recyclerPokemons.setAdapter(pokemonAdapter);
 
 
