@@ -36,7 +36,7 @@ public class AdapterPerfilCapturados extends RecyclerView.Adapter<AdapterPerfilC
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_celula, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pokemons_celula_favoritos, viewGroup, false);
 
 
         return new ViewHolder(view);

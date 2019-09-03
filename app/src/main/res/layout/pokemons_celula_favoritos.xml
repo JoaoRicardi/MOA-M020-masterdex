@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="110dp"
-    android:layout_height="170dp"
-    android:layout_marginStart="3dp"
-    android:layout_marginEnd="2dp"
-    android:layout_marginTop="4dp"
+    android:layout_width="100dp"
+    android:layout_height="145dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginTop="10dp"
+    android:gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
 
@@ -15,6 +15,7 @@
 
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/pokemon_card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:backgroundTint="@color/branco"
@@ -24,27 +25,37 @@
         app:strokeWidth="@dimen/cardview_default_elevation">
 
         <ImageView
-            android:id="@+id/fotoPokemonFav"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center|top"
-
+            android:id="@+id/imageFotoPokemon"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="top|center_horizontal"
             android:cropToPadding="true"
             android:scaleType="fitXY" />
 
-        <TextView
-            android:id="@+id/nomePokemonFav"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:background="@drawable/circle"
-            android:backgroundTint="@color/azulBackground"
-            android:gravity="center|top"
-            android:text="Pokemons"
-            android:textAllCaps="false"
-            android:textColor="@color/branco"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="2dp"
+            android:backgroundTint="@color/azulBackgroundLight"
+            app:cardCornerRadius="8dp">
+
+            <TextView
+                android:id="@+id/textNomePokemon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/circle"
+                android:gravity="center"
+                android:text="Pokemons"
+                android:textAllCaps="false"
+                android:textColor="@color/branco"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
 
 
     </com.google.android.material.card.MaterialCardView>

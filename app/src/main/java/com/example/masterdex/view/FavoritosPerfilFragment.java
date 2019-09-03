@@ -70,6 +70,11 @@ public class FavoritosPerfilFragment extends Fragment {
         super.onStart();
     }
 
+    @Override
+    public void onResume() {
+        buscarTudoNoRoom();
+        super.onResume();
+    }
 
     private void buscarTudoNoRoom() {
         FavoritosDao favoritosDao = favoritosDb.favoritosDao();
