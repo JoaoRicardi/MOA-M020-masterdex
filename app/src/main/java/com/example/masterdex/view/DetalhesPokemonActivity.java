@@ -607,8 +607,7 @@ public class DetalhesPokemonActivity extends AppCompatActivity {
 
 
     private void voltarHome() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+       DetalhesPokemonActivity.this.onBackPressed();
     }
 
     public void switchBackground(Pokemon pokemon) {
